@@ -5,4 +5,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Repositories\Interfaces\" />
+    <Folder Include="Repositories\Inplementations\" />
+  </ItemGroup>
+
 </Project>
