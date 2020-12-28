@@ -13,3 +13,12 @@
 /hospital_manager_data_access/obj
 /hospital_manager_forms/bin
 /hospital_manager_forms/obj
+/hospital_manager_bu/obj
+/hospital_manager_bu/bin/Debug/netcoreapp3.1
+/hospital_manager_exceptions/bin/Debug/netcoreapp3.1
+/hospital_manager_exceptions/obj
+/hospital_manager_models/bin/Debug
+/hospital_manager_models/obj
+/oauth_api/bin/Debug
+/oauth_api/obj
+/packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0

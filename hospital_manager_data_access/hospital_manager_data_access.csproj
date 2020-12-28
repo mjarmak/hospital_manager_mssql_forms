@@ -6,9 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Repositories\Interfaces\" />
-    <Folder Include="Repositories\Inplementations\" />
+    <Compile Remove="Repositories\Inplementations\**" />
+    <EmbeddedResource Remove="Repositories\Inplementations\**" />
+    <None Remove="Repositories\Inplementations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\hospital_manager_models\hospital_manager_models.csproj" />
   </ItemGroup>
 
 </Project>

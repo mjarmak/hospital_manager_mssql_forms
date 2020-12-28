@@ -30,6 +30,76 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
+                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj",
+        "projectName": "hospital_manager_models",
+        "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj",
+        "packagesPath": "C:\\Users\\bmaj\\.nuget\\packages\\",
+        "outputPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\bmaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
             "projectReferences": {}
           }
         },

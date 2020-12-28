@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\hospital_manager_data_access\hospital_manager_data_access.csproj" />
+    <ProjectReference Include="..\hospital_manager_exceptions\hospital_manager_exceptions.csproj" />
+    <ProjectReference Include="..\hospital_manager_models\hospital_manager_models.csproj" />
+  </ItemGroup>
+
+</Project>

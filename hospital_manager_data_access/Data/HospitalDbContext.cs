@@ -1,10 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using hospital_manager_data_access.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace hospital_manager_data_access.Data
 {
-    class HospitalDbContext
+    public class HospitalDbContext : DbContext
     {
+        public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options)
+        {
+        }
+
+        public DbSet<AppointmentData> AppointmentData { get; set; }
+        public DbSet<ConsultationData> ConsultationData { get; set; }
+        public DbSet<DoctorData> DoctorData { get; set; }
+        public DbSet<HospitalData> HospitalData { get; set; }
+        public DbSet<RoomData> RoomData { get; set; }
+        public DbSet<SpecialityData> SpecialityData { get; set; }
     }
 }
