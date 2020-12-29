@@ -10,7 +10,7 @@ namespace hospital_manager_data_access.Repositories.Interfaces
         void Add(T entity);
         void Update(T entity);
         void Remove(T entity);
-        T Get(int id);
+        T Get(long id);
         IEnumerable<T> All();
         IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
     }

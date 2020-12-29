@@ -30,6 +30,241 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_bu\\hospital_manager_bl.csproj": {
+                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_bu\\hospital_manager_bl.csproj"
+              },
+              "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj": {
+                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj"
+              },
+              "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_exceptions\\hospital_manager_exceptions.csproj": {
+                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_exceptions\\hospital_manager_exceptions.csproj"
+              },
+              "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
+                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj"
+              },
+              "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj": {
+                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.0-preview1.19506.2, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "Microsoft.Extensions.Logging.Debug": {
+              "target": "Package",
+              "version": "[3.1.0-preview1.19506.1, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.0-preview1-19509-03, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.5.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_bu\\hospital_manager_bl.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_bu\\hospital_manager_bl.csproj",
+        "projectName": "hospital_manager_bl",
+        "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_bu\\hospital_manager_bl.csproj",
+        "packagesPath": "C:\\Users\\bmaj\\.nuget\\packages\\",
+        "outputPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_bu\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\bmaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj": {
+                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj"
+              },
+              "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_exceptions\\hospital_manager_exceptions.csproj": {
+                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_exceptions\\hospital_manager_exceptions.csproj"
+              },
+              "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
+                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj",
+        "projectName": "hospital_manager_data_access",
+        "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj",
+        "packagesPath": "C:\\Users\\bmaj\\.nuget\\packages\\",
+        "outputPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\bmaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
+                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_exceptions\\hospital_manager_exceptions.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_exceptions\\hospital_manager_exceptions.csproj",
+        "projectName": "hospital_manager_exceptions",
+        "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_exceptions\\hospital_manager_exceptions.csproj",
+        "packagesPath": "C:\\Users\\bmaj\\.nuget\\packages\\",
+        "outputPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_exceptions\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\bmaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
             "projectReferences": {}
           }
         },
@@ -52,6 +287,163 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj",
+        "projectName": "hospital_manager_models",
+        "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj",
+        "packagesPath": "C:\\Users\\bmaj\\.nuget\\packages\\",
+        "outputPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\bmaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj",
+        "projectName": "authentication_api",
+        "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj",
+        "packagesPath": "C:\\Users\\bmaj\\.nuget\\packages\\",
+        "outputPath": "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\bmaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
+                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "AspNet.Security.OpenIdConnect.Primitives": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "IdentityServer4": {
+              "target": "Package",
+              "version": "[3.0.2, )"
+            },
+            "IdentityServer4.AccessTokenValidation": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "IdentityServer4.AspNetIdentity": {
+              "target": "Package",
+              "version": "[3.0.2, )"
+            },
+            "IdentityServer4.EntityFramework": {
+              "target": "Package",
+              "version": "[3.0.2, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

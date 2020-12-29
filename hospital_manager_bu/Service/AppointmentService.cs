@@ -1,15 +1,34 @@
-﻿using hospital_manager_data_access.Entities;
+﻿using hospital_manager_bl.Util;
+using hospital_manager_data_access.Entities;
 using hospital_manager_data_access.Repositories.Interfaces;
 using hospital_manager_exceptions.Exceptions;
 using hospital_manager_models.Models;
+using System.Collections.Generic;
 
 namespace hospital_manager_bl.Service
 {
-    class AppointmentService
+    public class AppointmentService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ModelConverter modelConverter;
 
-        public Appointment SaveAppointment(Appointment appointment)
+        public AppointmentService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+            modelConverter = new ModelConverter();
+        }
+
+        public AppointmentData GetAppointment(long id)
+        {
+            return _unitOfWork.Appointment.Get(id);
+        }
+
+        public IEnumerable<AppointmentData> GetAppointments()
+        {
+            return _unitOfWork.Appointment.All();
+        }
+
+        public AppointmentData SaveAppointment(AppointmentRequest appointment)
         {
             if (appointment == null)
             {
@@ -29,36 +48,21 @@ namespace hospital_manager_bl.Service
             }
 
 
-            _unitOfWork.Appointment.Add(EnvelopeOf(appointment));
-
+            var appointmentData = modelConverter.EnvelopeOf(appointment);
+            _unitOfWork.Appointment.Add(appointmentData);
             _unitOfWork.Save();
 
-            return appointment;
+            return _unitOfWork.Appointment.Get(appointmentData.Id);
         }
 
         private bool RoomExists(long id)
         {
-            return _unitOfWork.Room.Find(e => e.Id == id) != null;
+            return _unitOfWork.Room.Get(id) != null;
         }
         private bool HospitalExists(long id)
         {
-            return _unitOfWork.Hospital.Find(e => e.Id == id) != null;
+            return _unitOfWork.Hospital.Get(id) != null;
         }
 
-        public AppointmentData EnvelopeOf(Appointment appointment)
-        {
-            return new AppointmentData
-            {
-                Id = appointment.Id,
-                PatientUsername = appointment.PatientUsername,
-                DoctorUsername = appointment.DoctorUsername,
-                RoomId = appointment.RoomId,
-                HospitalId = appointment.HospitalId,
-                Duration = appointment.Duration,
-                Description = appointment.Description,
-                From = appointment.From,
-                To = appointment.To
-            };
-        }
     }
 }

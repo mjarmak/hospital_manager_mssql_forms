@@ -29,7 +29,7 @@ namespace hospital_manager_data_access.Repositories.Implementation
             return DbSet.Where(predicate);
         }
 
-        public T Get(int id)
+        public T Get(long id)
         {
             return DbSet.Find(id);
         }

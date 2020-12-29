@@ -14,7 +14,7 @@ namespace hospital_manager_data_access.Entities
         public string Name { get; set; }
         public AddressData Address { get; set; }
         public List<OpeningHoursData> OpeningHours { get; set; }
-        public List<RoomData> Rooms { get; set; }
+
     }
 
     [Table(name: "Address")]

@@ -12,6 +12,10 @@ namespace hospital_manager_data_access.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
+        public long HospitalId { get; set; }
+
+        public string Name { get; set; }
+
         public SpecialityData Speciality { get; set; }
     }
 }

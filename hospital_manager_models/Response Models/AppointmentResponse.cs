@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace hospital_manager_models.Models
+﻿namespace hospital_manager_models.Models
 {
-    public class Appointment
+    public class AppointmentResponse
     {
         public long Id { get; set; }
 

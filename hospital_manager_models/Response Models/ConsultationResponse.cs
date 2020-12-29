@@ -4,12 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace hospital_manager_models.Models
+namespace hospital_manager_data_access.Entities
 {
-    class SpecialityToDoctor
+    public class ConsultationResponse
     {
         public long Id { get; set; }
 
-        public string Name { get; set; }
+        public long HospitalId { get; set; }
+
+        public int Duration { get; set; }
     }
 }

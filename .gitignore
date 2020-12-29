@@ -22,3 +22,5 @@
 /oauth_api/bin/Debug
 /oauth_api/obj
 /packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0
+/packages/Newtonsoft.Json.11.0.1
+/packages
