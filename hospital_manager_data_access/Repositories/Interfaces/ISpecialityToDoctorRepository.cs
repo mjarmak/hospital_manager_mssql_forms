@@ -2,7 +2,7 @@
 
 namespace hospital_manager_data_access.Repositories.Interfaces
 {
-    public interface ISpecialityToDoctorRepository : IRepository<SpecialityToDoctorData>
+    public interface ISpecialityRepository : IRepository<SpecialityData>
     {
     }
 }

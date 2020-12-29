@@ -1,4 +1,6 @@
-﻿namespace hospital_manager_models.Models
+﻿using System.Collections.Generic;
+
+namespace hospital_manager_models.Models
 {
     public class RoomResponse
     {
@@ -8,6 +10,6 @@
 
         public long HospitalId { get; set; }
 
-        public SpecialityResponse Speciality { get; set; }
+        public List<SpecialityResponse> Specialities { get; set; }
     }
 }

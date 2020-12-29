@@ -15,5 +15,7 @@ namespace hospital_manager_data_access.Data
         public DbSet<HospitalData> HospitalData { get; set; }
         public DbSet<RoomData> RoomData { get; set; }
         public DbSet<SpecialityData> SpecialityData { get; set; }
+        public DbSet<SpecialityToDoctorData> SpecialityToDoctorData { get; set; }
+        public DbSet<SpecialityToRoomData> SpecialityToRoomData { get; set; }
     }
 }
