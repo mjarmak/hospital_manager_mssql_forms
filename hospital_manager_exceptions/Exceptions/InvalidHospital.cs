@@ -2,11 +2,11 @@
 
 namespace hospital_manager_exceptions.Exceptions
 {
-    public class InvalidRoom : Exception
+    public class InvalidHospital: Exception
     {
         private string _Message;
 
-        public InvalidRoom(string message)
+        public InvalidHospital(string message)
         {
             _Message = message;
         }
@@ -18,6 +18,5 @@ namespace hospital_manager_exceptions.Exceptions
                 return _Message;
             }
         }
-
     }
 }
