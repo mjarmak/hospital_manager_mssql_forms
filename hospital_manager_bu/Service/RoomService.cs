@@ -11,16 +11,22 @@ namespace hospital_manager_bl.Service
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ModelConverter modelConverter;
+        private readonly SpecialityService specialityService;
 
         public RoomService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             modelConverter = new ModelConverter();
+            specialityService = new SpecialityService(_unitOfWork);
         }
 
-        public RoomData GetRoom(long id)
+        public RoomResponse GetRoom(long id)
         {
-            return _unitOfWork.Room.Get(id);
+            var test = _unitOfWork.Room.GetRoom(id);
+
+            var roomResponse = modelConverter.ResponseOf(_unitOfWork.Room.Get(id));
+            roomResponse.Specialities = specialityService.GetSpecialitiesForRoom(id);
+            return roomResponse;
         }
 
         public IEnumerable<RoomData> GetRooms()
@@ -28,17 +34,19 @@ namespace hospital_manager_bl.Service
             return _unitOfWork.Room.All();
         }
 
-        public RoomData SaveRoom(RoomRequest room)
+        public RoomResponse SaveRoom(RoomRequest roomRequest)
         {
-            if (!HospitalExists(room.HospitalId))
+            if (!HospitalExists(roomRequest.HospitalId))
             {
-                throw new InvalidRoom("Hospital with ID " + room.HospitalId + " does not exist.");
+                throw new InvalidRoom("Hospital with ID " + roomRequest.HospitalId + " does not exist.");
             }
-            var roomData = modelConverter.EnvelopeOf(room);
+            var roomData = modelConverter.EnvelopeOf(roomRequest);
             _unitOfWork.Room.Add(roomData);
             _unitOfWork.Save();
 
-            return _unitOfWork.Room.Get(roomData.Id);
+            var roomResponse = modelConverter.ResponseOf(_unitOfWork.Room.Get(roomData.Id));
+            roomResponse.Specialities = specialityService.GetSpecialitiesForRoom(roomData.Id);
+            return roomResponse;
         }
 
         private bool HospitalExists(long id)

@@ -32,6 +32,24 @@ namespace hospital_manager_bl.Util
                 Name = room.Name
             };
         }
+        public RoomResponse ResponseOf(RoomData room)
+        {
+            return new RoomResponse
+            {
+                Id = room.Id,
+                Name = room.Name
+            };
+        }
+
+        public SpecialityResponse ResponseOf(SpecialityData speciality)
+        {
+            return new SpecialityResponse
+            {
+                Id = speciality.Id,
+                Name = speciality.Name
+            };
+        }
+
         public HospitalData EnvelopeOf(HospitalRequest hospital)
         {
             return new HospitalData
@@ -48,7 +66,7 @@ namespace hospital_manager_bl.Util
                     MinuteFrom = openingHours.MinuteFrom,
                     MinuteTo = openingHours.MinuteTo,
                     Closed = openingHours.Closed
-                }).ToList(),
+                }).ToList()
             };
         }
         public SpecialityData EnvelopeOf(SpecialityRequest speciality)

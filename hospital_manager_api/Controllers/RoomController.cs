@@ -36,14 +36,14 @@ namespace hospital_manager_api.Controllers
 
         [HttpPost]
         //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public ActionResult<RoomData> SaveRoom(RoomRequest room)
+        public ActionResult<RoomResponse> SaveRoom(RoomRequest room)
         {
             try
             {
-                var appointmentData = _roomService.SaveRoom(room);
+                var roomResponse = _roomService.SaveRoom(room);
                 return Ok(new
                 {
-                    data = appointmentData
+                    data = roomResponse
                 });
             }
             catch (InvalidRoom e)
@@ -57,7 +57,7 @@ namespace hospital_manager_api.Controllers
 
         [HttpGet("{id}")]
         //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public ActionResult<RoomData> GetRoom(long id)
+        public ActionResult<RoomResponse> GetRoom(long id)
         {
             return Ok(new
             {
