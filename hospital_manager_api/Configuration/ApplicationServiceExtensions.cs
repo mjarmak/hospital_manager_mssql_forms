@@ -16,8 +16,6 @@ namespace hospital_manager_api.Configuration
             services.AddScoped<IHospitalRepository, HospitalRepository>();
             services.AddScoped<IRoomRepository, RoomRepository>();
             services.AddScoped<ISpecialityRepository, SpecialityRepository>();
-            services.AddScoped<ISpecialityToDoctorRepository, SpecialityToDoctorRepository>();
-            services.AddScoped<ISpecialityToRoomRepository, SpecialityToRoomRepository>();
 
             return services;
         }

@@ -16,5 +16,7 @@ namespace hospital_manager_data_access.Entities
 
         public string Name { get; set; }
 
+        public List<SpecialityToRoomData> Specialities { get; set; }
+
     }
 }

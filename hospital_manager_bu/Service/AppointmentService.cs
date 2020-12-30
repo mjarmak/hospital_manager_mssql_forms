@@ -15,7 +15,7 @@ namespace hospital_manager_bl.Service
         public AppointmentService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            modelConverter = new ModelConverter();
+            modelConverter = new ModelConverter(_unitOfWork);
         }
 
         public AppointmentData GetAppointment(long id)

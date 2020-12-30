@@ -56,7 +56,6 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpGet("{id}")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<RoomResponse> GetRoom(long id)
         {
             return Ok(new
@@ -65,8 +64,16 @@ namespace hospital_manager_api.Controllers
             });
         }
 
+        [HttpGet("hospital/{id}")]
+        public ActionResult<IEnumerable<RoomData>> GetRoomsByHospitalId(long hospitalId)
+        {
+            return Ok(new
+            {
+                data = _roomService.GetRoomsByHospitalId(hospitalId)
+            });
+        }
+
         [HttpGet("all")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<IEnumerable<RoomData>> GetRooms()
         {
             return Ok(new

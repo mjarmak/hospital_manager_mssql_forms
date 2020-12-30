@@ -16,27 +16,27 @@ namespace hospital_manager_bl.Service
         public SpecialityService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            modelConverter = new ModelConverter();
+            modelConverter = new ModelConverter(_unitOfWork);
         }
 
-        public List<SpecialityResponse> GetSpecialitiesForDoctor(string doctorUsername)
-        {
-            List<SpecialityToDoctorData> specialities = _unitOfWork.SpecialityToDoctor.Find(e => e.DoctorUsername == doctorUsername).ToList();
-            List<SpecialityData> specialityData = new List<SpecialityData>();
-            specialities.ForEach(speciality =>
-                specialityData.Add(_unitOfWork.Speciality.Get(speciality.Id))
-            );
-            return specialityData?.Select(speciality => modelConverter.ResponseOf(speciality)).ToList();
-        }
-        public List<SpecialityResponse> GetSpecialitiesForRoom(long roomId)
-        {
-            List<SpecialityToRoomData> specialities = _unitOfWork.SpecialityToRoom.Find(e => e.RoomId == roomId).ToList();
-            List<SpecialityData> specialityData = new List<SpecialityData>();
-            specialities.ForEach(speciality =>
-                specialityData.Add(_unitOfWork.Speciality.Get(speciality.Id))
-            );
-            return specialityData?.Select(speciality => modelConverter.ResponseOf(speciality)).ToList();
-        }
+        //public List<SpecialityResponse> GetSpecialitiesForDoctor(string doctorUsername)
+        //{
+        //    List<SpecialityToDoctorData> specialities = _unitOfWork.SpecialityToDoctor.Find(e => e.DoctorUsername == doctorUsername).ToList();
+        //    List<SpecialityData> specialityData = new List<SpecialityData>();
+        //    specialities.ForEach(speciality =>
+        //        specialityData.Add(_unitOfWork.Speciality.Get(speciality.Id))
+        //    );
+        //    return specialityData?.Select(speciality => modelConverter.ResponseOf(speciality)).ToList();
+        //}
+        //public List<SpecialityResponse> GetSpecialitiesForRoom(long roomId)
+        //{
+        //    List<SpecialityToRoomData> specialities = _unitOfWork.SpecialityToRoom.Find(e => e.RoomId == roomId).ToList();
+        //    List<SpecialityData> specialityData = new List<SpecialityData>();
+        //    specialities.ForEach(speciality =>
+        //        specialityData.Add(_unitOfWork.Speciality.Get(speciality.Id))
+        //    );
+        //    return specialityData?.Select(speciality => modelConverter.ResponseOf(speciality)).ToList();
+        //}
 
         public SpecialityResponse GetSpeciality(long id)
         {

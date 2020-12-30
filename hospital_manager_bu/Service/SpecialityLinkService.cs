@@ -16,18 +16,18 @@ namespace hospital_manager_bl.Service
         public SpecialityLinkService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            modelConverter = new ModelConverter();
+            modelConverter = new ModelConverter(_unitOfWork);
         }
 
-        public void SaveSpecialitiesForDoctor(string doctorUsername, List<long> specialityIds)
-        {
-            specialityIds.ForEach(id => _unitOfWork.SpecialityToDoctor.Add(new SpecialityToDoctorData(doctorUsername, id)));
-        }
+        //public void SaveSpecialitiesForDoctor(string doctorUsername, List<long> specialityIds)
+        //{
+        //    specialityIds.ForEach(id => _unitOfWork.SpecialityToDoctor.Add(new SpecialityToDoctorData(doctorUsername, id)));
+        //}
 
-        public void SaveSpecialitiesForRoom(long roomId, List<long> specialityIds)
-        {
-            specialityIds.ForEach(id => _unitOfWork.SpecialityToRoom.Add(new SpecialityToRoomData(roomId, id)));
-        }
+        //public void SaveSpecialitiesForRoom(long roomId, List<long> specialityIds)
+        //{
+        //    specialityIds.ForEach(id => _unitOfWork.SpecialityToRoom.Add(new SpecialityToRoomData(roomId, id)));
+        //}
 
     }
 }

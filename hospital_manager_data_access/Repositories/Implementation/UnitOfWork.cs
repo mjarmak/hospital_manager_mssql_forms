@@ -16,8 +16,6 @@ namespace hospital_manager_data_access.Repositories.Implementation
         public IHospitalRepository Hospital { get; private set; }
         public IRoomRepository Room { get; private set; }
         public ISpecialityRepository Speciality { get; private set; }
-        public ISpecialityToDoctorRepository SpecialityToDoctor { get; private set; }
-        public ISpecialityToRoomRepository SpecialityToRoom { get; private set; }
 
         public UnitOfWork(HospitalDbContext context, IHttpContextAccessor httpContextAccessor)
         {
@@ -28,8 +26,6 @@ namespace hospital_manager_data_access.Repositories.Implementation
             Hospital = new HospitalRepository(_context);
             Room = new RoomRepository(_context);
             Speciality = new SpecialityRepository(_context);
-            SpecialityToDoctor = new SpecialityToDoctorRepository(_context);
-            SpecialityToRoom = new SpecialityToRoomRepository(_context);
         }
 
         public int Save()

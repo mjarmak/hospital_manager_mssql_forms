@@ -1,6 +1,8 @@
-﻿namespace hospital_manager_models.Models
+﻿using hospital_manager_data_access.Entities;
+
+namespace hospital_manager_models.Models
 {
-    public class UserAccountModel
+    public class UserAccountRequest
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -9,11 +11,12 @@
         public string Gender { get; set; }
         public string BirthDate { get; set; }
         public string Password { get; set; }
-    }
-    public enum UserGenderEnum
-    {
-        MALE,
-        FEMALE,
-        UNKNOWN
+        public DoctorRequest DoctorRequest { get; set; }
+        public enum UserGenderEnum
+        {
+            MALE,
+            FEMALE,
+            UNKNOWN
+        }
     }
 }

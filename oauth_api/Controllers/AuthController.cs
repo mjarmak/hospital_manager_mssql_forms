@@ -11,6 +11,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using hospital_manager_models.Models;
+using static hospital_manager_models.Models.UserAccountRequest;
 
 namespace authentication_api.Controllers
 {
@@ -39,7 +40,7 @@ namespace authentication_api.Controllers
 
         [Route("register")]
         [HttpPost]
-        public async Task<ActionResult> Register(UserAccountModel userAccountModel)
+        public async Task<ActionResult> Register(UserAccountRequest userAccountModel)
         {
             UserAccountDataModel userAccountDataModel;
             try
@@ -101,7 +102,7 @@ namespace authentication_api.Controllers
         [Route("register/doctor")]
         [HttpPost]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public async Task<ActionResult> RegisterDoctor(UserAccountModel userAccountModel)
+        public async Task<ActionResult> RegisterDoctor(UserAccountRequest userAccountModel)
         {
             UserAccountDataModel userAccountDataModel;
             try
@@ -155,7 +156,8 @@ namespace authentication_api.Controllers
 
             return Ok(new
             {
-                data = result.ToString()
+                data = result.ToString(),
+                username
             });
         }
 
@@ -250,7 +252,7 @@ namespace authentication_api.Controllers
             });
         }
 
-        private static UserAccountDataModel EnvelopeOf(UserAccountModel userAccountModel)
+        private static UserAccountDataModel EnvelopeOf(UserAccountRequest userAccountModel)
         {
             return new UserAccountDataModel
             {
@@ -264,7 +266,7 @@ namespace authentication_api.Controllers
             };
         }
 
-        private static string GetUserName(UserAccountModel userAccountModel)
+        private static string GetUserName(UserAccountRequest userAccountModel)
         {
             return userAccountModel.Name + userAccountModel.Surname + userAccountModel.BirthDate.Replace("/", "");
         }

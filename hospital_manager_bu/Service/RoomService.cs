@@ -4,6 +4,7 @@ using hospital_manager_data_access.Repositories.Interfaces;
 using hospital_manager_exceptions.Exceptions;
 using hospital_manager_models.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace hospital_manager_bl.Service
 {
@@ -11,29 +12,28 @@ namespace hospital_manager_bl.Service
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ModelConverter modelConverter;
-        private readonly SpecialityService specialityService;
-        private readonly SpecialityLinkService specialityLinkService;
 
         public RoomService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            modelConverter = new ModelConverter();
-            specialityService = new SpecialityService(_unitOfWork);
-            specialityLinkService = new SpecialityLinkService(_unitOfWork);
+            modelConverter = new ModelConverter(_unitOfWork);
         }
 
         public RoomResponse GetRoom(long id)
         {
-            //var test = _unitOfWork.Room.GetRoom(id);
-
-            var roomResponse = modelConverter.ResponseOf(_unitOfWork.Room.Get(id));
-            roomResponse.Specialities = specialityService.GetSpecialitiesForRoom(id);
-            return roomResponse;
+            RoomData roomData = _unitOfWork.Room.GetRoom(id);
+            return modelConverter.ResponseOf(roomData);
         }
 
-        public IEnumerable<RoomData> GetRooms()
+        public List<RoomResponse> GetRooms()
         {
-            return _unitOfWork.Room.All();
+            List<RoomData> roomData = _unitOfWork.Room.GetRooms();
+            return roomData?.Select(room => modelConverter.ResponseOf(room)).ToList();
+        }
+        public List<RoomResponse> GetRoomsByHospitalId(long hospitalId)
+        {
+            List<RoomData> roomData = _unitOfWork.Room.GetRoomsByHospitalId(hospitalId);
+            return roomData?.Select(room => modelConverter.ResponseOf(room)).ToList();
         }
 
         public RoomResponse SaveRoom(RoomRequest roomRequest)
@@ -46,10 +46,9 @@ namespace hospital_manager_bl.Service
             var roomData = modelConverter.EnvelopeOf(roomRequest);
             _unitOfWork.Room.Add(roomData);
             _unitOfWork.Save();
+            _unitOfWork.Save();
 
-            var roomResponse = modelConverter.ResponseOf(_unitOfWork.Room.Get(roomData.Id));
-            specialityLinkService.SaveSpecialitiesForRoom(roomData.Id, roomRequest.SpecialityIds);
-            //roomResponse.Specialities = specialityLinkService.GetSpecialitiesForRoom(roomData.Id);
+            var roomResponse = modelConverter.ResponseOf(_unitOfWork.Room.GetRoom(roomData.Id));
             return roomResponse;
         }
 

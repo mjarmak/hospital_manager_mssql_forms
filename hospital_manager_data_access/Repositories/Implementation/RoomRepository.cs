@@ -1,6 +1,7 @@
 ﻿using hospital_manager_data_access.Data;
 using hospital_manager_data_access.Entities;
 using hospital_manager_data_access.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +12,17 @@ namespace hospital_manager_data_access.Repositories.Implementation
     {
         public RoomRepository(HospitalDbContext context) : base(context) { }
 
-        public object GetRoom(long id)
+        public RoomData GetRoom(long id)
         {
-            return Db.RoomData.Where(room => room.Id == id)
-                .Join(
-                Db.SpecialityToRoomData,
-                room => room.Id,
-                specialityToRoom => specialityToRoom.RoomId,
-            (room, specialityToRoom) => new
-            {
-                room.Id,
-                room.Name,
-                Specialities = specialityToRoom.Id
-            })
-                .Single();
+            return Db.RoomData.Include(room => room.Specialities).Single(room => room.Id == id);
+        }
+        public List<RoomData> GetRooms()
+        {
+            return Db.RoomData.Include(room => room.Specialities).ToList();
+        }
+        public List<RoomData> GetRoomsByHospitalId(long hospitalId)
+        {
+            return Db.RoomData.Include(room => room.Specialities).Where(room => room.HospitalId == hospitalId).ToList();
         }
     }
 }
