@@ -8,5 +8,11 @@ namespace hospital_manager_data_access.Entities
         public long Id { get; set; }
 
         public string DoctorUsername { get; set; }
+
+        public SpecialityToDoctorData(string doctorUsername, long id)
+        {
+            DoctorUsername = doctorUsername;
+            Id = id;
+        }
     }
 }

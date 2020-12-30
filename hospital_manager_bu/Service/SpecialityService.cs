@@ -37,20 +37,15 @@ namespace hospital_manager_bl.Service
             );
             return specialityData?.Select(speciality => modelConverter.ResponseOf(speciality)).ToList();
         }
-        //public void SaveSpecialitiesForRoom(long roomId, List<SpecialityRequest> specialityRequests)
-        //{
-        //    specialityRequests.ForEach(speciality =>
-        //        specialityData.Add(_unitOfWork.Speciality.Add(speciality.Id))
-        //    );
-        //}
+
+        public SpecialityResponse GetSpeciality(long id)
+        {
+            return modelConverter.ResponseOf(_unitOfWork.Speciality.Get(id));
+        }
 
         public IEnumerable<SpecialityResponse> GetSpecialities()
         {
-            return _unitOfWork.Speciality.All().ToList()?.Select(speciality => new SpecialityResponse()
-            {
-                Id = speciality.Id,
-                Name = speciality.Name
-            }).ToList();
+            return _unitOfWork.Speciality.All().ToList()?.Select(speciality => modelConverter.ResponseOf(speciality)).ToList();
         }
 
         public SpecialityData SaveSpeciality(SpecialityRequest specialityRequest)

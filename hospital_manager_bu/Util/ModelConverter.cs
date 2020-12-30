@@ -29,6 +29,7 @@ namespace hospital_manager_bl.Util
             return new RoomData
             {
                 Id = room.Id,
+                HospitalId = room.HospitalId,
                 Name = room.Name
             };
         }

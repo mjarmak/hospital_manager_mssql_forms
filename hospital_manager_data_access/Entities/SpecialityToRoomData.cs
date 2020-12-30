@@ -8,5 +8,12 @@ namespace hospital_manager_data_access.Entities
         public long Id { get; set; }
 
         public long RoomId { get; set; }
+
+        public SpecialityToRoomData(long roomId, long id)
+        {
+            RoomId = roomId;
+            Id = id;
+        }
+
     }
 }
