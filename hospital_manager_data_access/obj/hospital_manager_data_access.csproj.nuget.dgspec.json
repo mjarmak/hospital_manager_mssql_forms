@@ -1,24 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj": {}
+    "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj": {}
   },
   "projects": {
-    "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj": {
+    "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj",
+        "projectUniqueName": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj",
         "projectName": "hospital_manager_data_access",
-        "projectPath": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj",
-        "packagesPath": "C:\\Users\\BIGIF\\.nuget\\packages\\",
-        "outputPath": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_data_access\\obj\\",
+        "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj",
+        "packagesPath": "C:\\Users\\bmaj\\.nuget\\packages\\",
+        "outputPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\BIGIF\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\bmaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -29,10 +30,9 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
-                "projectPath": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj"
+              "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
+                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj"
               }
             }
           }
@@ -45,7 +45,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
@@ -71,25 +70,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
+    "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj",
+        "projectUniqueName": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj",
         "projectName": "hospital_manager_models",
-        "projectPath": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj",
-        "packagesPath": "C:\\Users\\BIGIF\\.nuget\\packages\\",
-        "outputPath": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_models\\obj\\",
+        "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj",
+        "packagesPath": "C:\\Users\\bmaj\\.nuget\\packages\\",
+        "outputPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\BIGIF\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\bmaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -100,7 +100,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -112,7 +111,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",
@@ -128,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     }
