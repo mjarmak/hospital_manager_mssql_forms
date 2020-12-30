@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace hospital_manager_exceptions.Exceptions
 {
     public class InvalidAppointment : Exception
     {
-
         private string _Message;
 
         public InvalidAppointment(string message)
