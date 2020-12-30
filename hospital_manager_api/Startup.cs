@@ -55,13 +55,13 @@ namespace hospital_manager_api
                 c.SwaggerDoc("V1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "API EPHEC",
-                    Description = "Projet WEB - Mettre en place un webite publique avec authentication et rôles utilisant un backend composé d'api en .NET Core 3.1",
+                    Title = "API Hospital Manager",
+                    Description = "Project SGBD - Creation of an Hospital Manager application. ",
                     TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
                     {
                         Name = "Francesco Bigi",
-                        Email = "francesco.bigi.87@gmail.com",
+                        Email = "psr07700@students.ephec.com",
                         Url = new Uri("https://be.linkedin.com/in/bigif"),
                     },
                     License = new OpenApiLicense
