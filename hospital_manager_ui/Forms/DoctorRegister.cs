@@ -33,5 +33,10 @@ namespace hospital_manager_ui.Forms
             f.Show();
             this.Close();
         }
+
+        private void DoctorRegister_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
