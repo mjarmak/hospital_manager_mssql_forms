@@ -94,7 +94,8 @@ namespace authentication_api.Controllers
 
             return Ok(new
             {
-                data = result.ToString()
+                data = result.ToString(),
+                username
             });
         }
 
