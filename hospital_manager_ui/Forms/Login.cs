@@ -67,7 +67,7 @@ namespace hospital_manager_ui.Forms
 
         private void Click_Register(object sender, EventArgs e)
         {
-            DoctorRegister f = new DoctorRegister();
+            UserRegister f = new UserRegister();
             f.Show();
             this.Hide();
         }

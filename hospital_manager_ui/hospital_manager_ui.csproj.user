@@ -14,5 +14,8 @@
     <Compile Update="Forms\AdminHomePage.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\UserRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
