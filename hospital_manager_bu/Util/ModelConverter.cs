@@ -50,12 +50,51 @@ namespace hospital_manager_bl.Util
                 );
             return doctorResponse;
         }
+        public HospitalResponse ResponseOf(HospitalData hospitalData)
+        {
+            var hospitalResponse = new HospitalResponse
+            {
+                Id = hospitalData.Id,
+                Name = hospitalData.Name,
+                Address = ResponseOf(hospitalData.Address),
+                OpeningHours = ResponseOf(hospitalData.OpeningHours)
+
+            };
+            return hospitalResponse;
+        }
+        public AddressResponse ResponseOf(AddressData addressData)
+        {
+            return new AddressResponse
+            {
+                Id = addressData.Id,
+                Street = addressData.Street,
+                City = addressData.City,
+                Country = addressData.Country,
+                PostalCode = addressData.PostalCode,
+                BoxNumber = addressData.BoxNumber
+
+            };
+        }
+        public List<OpeningHoursResponse> ResponseOf(List<OpeningHoursData> openingHoursData)
+        {
+            return openingHoursData?.Select(openingHours => new OpeningHoursResponse()
+            {
+                Id = openingHours.Id,
+                Day = openingHours.Day,
+                Closed = openingHours.Closed,
+                HourFrom = openingHours.HourFrom,
+                MinuteFrom = openingHours.MinuteFrom,
+                HourTo = openingHours.HourTo,
+                MinuteTo = openingHours.MinuteTo
+            }).ToList();
+        }
         public ConsultationData EnvelopeOf(ConsultationRequest consultationRequest)
         {
             return new ConsultationData
             {
                 Id = consultationRequest.Id,
                 HospitalId = consultationRequest.HospitalId,
+                SpecialityId = consultationRequest.SpecialityId,
                 Duration = consultationRequest.Duration
             };
         }
@@ -65,10 +104,13 @@ namespace hospital_manager_bl.Util
         }
         public ConsultationResponse ResponseOf(ConsultationData consultationData)
         {
+            HospitalResponse hospital = ResponseOf(_unitOfWork.Hospital.GetHospital(consultationData.HospitalId));
+            SpecialityResponse speciality = ResponseOf(_unitOfWork.Speciality.Get(consultationData.SpecialityId));
             return new ConsultationResponse
             {
                 Id = consultationData.Id,
-                HospitalId = consultationData.HospitalId,
+                Hospital = hospital,
+                Speciality = speciality,
                 Duration = consultationData.Duration
             };
         }

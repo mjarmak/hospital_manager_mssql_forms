@@ -51,6 +51,11 @@ namespace hospital_manager_ui.Forms
                 {
                     return speciality.Name;
                 }).ToArray());
+                consulationSpecialityComboBox.Items.Clear();
+                consulationSpecialityComboBox.Items.AddRange(specialitiesResponse.Select(speciality =>
+                {
+                    return speciality.Name;
+                }).ToArray());
             }
         }
         private void RefreshHospitals()
@@ -115,15 +120,16 @@ namespace hospital_manager_ui.Forms
             {
                 int duration = Int32.Parse(consultationDurationComboBox.SelectedItem.ToString());
                 long hospitalId = hospitals.Find(hospital => hospital.Name == hospitalComboBox.SelectedItem.ToString()).Id;
+                long specialityId = specialities.Find(speciality => speciality.Name == consulationSpecialityComboBox.SelectedItem.ToString()).Id;
 
-                if (consultationRequests.Find(consultation => consultation.HospitalId == hospitalId) != null)
+                if (consultationRequests.Find(consultation => consultation.HospitalId == hospitalId && consultation.SpecialityId == specialityId) != null)
                 {
-                    MessageBox.Show("Choose a different hospital", "Consultation already exists",
+                    MessageBox.Show("Choose a different hospital or speciality", "Consultation already exists",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
                     return;
                 }
-                consultationRequests.Add(new ConsultationRequest(hospitalId, duration));
+                consultationRequests.Add(new ConsultationRequest(hospitalId, duration, specialityId));
                 RefreshConsultationsList();          
             } else
             {
@@ -137,7 +143,7 @@ namespace hospital_manager_ui.Forms
             consultationsLlistView.Items.Clear();
             consultationsLlistView.Items.AddRange(consultationRequests.Select(consultation =>
             {
-                return new ListViewItem(new[] { hospitals.Find(hospital => hospital.Id == consultation.HospitalId).Name, consultation.Duration.ToString() });
+                return new ListViewItem(new[] { hospitals.Find(hospital => hospital.Id == consultation.HospitalId).Name, specialities.Find(speciality => speciality.Id == consultation.SpecialityId).Name, consultation.Duration.ToString() });
             }).ToArray());
         }
     }

@@ -68,12 +68,10 @@ namespace hospital_manager_api.Controllers
             JObject jObject = JObject.Parse(result);
             string username = jObject.GetValue("username").ToString();
             userAccountRequest.DoctorRequest.Username = username;
-            var roomResponse = _doctorService.SaveDoctor(userAccountRequest.DoctorRequest);
-
             return Ok(new
             {
-                data = roomResponse
-            });
+                data = _doctorService.SaveDoctor(userAccountRequest.DoctorRequest)
+        });
         }
 
         [HttpGet("{username}")]

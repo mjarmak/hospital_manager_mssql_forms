@@ -42,14 +42,17 @@
             this.textBoxLastName = new System.Windows.Forms.TextBox();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.consultationsLlistView = new System.Windows.Forms.ListView();
+            this.Hospital = new System.Windows.Forms.ColumnHeader();
+            this.Speciality = new System.Windows.Forms.ColumnHeader();
+            this.Duration = new System.Windows.Forms.ColumnHeader();
             this.hospitalComboBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.consultationDurationComboBox = new System.Windows.Forms.ComboBox();
             this.addConsultation = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.Hospital = new System.Windows.Forms.ColumnHeader();
-            this.Duration = new System.Windows.Forms.ColumnHeader();
+            this.consulationSpecialityComboBox = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -157,7 +160,6 @@
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(255, 23);
             this.textBoxPassword.TabIndex = 11;
-            this.textBoxPassword.Visible = false;
             // 
             // textBoxEmail
             // 
@@ -190,6 +192,7 @@
             // 
             this.consultationsLlistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Hospital,
+            this.Speciality,
             this.Duration});
             this.consultationsLlistView.HideSelection = false;
             this.consultationsLlistView.Location = new System.Drawing.Point(426, 200);
@@ -198,6 +201,21 @@
             this.consultationsLlistView.TabIndex = 19;
             this.consultationsLlistView.UseCompatibleStateImageBehavior = false;
             this.consultationsLlistView.View = System.Windows.Forms.View.Details;
+            // 
+            // Hospital
+            // 
+            this.Hospital.Text = "Hospital";
+            this.Hospital.Width = 130;
+            // 
+            // Speciality
+            // 
+            this.Speciality.Text = "Speciality";
+            this.Speciality.Width = 130;
+            // 
+            // Duration
+            // 
+            this.Duration.Text = "Duration";
+            this.Duration.Width = 100;
             // 
             // hospitalComboBox
             // 
@@ -235,7 +253,7 @@
             // 
             // addConsultation
             // 
-            this.addConsultation.Location = new System.Drawing.Point(560, 100);
+            this.addConsultation.Location = new System.Drawing.Point(560, 158);
             this.addConsultation.Name = "addConsultation";
             this.addConsultation.Size = new System.Drawing.Size(75, 23);
             this.addConsultation.TabIndex = 23;
@@ -246,7 +264,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(426, 46);
+            this.label8.Location = new System.Drawing.Point(426, 45);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(49, 15);
             this.label8.TabIndex = 24;
@@ -261,21 +279,30 @@
             this.label9.TabIndex = 25;
             this.label9.Text = "Duration:";
             // 
-            // Hospital
+            // consulationSpecialityComboBox
             // 
-            this.Hospital.Text = "Hospital";
-            this.Hospital.Width = 140;
+            this.consulationSpecialityComboBox.FormattingEnabled = true;
+            this.consulationSpecialityComboBox.Location = new System.Drawing.Point(514, 101);
+            this.consulationSpecialityComboBox.Name = "consulationSpecialityComboBox";
+            this.consulationSpecialityComboBox.Size = new System.Drawing.Size(121, 23);
+            this.consulationSpecialityComboBox.TabIndex = 26;
             // 
-            // Duration
+            // label10
             // 
-            this.Duration.Text = "Duration";
-            this.Duration.Width = 160;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(426, 104);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(60, 15);
+            this.label10.TabIndex = 27;
+            this.label10.Text = "Speciality:";
             // 
             // AddDoctor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(835, 483);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.consulationSpecialityComboBox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.addConsultation);
@@ -327,5 +354,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ColumnHeader Hospital;
         private System.Windows.Forms.ColumnHeader Duration;
+        private System.Windows.Forms.ColumnHeader Speciality;
+        private System.Windows.Forms.ComboBox consulationSpecialityComboBox;
+        private System.Windows.Forms.Label label10;
     }
 }

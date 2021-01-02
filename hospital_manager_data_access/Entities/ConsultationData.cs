@@ -14,6 +14,8 @@ namespace hospital_manager_data_access.Entities
 
         public long HospitalId { get; set; }
 
+        public long SpecialityId { get; set; }
+
         public int Duration { get; set; }
     }
 }
