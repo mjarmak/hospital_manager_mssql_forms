@@ -34,7 +34,6 @@ namespace hospital_manager_bl.Service
             var doctorData = modelConverter.EnvelopeOf(doctorRequest);
             _unitOfWork.Doctor.Add(doctorData);
             _unitOfWork.Save();
-            _unitOfWork.Save();
 
             var doctorResponse = modelConverter.ResponseOf(_unitOfWork.Doctor.GetDoctor(doctorData.Username));
             return doctorResponse;

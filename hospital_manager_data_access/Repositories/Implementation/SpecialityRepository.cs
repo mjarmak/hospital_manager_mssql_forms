@@ -15,5 +15,9 @@ namespace hospital_manager_data_access.Repositories.Implementation
             return Db.SpecialityData.Where(speciality => specialityIds.Contains(speciality.Id)).ToList();
         }
 
+        public SpecialityData GetSpecialityByName(string name)
+        {
+            return Db.SpecialityData.Where(speciality => speciality.Name == name).SingleOrDefault();
+        }
     }
 }

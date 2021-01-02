@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Forms\AddSpeciality - Copy.Designer.cs">
+      <DependentUpon>AddSpeciality.Designer.cs</DependentUpon>
+    </Compile>
     <Compile Update="Forms\DoctorRegister.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -31,6 +34,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Forms\AddSpeciality - Copy.resx">
+      <DependentUpon>AddSpeciality.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Update="Forms\DoctorRegister.resx">
       <DependentUpon>DoctorRegister.cs</DependentUpon>
     </EmbeddedResource>

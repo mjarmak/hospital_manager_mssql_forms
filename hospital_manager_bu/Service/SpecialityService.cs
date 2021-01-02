@@ -19,25 +19,6 @@ namespace hospital_manager_bl.Service
             modelConverter = new ModelConverter(_unitOfWork);
         }
 
-        //public List<SpecialityResponse> GetSpecialitiesForDoctor(string doctorUsername)
-        //{
-        //    List<SpecialityToDoctorData> specialities = _unitOfWork.SpecialityToDoctor.Find(e => e.DoctorUsername == doctorUsername).ToList();
-        //    List<SpecialityData> specialityData = new List<SpecialityData>();
-        //    specialities.ForEach(speciality =>
-        //        specialityData.Add(_unitOfWork.Speciality.Get(speciality.Id))
-        //    );
-        //    return specialityData?.Select(speciality => modelConverter.ResponseOf(speciality)).ToList();
-        //}
-        //public List<SpecialityResponse> GetSpecialitiesForRoom(long roomId)
-        //{
-        //    List<SpecialityToRoomData> specialities = _unitOfWork.SpecialityToRoom.Find(e => e.RoomId == roomId).ToList();
-        //    List<SpecialityData> specialityData = new List<SpecialityData>();
-        //    specialities.ForEach(speciality =>
-        //        specialityData.Add(_unitOfWork.Speciality.Get(speciality.Id))
-        //    );
-        //    return specialityData?.Select(speciality => modelConverter.ResponseOf(speciality)).ToList();
-        //}
-
         public SpecialityResponse GetSpeciality(long id)
         {
             return modelConverter.ResponseOf(_unitOfWork.Speciality.Get(id));
@@ -50,6 +31,12 @@ namespace hospital_manager_bl.Service
 
         public SpecialityData SaveSpeciality(SpecialityRequest specialityRequest)
         {
+
+            if (SpecialityNameExists(specialityRequest.Name))
+            {
+                throw new InvalidSpeciality("A Speciality with name " + specialityRequest.Name + " already exists.");
+            }
+
             var specialityData = modelConverter.EnvelopeOf(specialityRequest);
             _unitOfWork.Speciality.Add(specialityData);
             _unitOfWork.Save();
@@ -57,5 +44,9 @@ namespace hospital_manager_bl.Service
             return _unitOfWork.Speciality.Get(specialityData.Id);
         }
 
+        private bool SpecialityNameExists(string name)
+        {
+            return _unitOfWork.Speciality.GetSpecialityByName(name) != null;
+        }
     }
 }

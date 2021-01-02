@@ -2,6 +2,15 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Forms\AddDoctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\AddHospital.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\AddSpeciality.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\AdminHomePage.cs">
       <SubType>Form</SubType>
     </Compile>

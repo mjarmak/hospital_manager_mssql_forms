@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using hospital_manager_models.Models;
+using hospital_manager_ui.Configuration;
 using hospital_manager_ui.Util;
 using Newtonsoft.Json.Linq;
 
@@ -47,15 +48,20 @@ namespace hospital_manager_ui.Forms
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Error);
                 }
+                else
+                {
+                    string result = response.Result.Content.ReadAsStringAsync().Result;
+                    JObject jObject = JObject.Parse(result);
+                    string token = jObject.GetValue("access_token").ToString();
+                    authUtil.DecodeToken(token);
 
-                string result = response.Result.Content.ReadAsStringAsync().Result;
-                JObject jObject = JObject.Parse(result);
-                string token = jObject.GetValue("access_token").ToString();
-                authUtil.DecodeToken(token);
-
-                //MessageBox.Show("Nice", "Login Successful",
-                //                MessageBoxButtons.OK,
-                //                MessageBoxIcon.Information);
+                    if (AuthConfiguration.Role.Contains("ADMIN"))
+                    {
+                        AdminHomePage f = new AdminHomePage();
+                        f.Show();
+                        this.Hide();
+                    }
+                }
             }
         }
 

@@ -11,5 +11,6 @@ namespace hospital_manager_ui
         public static string client_id = "client_id";
         public static string client_secret = "client_secret";
 
+        public static string hospitalManagerApiUrl = "https://localhost:44396";
     }
 }

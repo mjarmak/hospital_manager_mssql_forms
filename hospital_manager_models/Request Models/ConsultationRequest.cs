@@ -7,5 +7,14 @@
         public long HospitalId { get; set; }
 
         public int Duration { get; set; }
+
+        public ConsultationRequest()
+        {
+        }
+        public ConsultationRequest(long HospitalId, int Duration)
+        {
+            this.HospitalId = HospitalId;
+            this.Duration = Duration;
+        }
     }
 }

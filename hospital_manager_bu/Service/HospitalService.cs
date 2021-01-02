@@ -20,12 +20,12 @@ namespace hospital_manager_bl.Service
 
         public HospitalData GetHospital(long id)
         {
-            return _unitOfWork.Hospital.Get(id);
+            return _unitOfWork.Hospital.GetHospital(id);
         }
 
         public IEnumerable<HospitalData> GetHospitals()
         {
-            return _unitOfWork.Hospital.All();
+            return _unitOfWork.Hospital.GetHospitals();
         }
 
         public HospitalData SaveHospital(HospitalRequest hospital)

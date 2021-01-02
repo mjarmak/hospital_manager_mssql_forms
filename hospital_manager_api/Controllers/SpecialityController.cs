@@ -46,7 +46,7 @@ namespace hospital_manager_api.Controllers
                     data = specialityResponse
                 });
             }
-            catch (InvalidRoom e)
+            catch (InvalidSpeciality e)
             {
                 return BadRequest(new
                 {
