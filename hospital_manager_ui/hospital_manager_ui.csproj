@@ -16,11 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Forms\DoctorRegister.cs">
+    <Compile Update="Forms\UserRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\DoctorRegister.Designer.cs">
-      <DependentUpon>DoctorRegister.cs</DependentUpon>
+    <Compile Update="Forms\UserRegister.Designer.cs">
+      <DependentUpon>UserRegister.cs</DependentUpon>
     </Compile>
     <Compile Update="Forms\Login.cs">
       <SubType>Form</SubType>
@@ -36,8 +36,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Forms\DoctorRegister.resx">
-      <DependentUpon>DoctorRegister.cs</DependentUpon>
+    <EmbeddedResource Update="Forms\UserRegister.resx">
+      <DependentUpon>UserRegister.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Forms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

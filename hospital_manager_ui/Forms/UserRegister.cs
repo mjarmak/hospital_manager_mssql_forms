@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace hospital_manager_ui.Forms
 {
-    public partial class DoctorRegister : Form
+    public partial class UserRegister : Form
     {
-        public DoctorRegister()
+        public UserRegister()
         {
             InitializeComponent();
         }
@@ -34,7 +34,7 @@ namespace hospital_manager_ui.Forms
             this.Close();
         }
 
-        private void DoctorRegister_Load(object sender, EventArgs e)
+        private void UserRegister_Load(object sender, EventArgs e)
         {
 
         }
