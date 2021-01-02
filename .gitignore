@@ -24,3 +24,5 @@
 /packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0
 /packages/Newtonsoft.Json.11.0.1
 /packages
+/hospital_manager_ui/bin/Debug/netcoreapp3.1
+/hospital_manager_ui/obj

@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace hospital_manager_forms
+namespace hospital_manager_ui.Forms
 {
-    public partial class Form1 : Form
+    public partial class AdminHomePage : Form
     {
-        public Form1()
+        public AdminHomePage()
         {
             InitializeComponent();
         }
