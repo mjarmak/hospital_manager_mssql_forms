@@ -46,10 +46,19 @@ namespace hospital_manager_bl.Service
             var roomData = modelConverter.EnvelopeOf(roomRequest);
             _unitOfWork.Room.Add(roomData);
             _unitOfWork.Save();
-            _unitOfWork.Save();
 
             var roomResponse = modelConverter.ResponseOf(_unitOfWork.Room.GetRoom(roomData.Id));
             return roomResponse;
+        }
+
+        public List<RoomResponse> SaveRooms(List<RoomRequest> roomRequests)
+        {
+            List<RoomResponse> roomResponses = new List<RoomResponse>();
+            roomRequests.ForEach(roomRequest =>
+            {
+                roomResponses.Add(SaveRoom(roomRequest));
+            });
+            return roomResponses;
         }
 
         private bool HospitalExists(long id)

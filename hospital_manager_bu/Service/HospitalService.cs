@@ -11,11 +11,13 @@ namespace hospital_manager_bl.Service
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ModelConverter modelConverter;
+        private readonly RoomService roomService;
 
         public HospitalService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             modelConverter = new ModelConverter(_unitOfWork);
+            roomService = new RoomService(_unitOfWork);
         }
 
         public HospitalData GetHospital(long id)
@@ -33,6 +35,13 @@ namespace hospital_manager_bl.Service
             var hospitalData = modelConverter.EnvelopeOf(hospital);
             _unitOfWork.Hospital.Add(hospitalData);
             _unitOfWork.Save();
+
+            if (hospital.Rooms != null)
+            {
+                foreach (RoomRequest room in hospital.Rooms)
+                    room.HospitalId = hospitalData.Id;
+                roomService.SaveRooms(hospital.Rooms);
+            }
 
             return _unitOfWork.Hospital.Get(hospitalData.Id);
         }
