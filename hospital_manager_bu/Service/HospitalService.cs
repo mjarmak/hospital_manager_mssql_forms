@@ -4,6 +4,7 @@ using hospital_manager_data_access.Repositories.Interfaces;
 using hospital_manager_exceptions.Exceptions;
 using hospital_manager_models.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace hospital_manager_bl.Service
 {
@@ -20,17 +21,21 @@ namespace hospital_manager_bl.Service
             roomService = new RoomService(_unitOfWork);
         }
 
-        public HospitalData GetHospital(long id)
+        public HospitalResponse GetHospital(long id)
         {
-            return _unitOfWork.Hospital.GetHospital(id);
+            return modelConverter.ResponseOf(_unitOfWork.Hospital.GetHospital(id));
         }
 
-        public IEnumerable<HospitalData> GetHospitals()
+        public List<HospitalResponse> GetHospitals()
         {
-            return _unitOfWork.Hospital.GetHospitals();
+            return _unitOfWork.Hospital.GetHospitals()?.Select(hospital => modelConverter.ResponseOf(hospital)).ToList();
+        }
+        public List<HospitalResponse> GetHospitalsBySpecialityId(long specialityId)
+        {
+            return _unitOfWork.Hospital.GetHospitalsBySpecialityId(specialityId)?.Select(hospital => modelConverter.ResponseOf(hospital)).ToList();
         }
 
-        public HospitalData SaveHospital(HospitalRequest hospital)
+        public HospitalResponse SaveHospital(HospitalRequest hospital)
         {
             var hospitalData = modelConverter.EnvelopeOf(hospital);
             _unitOfWork.Hospital.Add(hospitalData);
@@ -43,7 +48,7 @@ namespace hospital_manager_bl.Service
                 roomService.SaveRooms(hospital.Rooms);
             }
 
-            return _unitOfWork.Hospital.Get(hospitalData.Id);
+            return modelConverter.ResponseOf(_unitOfWork.Hospital.GetHospital(hospitalData.Id));
         }
     }
 }

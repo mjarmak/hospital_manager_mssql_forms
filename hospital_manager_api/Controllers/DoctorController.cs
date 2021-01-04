@@ -75,6 +75,15 @@ namespace hospital_manager_api.Controllers
         });
         }
 
+        [HttpGet("hospital/{hospitalId}")]
+        public ActionResult<DoctorResponse> GetDoctorsByHospitalId(long hospitalId)
+        {
+            return Ok(new
+            {
+                data = _doctorService.GetDoctorsByHospitalId(hospitalId)
+            });
+        }
+
         [HttpGet("{username}")]
         public ActionResult<DoctorResponse> GetDoctor(string username)
         {

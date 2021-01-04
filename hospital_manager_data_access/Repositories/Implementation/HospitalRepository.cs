@@ -19,6 +19,11 @@ namespace hospital_manager_data_access.Repositories.Implementation
         {
             return Db.HospitalData.Include(hospital => hospital.Address).Include(hospital => hospital.OpeningHours).ToList();
         }
+        public List<HospitalData> GetHospitalsBySpecialityId(long specialityId)
+        {
+            return Db.HospitalData.Where(hospital => Db.RoomData.Any(room => room.HospitalId == hospital.Id && room.Specialities.Any(speciality => speciality.SpecialityId == specialityId)))
+            .Include(hospital => hospital.Address).ToList();
+        }
 
     }
 }

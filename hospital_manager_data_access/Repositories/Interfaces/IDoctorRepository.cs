@@ -8,5 +8,8 @@ namespace hospital_manager_data_access.Repositories.Interfaces
         DoctorData GetDoctor(string username);
 
         List<DoctorData> GetDoctors();
+
+        List<DoctorData> GetDoctorsByHospitalId(long hospitalId);
+
     }
 }

@@ -35,7 +35,7 @@ namespace hospital_manager_api.Controllers
 
         [HttpPost]
         //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public ActionResult<HospitalData> SaveHospital(HospitalRequest hospital)
+        public ActionResult<HospitalResponse> SaveHospital(HospitalRequest hospital)
         {
             return Ok(new
             {
@@ -45,7 +45,7 @@ namespace hospital_manager_api.Controllers
 
         [HttpGet("{id}")]
         //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public ActionResult<HospitalData> GetHospital(long id)
+        public ActionResult<HospitalResponse> GetHospital(long id)
         {
             return Ok(new
             {
@@ -55,11 +55,20 @@ namespace hospital_manager_api.Controllers
 
         [HttpGet("all")]
         //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public ActionResult<IEnumerable<HospitalData>> GetHospitals()
+        public ActionResult<List<HospitalResponse>> GetHospitals()
         {
             return Ok(new
             {
                 data = _hospitalService.GetHospitals()
+            });
+        }
+        [HttpGet("speciality/{specialityId}")]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<List<HospitalResponse>> GetHospitalsBySpecialityId(long specialityId)
+        {
+            return Ok(new
+            {
+                data = _hospitalService.GetHospitalsBySpecialityId(specialityId)
             });
         }
         private string GetClaim(string name)

@@ -28,6 +28,11 @@ namespace hospital_manager_bl.Service
             List<DoctorData> doctorData = _unitOfWork.Doctor.GetDoctors();
             return doctorData?.Select(doctor => modelConverter.ResponseOf(doctor)).ToList();
         }
+        public List<DoctorResponse> GetDoctorsByHospitalId(long hospitalId)
+        {
+            List<DoctorData> doctorData = _unitOfWork.Doctor.GetDoctorsByHospitalId(hospitalId);
+            return doctorData?.Select(doctor => modelConverter.ResponseOf(doctor)).ToList();
+        }
 
         public DoctorResponse SaveDoctor(DoctorRequest doctorRequest)
         {
