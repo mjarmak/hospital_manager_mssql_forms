@@ -9356,25 +9356,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bmaj\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\BIGIF\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_api\\hospital_manager_api.csproj",
+      "projectUniqueName": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_api\\hospital_manager_api.csproj",
       "projectName": "hospital_manager_api",
-      "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_api\\hospital_manager_api.csproj",
-      "packagesPath": "C:\\Users\\bmaj\\.nuget\\packages\\",
-      "outputPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_api\\obj\\",
+      "projectPath": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_api\\hospital_manager_api.csproj",
+      "packagesPath": "C:\\Users\\BIGIF\\.nuget\\packages\\",
+      "outputPath": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\bmaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\BIGIF\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -9385,21 +9384,22 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_bu\\hospital_manager_bl.csproj": {
-              "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_bu\\hospital_manager_bl.csproj"
+            "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_bu\\hospital_manager_bl.csproj": {
+              "projectPath": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_bu\\hospital_manager_bl.csproj"
             },
-            "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj": {
-              "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj"
+            "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj": {
+              "projectPath": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_data_access\\hospital_manager_data_access.csproj"
             },
-            "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_exceptions\\hospital_manager_exceptions.csproj": {
-              "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_exceptions\\hospital_manager_exceptions.csproj"
+            "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_exceptions\\hospital_manager_exceptions.csproj": {
+              "projectPath": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_exceptions\\hospital_manager_exceptions.csproj"
             },
-            "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
-              "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj"
+            "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
+              "projectPath": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj"
             },
-            "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj": {
-              "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj"
+            "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj": {
+              "projectPath": "D:\\Informatique du gestion\\EPHEC\\2020-21\\SGBD_SQL\\Project2020\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj"
             }
           }
         }
@@ -9412,6 +9412,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Tools": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -9454,7 +9455,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   },
