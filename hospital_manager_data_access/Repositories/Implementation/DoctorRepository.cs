@@ -13,11 +13,11 @@ namespace hospital_manager_data_access.Repositories.Implementation
 
         public DoctorData GetDoctor(string username)
         {
-            return Db.DoctorData.Include(doctor => doctor.Specialities).Include(doctor => doctor.Consultations).Single(doctor => doctor.Username == username);
+            return Db.DoctorData.Include(doctor => doctor.SpecialityIds).Include(doctor => doctor.Consultations).Single(doctor => doctor.Username == username);
         }
         public List<DoctorData> GetDoctors()
         {
-            return Db.DoctorData.Include(doctor => doctor.Specialities).Include(doctor => doctor.Consultations).ToList();
+            return Db.DoctorData.Include(doctor => doctor.SpecialityIds).Include(doctor => doctor.Consultations).ToList();
         }
     }
 }
