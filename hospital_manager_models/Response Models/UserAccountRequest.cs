@@ -1,7 +1,9 @@
-﻿using hospital_manager_data_access.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using hospital_manager_data_access.Entities;
 
 namespace hospital_manager_models.Models
 {
+    [Table(name: "UserAccountRequest")]
     public class UserAccountRequest
     {
         public string Name { get; set; }

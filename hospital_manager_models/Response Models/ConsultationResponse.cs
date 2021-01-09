@@ -7,6 +7,7 @@ using System.Text;
 
 namespace hospital_manager_data_access.Entities
 {
+    [Table(name: "ConsultationResponse")]
     public class ConsultationResponse
     {
         public long Id { get; set; }

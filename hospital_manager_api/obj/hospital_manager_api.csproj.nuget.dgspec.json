@@ -63,23 +63,23 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.1.0-preview1.19506.2, )"
+              "version": "[5.0.1, )"
             },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
-              "version": "[3.1.5, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
-              "version": "[3.1.0-preview1.19506.1, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[3.1.0-preview1-19509-03, )"
+              "version": "[3.1.4, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[5.5.1, )"
+              "version": "[5.6.3, )"
             }
           },
           "imports": [
@@ -220,7 +220,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.5, )"
+              "version": "[5.0.1, )"
             }
           },
           "imports": [
@@ -399,13 +399,9 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
-            "AspNet.Security.OpenIdConnect.Primitives": {
-              "target": "Package",
-              "version": "[2.0.0, )"
-            },
             "IdentityServer4": {
               "target": "Package",
-              "version": "[3.0.2, )"
+              "version": "[4.1.1, )"
             },
             "IdentityServer4.AccessTokenValidation": {
               "target": "Package",
@@ -413,27 +409,27 @@
             },
             "IdentityServer4.AspNetIdentity": {
               "target": "Package",
-              "version": "[3.0.2, )"
+              "version": "[4.1.1, )"
             },
             "IdentityServer4.EntityFramework": {
               "target": "Package",
-              "version": "[3.0.2, )"
+              "version": "[4.1.1, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[3.1.5, )"
+              "version": "[3.1.10, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.5, )"
+              "version": "[5.0.1, )"
             },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
-              "version": "[3.1.5, )"
+              "version": "[5.0.1, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.1.5, )"
+              "version": "[5.0.1, )"
             }
           },
           "imports": [

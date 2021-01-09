@@ -56,6 +56,7 @@ namespace authentication_api
             userManager.AddClaimAsync(user, new Claim(JwtClaimTypes.BirthDate, birthdate));
         }
 
+
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

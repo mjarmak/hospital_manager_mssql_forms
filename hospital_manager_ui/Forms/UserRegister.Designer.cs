@@ -75,6 +75,7 @@
             this.label7.Size = new System.Drawing.Size(233, 33);
             this.label7.TabIndex = 1;
             this.label7.Text = "Hospital Manager";
+            this.label7.Click += new System.EventHandler(this.label7_Click_1);
             // 
             // pictureBox1
             // 
@@ -253,6 +254,7 @@
             this.button2.TabIndex = 20;
             this.button2.Text = "Register";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -267,6 +269,7 @@
             this.button1.TabIndex = 19;
             this.button1.Text = "Back";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // hScrollBar1
             // 

@@ -15,7 +15,7 @@ namespace authentication_api
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
         public string Gender { get; set; }
-        [Required(ErrorMessage = "Birthdate is required is required")]
+        [Required(ErrorMessage = "Birthdate is required")]
         public string BirthDate { get; set; }
         public bool Profession { get; set; }
         [DataType(DataType.Password)]

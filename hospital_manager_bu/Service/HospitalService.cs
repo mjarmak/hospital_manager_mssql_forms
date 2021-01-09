@@ -3,6 +3,7 @@ using hospital_manager_data_access.Entities;
 using hospital_manager_data_access.Repositories.Interfaces;
 using hospital_manager_exceptions.Exceptions;
 using hospital_manager_models.Models;
+using System;
 using System.Collections.Generic;
 
 namespace hospital_manager_bl.Service
@@ -35,6 +36,11 @@ namespace hospital_manager_bl.Service
             _unitOfWork.Save();
 
             return _unitOfWork.Hospital.Get(hospitalData.Id);
+        }
+
+        public void SaveHospital(HospitalRequest hospitalRequest, AddressRequest addressRequest, object p)
+        {
+            throw new NotImplementedException();
         }
     }
 }

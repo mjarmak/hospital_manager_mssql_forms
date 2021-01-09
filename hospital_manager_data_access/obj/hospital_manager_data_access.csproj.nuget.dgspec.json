@@ -53,7 +53,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.5, )"
+              "version": "[5.0.1, )"
             }
           },
           "imports": [
