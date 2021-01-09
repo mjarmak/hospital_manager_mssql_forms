@@ -44,6 +44,7 @@
             this.hospitalComboBox.Name = "hospitalComboBox";
             this.hospitalComboBox.Size = new System.Drawing.Size(394, 23);
             this.hospitalComboBox.TabIndex = 0;
+            this.hospitalComboBox.SelectedIndexChanged += new System.EventHandler(this.hospitalComboBox_SelectedIndexChanged);
             // 
             // label1
             // 

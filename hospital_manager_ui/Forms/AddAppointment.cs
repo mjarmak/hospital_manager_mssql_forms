@@ -3,13 +3,10 @@ using hospital_manager_models.Response_Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,12 +26,6 @@ namespace hospital_manager_ui.Forms
         {
             InitializeComponent();
             RefreshSpecialities();
-            RefreshHospitals();
-        }
-
-        private void RefreshHospitalsList(long specialityId)
-        {
-
         }
 
         private void RefreshSpecialities()
@@ -61,11 +52,11 @@ namespace hospital_manager_ui.Forms
                 }).ToArray());
             }
         }
-        private void RefreshHospitals()
+        private void RefreshHospitals(long specialityId)
         {
             var client = new HttpClient();
 
-            Task<HttpResponseMessage> response = client.GetAsync(url + "/hospital/all");
+            Task<HttpResponseMessage> response = client.GetAsync(url + "/hospital/speciality/" + specialityId);
             response.Wait();
             if (response.Result.StatusCode != HttpStatusCode.OK)
             {
@@ -89,6 +80,12 @@ namespace hospital_manager_ui.Forms
         private void specialityComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             specialityId = specialities.Single(speciality => speciality.Name == hospitalComboBox.SelectedItem.ToString()).Id;
+            RefreshHospitals(specialityId);
+        }
+
+        private void hospitalComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

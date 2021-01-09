@@ -23,7 +23,6 @@ namespace hospital_manager_bl.Util
                 DoctorUsername = appointment.DoctorUsername,
                 RoomId = appointment.RoomId,
                 HospitalId = appointment.HospitalId,
-                Duration = appointment.Duration,
                 Description = appointment.Description,
                 From = appointment.From,
                 To = appointment.To
@@ -51,6 +50,21 @@ namespace hospital_manager_bl.Util
                 _unitOfWork.Speciality.GetSpecialities(doctorData.Specialities?.Select(speciality => speciality.SpecialityId).ToList())
                 );
             return doctorResponse;
+        }
+        public AppointmentResponse ResponseOf(AppointmentData appointment)
+        {
+            var appointmentResponse = new AppointmentResponse
+            {
+                Id = appointment.Id,
+                PatientUsername = appointment.PatientUsername,
+                DoctorUsername = appointment.DoctorUsername,
+                RoomId = appointment.RoomId,
+                HospitalId = appointment.HospitalId,
+                Description = appointment.Description,
+                From = appointment.From,
+                To = appointment.To
+            };
+            return appointmentResponse;
         }
         public HospitalResponse ResponseOf(HospitalData hospitalData)
         {

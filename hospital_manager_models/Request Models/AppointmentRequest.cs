@@ -1,4 +1,6 @@
-﻿namespace hospital_manager_models.Models
+﻿using System;
+
+namespace hospital_manager_models.Models
 {
     public class AppointmentRequest
     {
@@ -12,12 +14,10 @@
 
         public long HospitalId { get; set; }
 
-        public int Duration { get; set; }
-
         public string Description { get; set; }
 
-        public string From { get; set; }
+        public DateTime From { get; set; }
 
-        public string To { get; set; }
+        public DateTime To { get; set; }
     }
 }

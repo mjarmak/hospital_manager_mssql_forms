@@ -1,4 +1,4 @@
-﻿using hospital_manager_models.Models;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,13 +18,11 @@ namespace hospital_manager_data_access.Entities
 
         public long HospitalId { get; set; }
 
-        public int Duration { get; set; }
-
         public string Description { get; set; }
 
-        public string From { get; set; }
+        public DateTime From { get; set; }
 
-        public string To { get; set; }
+        public DateTime To { get; set; }
     }
 
 }
