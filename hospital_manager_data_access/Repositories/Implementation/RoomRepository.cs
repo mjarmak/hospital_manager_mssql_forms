@@ -24,5 +24,9 @@ namespace hospital_manager_data_access.Repositories.Implementation
         {
             return Db.RoomData.Include(room => room.Specialities).Where(room => room.HospitalId == hospitalId).ToList();
         }
+        public List<RoomData> GetRoomsByHospitalIdAndSpecialityId(long hospitalId, long specialityId)
+        {
+            return Db.RoomData.Include(room => room.Specialities).Where(room => room.HospitalId == hospitalId && room.Specialities.Any(speciality => speciality.SpecialityId == specialityId)).ToList();
+        }
     }
 }

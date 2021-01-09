@@ -74,6 +74,48 @@ namespace hospital_manager_api.Controllers
                 data = _appointmentService.GetAppointments()
             });
         }
+
+        [HttpGet("hospital/{hospitalId}/speciality/{specialityId}")]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<List<AppointmentData>> GetAppointmentsByHospitalAndSpeciality(
+            int hospitalId,
+            int specialityId,
+            [FromQuery] DateTime from,
+            [FromQuery] DateTime to
+            )
+        {
+            return Ok(new
+            {
+                data = _appointmentService.GetAppointmentsByHospitalAndSpeciality(hospitalId, specialityId, from, to)
+            });
+        }
+        [HttpGet("hospital/{hospitalId}")]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<List<AppointmentData>> GetAppointmentsByHospital(
+            int hospitalId,
+            [FromQuery] DateTime from,
+            [FromQuery] DateTime to
+            )
+        {
+            return Ok(new
+            {
+                data = _appointmentService.GetAppointmentsByHospital(hospitalId, from, to)
+            });
+        }
+        [HttpGet("hospital/{hospitalId}/speciality/{specialityId}/suggestions")]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<List<AppointmentData>> GetAppointmentSuggestions(
+            int hospitalId,
+            int specialityId,
+            [FromQuery] DateTime from,
+            [FromQuery] DateTime to
+            )
+        {
+            return Ok(new
+            {
+                data = _appointmentService.GetAppointmentSuggestions(hospitalId, specialityId, from, to)
+            });
+        }
         private string GetClaim(string name)
         {
             var accessTokenString = Request.Headers[HeaderNames.Authorization].ToString();

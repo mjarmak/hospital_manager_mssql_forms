@@ -16,8 +16,6 @@ namespace hospital_manager_data_access.Entities
 
         public long RoomId { get; set; }
 
-        public long HospitalId { get; set; }
-
         public string Description { get; set; }
 
         public DateTime From { get; set; }

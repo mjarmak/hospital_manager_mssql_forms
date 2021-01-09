@@ -25,8 +25,7 @@ namespace hospital_manager_bl.Service
 
         public List<DoctorResponse> GetDoctors()
         {
-            List<DoctorData> doctorData = _unitOfWork.Doctor.GetDoctors();
-            return doctorData?.Select(doctor => modelConverter.ResponseOf(doctor)).ToList();
+            return _unitOfWork.Doctor.GetDoctors()?.Select(doctor => modelConverter.ResponseOf(doctor)).ToList();
         }
         public List<DoctorResponse> GetDoctorsByHospitalId(long hospitalId)
         {

@@ -12,7 +12,5 @@ namespace hospital_manager_data_access.Entities
         public List<SpecialityResponse> Specialities { get; set; }
         
         public List<ConsultationResponse> Consultations { get; set; }
-
-
     }
 }

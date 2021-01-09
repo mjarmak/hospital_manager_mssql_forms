@@ -11,5 +11,7 @@ namespace hospital_manager_data_access.Repositories.Interfaces
         List<RoomData> GetRooms();
 
         List<RoomData> GetRoomsByHospitalId(long hospitalId);
+
+        List<RoomData> GetRoomsByHospitalIdAndSpecialityId(long hospitalId, long specialityId);
     }
 }
