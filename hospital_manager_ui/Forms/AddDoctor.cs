@@ -88,18 +88,27 @@ namespace hospital_manager_ui.Forms
         {
             var client = new HttpClient();
 
-            DoctorRequest doctorRequest = new DoctorRequest();
+            UserAccountRequest userAccountRequest = new UserAccountRequest();
+            userAccountRequest.Name = textBoxName.Text;
+            userAccountRequest.Surname = textBoxLastName.Text;
+            userAccountRequest.Email = textBoxEmail.Text;
+            userAccountRequest.Phone = textBoxPhone.Text;
+            userAccountRequest.Password = textBoxPassword.Text;
+            userAccountRequest.Gender = genderComboBox.SelectedItem.ToString();
+            userAccountRequest.BirthDate = birthdayDateTimePicker.Value.ToString();
 
+            DoctorRequest doctorRequest = new DoctorRequest();
             List<string> checkedSpecialities = specialititesList.CheckedItems.Cast<string>().ToList();
             doctorRequest.SpecialityIds = checkedSpecialities.Select(name => specialities.Find(speciality => speciality.Name == name).Id).ToList();
+            doctorRequest.Consultations = consultationRequests;
 
-            string json = null;
+            string json = JsonConvert.SerializeObject(doctorRequest);
             StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-            Task<HttpResponseMessage> response = client.PostAsync(url + "/hospital", httpContent);
+            Task<HttpResponseMessage> response = client.PostAsync(url + "/doctor/register", httpContent);
             response.Wait();
             if (response.Result.StatusCode != HttpStatusCode.OK)
             {
-                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to add speciality",
+                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to add doctor",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }

@@ -148,18 +148,33 @@ namespace hospital_manager_ui.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             AddSpeciality f = new AddSpeciality();
+            f.FormClosed += new FormClosedEventHandler(Form_Closed);
+            void Form_Closed(object sender, FormClosedEventArgs e)
+            {
+                RefreshSpecialities();
+            }
             f.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             AddHospital f = new AddHospital();
+            f.FormClosed += new FormClosedEventHandler(Form_Closed);
+            void Form_Closed(object sender, FormClosedEventArgs e)
+            {
+                RefreshHospitals();
+            }
             f.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             AddDoctor f = new AddDoctor();
+            f.FormClosed += new FormClosedEventHandler(Form_Closed);
+            void Form_Closed(object sender, FormClosedEventArgs e)
+            {
+                RefreshDoctors();
+            }
             f.Show();
         }
     }

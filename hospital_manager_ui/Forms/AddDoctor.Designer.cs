@@ -53,6 +53,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.consulationSpecialityComboBox = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.textBoxPhone = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.genderComboBox = new System.Windows.Forms.ComboBox();
+            this.birthdayDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // button1
@@ -87,9 +91,9 @@
             // 
             this.specialititesList.CheckOnClick = true;
             this.specialititesList.FormattingEnabled = true;
-            this.specialititesList.Location = new System.Drawing.Point(34, 200);
+            this.specialititesList.Location = new System.Drawing.Point(34, 254);
             this.specialititesList.Name = "specialititesList";
-            this.specialititesList.Size = new System.Drawing.Size(361, 220);
+            this.specialititesList.Size = new System.Drawing.Size(361, 166);
             this.specialititesList.TabIndex = 4;
             // 
             // label1
@@ -105,7 +109,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 136);
+            this.label2.Location = new System.Drawing.Point(34, 192);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 15);
@@ -195,9 +199,9 @@
             this.Speciality,
             this.Duration});
             this.consultationsLlistView.HideSelection = false;
-            this.consultationsLlistView.Location = new System.Drawing.Point(426, 200);
+            this.consultationsLlistView.Location = new System.Drawing.Point(426, 135);
             this.consultationsLlistView.Name = "consultationsLlistView";
-            this.consultationsLlistView.Size = new System.Drawing.Size(375, 220);
+            this.consultationsLlistView.Size = new System.Drawing.Size(375, 285);
             this.consultationsLlistView.TabIndex = 19;
             this.consultationsLlistView.UseCompatibleStateImageBehavior = false;
             this.consultationsLlistView.View = System.Windows.Forms.View.Details;
@@ -220,7 +224,7 @@
             // hospitalComboBox
             // 
             this.hospitalComboBox.FormattingEnabled = true;
-            this.hospitalComboBox.Location = new System.Drawing.Point(514, 42);
+            this.hospitalComboBox.Location = new System.Drawing.Point(514, 43);
             this.hospitalComboBox.Name = "hospitalComboBox";
             this.hospitalComboBox.Size = new System.Drawing.Size(121, 23);
             this.hospitalComboBox.TabIndex = 20;
@@ -246,14 +250,14 @@
             "90",
             "105",
             "120"});
-            this.consultationDurationComboBox.Location = new System.Drawing.Point(514, 71);
+            this.consultationDurationComboBox.Location = new System.Drawing.Point(514, 72);
             this.consultationDurationComboBox.Name = "consultationDurationComboBox";
             this.consultationDurationComboBox.Size = new System.Drawing.Size(121, 23);
             this.consultationDurationComboBox.TabIndex = 22;
             // 
             // addConsultation
             // 
-            this.addConsultation.Location = new System.Drawing.Point(560, 158);
+            this.addConsultation.Location = new System.Drawing.Point(666, 106);
             this.addConsultation.Name = "addConsultation";
             this.addConsultation.Size = new System.Drawing.Size(75, 23);
             this.addConsultation.TabIndex = 23;
@@ -264,7 +268,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(426, 45);
+            this.label8.Location = new System.Drawing.Point(426, 46);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(49, 15);
             this.label8.TabIndex = 24;
@@ -273,7 +277,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(426, 74);
+            this.label9.Location = new System.Drawing.Point(426, 75);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(56, 15);
             this.label9.TabIndex = 25;
@@ -282,7 +286,7 @@
             // consulationSpecialityComboBox
             // 
             this.consulationSpecialityComboBox.FormattingEnabled = true;
-            this.consulationSpecialityComboBox.Location = new System.Drawing.Point(514, 101);
+            this.consulationSpecialityComboBox.Location = new System.Drawing.Point(514, 102);
             this.consulationSpecialityComboBox.Name = "consulationSpecialityComboBox";
             this.consulationSpecialityComboBox.Size = new System.Drawing.Size(121, 23);
             this.consulationSpecialityComboBox.TabIndex = 26;
@@ -290,17 +294,57 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(426, 104);
+            this.label10.Location = new System.Drawing.Point(426, 105);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 15);
             this.label10.TabIndex = 27;
             this.label10.Text = "Speciality:";
+            // 
+            // textBoxPhone
+            // 
+            this.textBoxPhone.Location = new System.Drawing.Point(140, 131);
+            this.textBoxPhone.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.textBoxPhone.MinimumSize = new System.Drawing.Size(233, 20);
+            this.textBoxPhone.Name = "textBoxPhone";
+            this.textBoxPhone.Size = new System.Drawing.Size(255, 23);
+            this.textBoxPhone.TabIndex = 9;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(34, 134);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(91, 15);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "Phone Number:";
+            // 
+            // genderComboBox
+            // 
+            this.genderComboBox.FormattingEnabled = true;
+            this.genderComboBox.Items.AddRange(new object[] {
+            "MALE",
+            "FEMALE"});
+            this.genderComboBox.Location = new System.Drawing.Point(140, 189);
+            this.genderComboBox.Name = "genderComboBox";
+            this.genderComboBox.Size = new System.Drawing.Size(255, 23);
+            this.genderComboBox.TabIndex = 28;
+            // 
+            // birthdayDateTimePicker
+            // 
+            this.birthdayDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.birthdayDateTimePicker.Location = new System.Drawing.Point(140, 160);
+            this.birthdayDateTimePicker.Name = "birthdayDateTimePicker";
+            this.birthdayDateTimePicker.Size = new System.Drawing.Size(255, 23);
+            this.birthdayDateTimePicker.TabIndex = 29;
             // 
             // AddDoctor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(835, 483);
+            this.Controls.Add(this.birthdayDateTimePicker);
+            this.Controls.Add(this.genderComboBox);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.consulationSpecialityComboBox);
             this.Controls.Add(this.label9);
@@ -312,11 +356,13 @@
             this.Controls.Add(this.consultationsLlistView);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.textBoxLastName);
+            this.Controls.Add(this.textBoxPhone);
             this.Controls.Add(this.textBoxEmail);
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -357,5 +403,9 @@
         private System.Windows.Forms.ColumnHeader Speciality;
         private System.Windows.Forms.ComboBox consulationSpecialityComboBox;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBoxPhone;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox genderComboBox;
+        private System.Windows.Forms.DateTimePicker birthdayDateTimePicker;
     }
 }

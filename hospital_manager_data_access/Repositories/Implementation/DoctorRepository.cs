@@ -19,5 +19,9 @@ namespace hospital_manager_data_access.Repositories.Implementation
         {
             return Db.DoctorData.Include(doctor => doctor.Specialities).Include(doctor => doctor.Consultations).ToList();
         }
+        public List<DoctorData> GetDoctorsByHospitalId(long hospitalId)
+        {
+            return Db.DoctorData.Where(doctor => doctor.Consultations.Any(consultation => consultation.HospitalId == hospitalId)).Include(doctor => doctor.Specialities).Include(doctor => doctor.Consultations).ToList();
+        }
     }
 }

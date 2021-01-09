@@ -5,6 +5,7 @@ using hospital_manager_exceptions.Exceptions;
 using hospital_manager_models.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace hospital_manager_bl.Service
 {
@@ -12,30 +13,43 @@ namespace hospital_manager_bl.Service
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ModelConverter modelConverter;
+        private readonly RoomService roomService;
 
         public HospitalService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             modelConverter = new ModelConverter(_unitOfWork);
+            roomService = new RoomService(_unitOfWork);
         }
 
-        public HospitalData GetHospital(long id)
+        public HospitalResponse GetHospital(long id)
         {
-            return _unitOfWork.Hospital.GetHospital(id);
+            return modelConverter.ResponseOf(_unitOfWork.Hospital.GetHospital(id));
         }
 
-        public IEnumerable<HospitalData> GetHospitals()
+        public List<HospitalResponse> GetHospitals()
         {
-            return _unitOfWork.Hospital.GetHospitals();
+            return _unitOfWork.Hospital.GetHospitals()?.Select(hospital => modelConverter.ResponseOf(hospital)).ToList();
+        }
+        public List<HospitalResponse> GetHospitalsBySpecialityId(long specialityId)
+        {
+            return _unitOfWork.Hospital.GetHospitalsBySpecialityId(specialityId)?.Select(hospital => modelConverter.ResponseOf(hospital)).ToList();
         }
 
-        public HospitalData SaveHospital(HospitalRequest hospital)
+        public HospitalResponse SaveHospital(HospitalRequest hospital)
         {
             var hospitalData = modelConverter.EnvelopeOf(hospital);
             _unitOfWork.Hospital.Add(hospitalData);
             _unitOfWork.Save();
 
-            return _unitOfWork.Hospital.Get(hospitalData.Id);
+            if (hospital.Rooms != null)
+            {
+                foreach (RoomRequest room in hospital.Rooms)
+                    room.HospitalId = hospitalData.Id;
+                roomService.SaveRooms(hospital.Rooms);
+            }
+
+            return modelConverter.ResponseOf(_unitOfWork.Hospital.GetHospital(hospitalData.Id));
         }
 
         public void SaveHospital(HospitalRequest hospitalRequest, AddressRequest addressRequest, object p)

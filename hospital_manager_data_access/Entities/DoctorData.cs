@@ -12,6 +12,8 @@ namespace hospital_manager_data_access.Entities
         [Key]
         public string Username { get; set; }
 
+        public string Name { get; set; }
+
         public List<SpecialityToDoctorData> Specialities { get; set; }
 
         public List<ConsultationData> Consultations { get; set; }

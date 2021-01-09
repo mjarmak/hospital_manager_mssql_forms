@@ -23,7 +23,6 @@ namespace hospital_manager_bl.Util
                 DoctorUsername = appointment.DoctorUsername,
                 RoomId = appointment.RoomId,
                 HospitalId = appointment.HospitalId,
-                Duration = appointment.Duration,
                 Description = appointment.Description,
                 From = appointment.From,
                 To = appointment.To
@@ -34,6 +33,7 @@ namespace hospital_manager_bl.Util
             return new DoctorData
             {
                 Username = doctorRequest.Username,
+                Name = doctorRequest.Name,
                 Consultations = EnvelopeOf(doctorRequest.Consultations),
                 Specialities = EnvelopeOfSpecialityToDoctor(doctorRequest.SpecialityIds)
             };
@@ -43,12 +43,28 @@ namespace hospital_manager_bl.Util
             var doctorResponse = new DoctorResponse
             {
                 Username = doctorData.Username,
+                Name = doctorData.Name,
                 Consultations = ResponseOf(doctorData.Consultations)
             };
             doctorResponse.Specialities = ResponseOf(
                 _unitOfWork.Speciality.GetSpecialities(doctorData.Specialities?.Select(speciality => speciality.SpecialityId).ToList())
                 );
             return doctorResponse;
+        }
+        public AppointmentResponse ResponseOf(AppointmentData appointment)
+        {
+            var appointmentResponse = new AppointmentResponse
+            {
+                Id = appointment.Id,
+                PatientUsername = appointment.PatientUsername,
+                DoctorUsername = appointment.DoctorUsername,
+                RoomId = appointment.RoomId,
+                HospitalId = appointment.HospitalId,
+                Description = appointment.Description,
+                From = appointment.From,
+                To = appointment.To
+            };
+            return appointmentResponse;
         }
         public HospitalResponse ResponseOf(HospitalData hospitalData)
         {
@@ -57,7 +73,8 @@ namespace hospital_manager_bl.Util
                 Id = hospitalData.Id,
                 Name = hospitalData.Name,
                 Address = ResponseOf(hospitalData.Address),
-                OpeningHours = ResponseOf(hospitalData.OpeningHours)
+                OpeningHours = ResponseOf(hospitalData.OpeningHours),
+                Rooms = ResponseOf(_unitOfWork.Room.GetRoomsByHospitalId(hospitalData.Id))
 
             };
             return hospitalResponse;
@@ -133,7 +150,8 @@ namespace hospital_manager_bl.Util
             var roomResponse = new RoomResponse
             {
                 Id = roomData.Id,
-                Name = roomData.Name
+                Name = roomData.Name,
+                HospitalId = roomData.HospitalId
             };
             roomResponse.Specialities = ResponseOf(
                 _unitOfWork.Speciality.GetSpecialities(roomData.Specialities?.Select(speciality => speciality.SpecialityId).ToList())

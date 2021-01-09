@@ -55,6 +55,27 @@ namespace hospital_manager_api.Controllers
             }
         }
 
+        [HttpPost("all")]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<List<RoomResponse>> SaveRooms(List<RoomRequest> rooms)
+        {
+            try
+            {
+                var roomResponse = _roomService.SaveRooms(rooms);
+                return Ok(new
+                {
+                    data = roomResponse
+                });
+            }
+            catch (InvalidRoom e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
+        }
+
         [HttpGet("{id}")]
         public ActionResult<RoomResponse> GetRoom(long id)
         {
@@ -64,7 +85,7 @@ namespace hospital_manager_api.Controllers
             });
         }
 
-        [HttpGet("hospital/{id}")]
+        [HttpGet("hospital/{hospitalId}")]
         public ActionResult<IEnumerable<RoomData>> GetRoomsByHospitalId(long hospitalId)
         {
             return Ok(new

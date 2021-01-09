@@ -26,7 +26,6 @@ namespace hospital_manager_ui.Forms
         private void Click_Login(object sender, EventArgs e)
         {
             if (text_username.Text != null && text_password.Text != null) {
-                UserAccountRequest userAccountRequest = new UserAccountRequest();
 
                 var url = ApplicationConfiguration.oauthUrl;
                 var client = new HttpClient();

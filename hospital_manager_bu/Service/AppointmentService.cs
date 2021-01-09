@@ -4,6 +4,7 @@ using hospital_manager_data_access.Repositories.Interfaces;
 using hospital_manager_exceptions.Exceptions;
 using hospital_manager_models.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace hospital_manager_bl.Service
 {
@@ -18,17 +19,17 @@ namespace hospital_manager_bl.Service
             modelConverter = new ModelConverter(_unitOfWork);
         }
 
-        public AppointmentData GetAppointment(long id)
+        public AppointmentResponse GetAppointment(long id)
         {
-            return _unitOfWork.Appointment.Get(id);
+            return modelConverter.ResponseOf(_unitOfWork.Appointment.Get(id));
         }
 
-        public IEnumerable<AppointmentData> GetAppointments()
+        public List<AppointmentData> GetAppointments()
         {
-            return _unitOfWork.Appointment.All();
+            return _unitOfWork.Appointment.All().ToList();
         }
 
-        public AppointmentData SaveAppointment(AppointmentRequest appointment)
+        public AppointmentResponse SaveAppointment(AppointmentRequest appointment)
         {
             if (appointment == null)
             {
@@ -52,7 +53,7 @@ namespace hospital_manager_bl.Service
             _unitOfWork.Appointment.Add(appointmentData);
             _unitOfWork.Save();
 
-            return _unitOfWork.Appointment.Get(appointmentData.Id);
+            return modelConverter.ResponseOf(_unitOfWork.Appointment.Get(appointmentData.Id));
         }
 
         private bool RoomExists(long id)

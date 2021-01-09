@@ -8,6 +8,8 @@ namespace hospital_manager_data_access.Entities
     {
         public string Username { get; set; }
 
+        public string Name { get; set; }
+
         public List<long> SpecialityIds { get; set; }
 
         public List<ConsultationRequest> Consultations { get; set; }

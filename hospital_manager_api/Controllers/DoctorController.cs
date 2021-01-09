@@ -68,10 +68,20 @@ namespace hospital_manager_api.Controllers
             JObject jObject = JObject.Parse(result);
             string username = jObject.GetValue("username").ToString();
             userAccountRequest.DoctorRequest.Username = username;
+            userAccountRequest.DoctorRequest.Name = userAccountRequest.Name + " " + userAccountRequest.Surname;
             return Ok(new
             {
                 data = _doctorService.SaveDoctor(userAccountRequest.DoctorRequest)
         });
+        }
+
+        [HttpGet("hospital/{hospitalId}")]
+        public ActionResult<DoctorResponse> GetDoctorsByHospitalId(long hospitalId)
+        {
+            return Ok(new
+            {
+                data = _doctorService.GetDoctorsByHospitalId(hospitalId)
+            });
         }
 
         [HttpGet("{username}")]

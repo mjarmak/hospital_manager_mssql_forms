@@ -10,6 +10,7 @@ namespace hospital_manager_models.Models
         public string Name { get; set; }
         public AddressResponse Address { get; set; }
         public List<OpeningHoursResponse> OpeningHours { get; set; }
+        public List<RoomResponse> Rooms { get; set; }
     }
 
     [Table(name: "AddressResponse")]

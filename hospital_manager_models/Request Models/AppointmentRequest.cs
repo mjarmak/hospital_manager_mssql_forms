@@ -1,8 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 
 namespace hospital_manager_models.Models
 {
-    [Table(name: "AppointmentRequest")]
     public class AppointmentRequest
     {
         public long Id { get; set; }
@@ -15,12 +14,10 @@ namespace hospital_manager_models.Models
 
         public long HospitalId { get; set; }
 
-        public int Duration { get; set; }
-
         public string Description { get; set; }
 
-        public string From { get; set; }
+        public DateTime From { get; set; }
 
-        public string To { get; set; }
+        public DateTime To { get; set; }
     }
 }
