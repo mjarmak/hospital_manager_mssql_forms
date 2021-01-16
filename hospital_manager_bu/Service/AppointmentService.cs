@@ -51,6 +51,35 @@ namespace hospital_manager_bl.Service
             {
                 throw new InvalidAppointment("Speciality with ID " + specialityId + " doesn't exist.");
             }
+            SpecialityData speciality = _unitOfWork.Speciality.Get(specialityId);
+            List<AppointmentRequest> appointmentSuggestions = new List<AppointmentRequest>();
+            List<RoomFromTo> roomFromTosFree = GetFreeRooms(hospitalId, specialityId, dateFrom, dateTo);
+            List<DoctorData> doctors = _unitOfWork.Doctor.GetDoctorsByConsultationHospitalIdAndSpecialityId(hospitalId, specialityId);
+            foreach(RoomFromTo roomFromTo in roomFromTosFree)
+            {
+                double availabeMinutes = (roomFromTo.To - roomFromTo.From).TotalMinutes;
+                List<DoctorData> availableDoctors = doctors.Where(doctor => doctor.Consultations.Any(consultation => consultation.Duration <= availabeMinutes)).ToList();
+                foreach (DoctorData availableDoctor in availableDoctors)
+                {
+                    foreach (ConsultationData availableConsultations in availableDoctor.Consultations.Where(consultation => consultation.HospitalId == hospitalId && consultation.SpecialityId == specialityId))
+                    {
+                        appointmentSuggestions.Add(new AppointmentRequest { RoomId = roomFromTo.RoomId, Description = speciality.Name, DoctorUsername = availableDoctor.Username, From = roomFromTo.From, To = roomFromTo.From.AddMinutes(availableConsultations.Duration) });
+                    }
+                }
+            }
+            return appointmentSuggestions;
+        }
+
+        public List<RoomFromTo> GetFreeRooms(int hospitalId, int specialityId, DateTime dateFrom, DateTime dateTo)
+        {
+            if (!HospitalExists(hospitalId))
+            {
+                throw new InvalidAppointment("Hospital with ID " + hospitalId + " doesn't exist.");
+            }
+            if (!SpecialityExists(specialityId))
+            {
+                throw new InvalidAppointment("Speciality with ID " + specialityId + " doesn't exist.");
+            }
             HospitalData hospital = _unitOfWork.Hospital.GetHospital(hospitalId);
             List<DateTime> allDates = new List<DateTime>();
             for (DateTime date = dateFrom; date <= dateTo; date = date.AddDays(1))
@@ -63,8 +92,6 @@ namespace hospital_manager_bl.Service
             List<AppointmentResponse> appointmentsTaken = _unitOfWork.Appointment.GetAppointmentsByHospitalAndSpeciality(hospitalId, specialityId, dateFrom, dateTo)?.Select(appointment => modelConverter.ResponseOf(appointment)).ToList();
 
             List<RoomData> rooms = _unitOfWork.Room.GetRoomsByHospitalIdAndSpecialityId(hospitalId, specialityId);
-
-            List<DoctorData> doctors = _unitOfWork.Doctor.GetDoctorsByHospitalIdAndSpecialityId(hospitalId, specialityId);
 
             List<RoomFromTo> roomFromTosTaken = appointmentsTaken?.Select(
                 appointment => new RoomFromTo { RoomId = appointment.RoomId, From = appointment.From, To = appointment.To }).ToList();
@@ -108,7 +135,7 @@ namespace hospital_manager_bl.Service
                 });
                 });
 
-            return null;
+            return roomFromTosFree;
         }
 
         public AppointmentResponse SaveAppointment(AppointmentRequest appointment)

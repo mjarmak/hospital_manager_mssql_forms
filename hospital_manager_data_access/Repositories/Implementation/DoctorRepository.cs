@@ -23,7 +23,7 @@ namespace hospital_manager_data_access.Repositories.Implementation
         {
             return Db.DoctorData.Where(doctor => doctor.Consultations.Any(consultation => consultation.HospitalId == hospitalId)).Include(doctor => doctor.Specialities).Include(doctor => doctor.Consultations).ToList();
         }
-        public List<DoctorData> GetDoctorsByHospitalIdAndSpecialityId(long hospitalId, long specialityId)
+        public List<DoctorData> GetDoctorsByConsultationHospitalIdAndSpecialityId(long hospitalId, long specialityId)
         {
             return Db.DoctorData.Where(doctor => doctor.Consultations.Any(consultation => consultation.HospitalId == hospitalId && consultation.SpecialityId == specialityId)).Include(doctor => doctor.Specialities).Include(doctor => doctor.Consultations).ToList();
         }
