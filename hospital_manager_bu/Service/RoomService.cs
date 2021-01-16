@@ -36,6 +36,13 @@ namespace hospital_manager_bl.Service
             return roomData?.Select(room => modelConverter.ResponseOf(room)).ToList();
         }
 
+        public List<RoomResponse> GetRoomsByHospitalIdAndSpecialityId(long hospitalId, long specialityId)
+        {
+            List<RoomData> roomData = _unitOfWork.Room.GetRoomsByHospitalIdAndSpecialityId(hospitalId, specialityId);
+            return roomData?.Select(room => modelConverter.ResponseOf(room)).ToList();
+        }
+
+
         public RoomResponse SaveRoom(RoomRequest roomRequest)
         {
             if (!HospitalExists(roomRequest.HospitalId))

@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\hospital_manager_data_access\hospital_manager_data_access.csproj" />
     <ProjectReference Include="..\hospital_manager_exceptions\hospital_manager_exceptions.csproj" />
     <ProjectReference Include="..\hospital_manager_models\hospital_manager_models.csproj" />

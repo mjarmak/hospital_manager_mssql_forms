@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using hospital_manager_data_access.Entities;
-
-namespace hospital_manager_models.Models
+﻿namespace hospital_manager_models.Models
 {
     public class UserAccountRequest
     {

@@ -14,11 +14,13 @@ namespace hospital_manager_bl.Service
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ModelConverter modelConverter;
+        private readonly OAuthService oAuthService;
 
         public AppointmentService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             modelConverter = new ModelConverter(_unitOfWork);
+            oAuthService = new OAuthService();
         }
 
         public AppointmentResponse GetAppointment(long id)
@@ -173,22 +175,26 @@ namespace hospital_manager_bl.Service
 
         public AppointmentResponse SaveAppointment(AppointmentRequest appointment)
         {
-            //if (appointment == null)
-            //{
-            //    throw new InvalidAppointment("Appointment is null.");
-            //}
-            //if (appointment.Id > 0)
-            //{
-            //    throw new InvalidAppointment("Appointment Id should be 0 on creation.");
-            //}
-            //if (!RoomExists(appointment.RoomId))
-            //{
-            //    throw new InvalidAppointment("Room with ID " + appointment.RoomId + " does not exist.");
-            //}
-            //if (!HospitalExists(appointment.HospitalId))
-            //{
-            //    throw new InvalidAppointment("Hospital with ID " + appointment.HospitalId + " does not exist.");
-            //}
+            if (appointment == null)
+            {
+                throw new InvalidAppointment("Appointment is null.");
+            }
+            if (appointment.Id > 0)
+            {
+                throw new InvalidAppointment("Appointment Id should be 0 on creation.");
+            }
+            if (!RoomExists(appointment.RoomId))
+            {
+                throw new InvalidAppointment("Room with ID " + appointment.RoomId + " does not exist.");
+            }
+            if (!oAuthService.UserExists(appointment.DoctorUsername))
+            {
+                throw new InvalidAppointment("Doctor with username " + appointment.DoctorUsername + " does not exist.");
+            }
+            if (!oAuthService.UserExists(appointment.PatientUsername))
+            {
+                throw new InvalidAppointment("Patient with username " + appointment.PatientUsername + " does not exist.");
+            }
 
 
             var appointmentData = modelConverter.EnvelopeOf(appointment);

@@ -24,15 +24,20 @@ namespace authentication_api
             AddUser(host, "admin", "ADMIN", "admin", "admin", "OTHER", "+32466550935",
                     "10/07/1995");
 
-            AddUser(host, "mohamadjarmak@gmail.com", "DOCTOR", "Mohamad", "Jarmak", "MALE", "+32466550935",
+            AddUser(host, "mohamadjarmak@gmail.com", "PATIENT", "Mohamad", "Jarmak", "MALE", "+32466550935",
                 "07/06/1995");
 
             AddUser(host, "bigi_admin@businessmanager.com", "PATIENT", "Francesco", "Bigi", "MALE", "+32466550935",
                 "10/07/1995");
 
-            AddUser(host, "newbreaker@gmail.com", "PATIENT", "Francesco", "Bigi", "MALE", "+32466550935",
+            AddUser(host, "newbreaker@gmail.com", "PATIENT", "Francesco2", "Bigi2", "MALE", "+32466550935",
                 "10/07/1995");
 
+            AddUser(host, "mohamadjarmak@gmail.com", "DOCTOR", "Doctor", "Who", "MALE", "+32466550935",
+                "10/07/1995");
+
+            AddUser(host, "mohamadjarmak@gmail.com", "DOCTOR", "Drake", "Ramoray", "MALE", "+32466550935",
+                "10/07/1995");
 
             host.Run();
         }
@@ -46,6 +51,7 @@ namespace authentication_api
 
             var username = name + familyName + birthdate.Replace("/", "");
             var user = new IdentityUser(username);
+            user.Email = email;
             userManager.CreateAsync(user, "password").GetAwaiter().GetResult();
             userManager.AddToRoleAsync(user, role);
             userManager.AddClaimAsync(user, new Claim(JwtClaimTypes.Email, email));

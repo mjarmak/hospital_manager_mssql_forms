@@ -20,11 +20,7 @@ namespace hospital_manager_ui.Forms
         public Login()
         {
             AddAppointment f = new AddAppointment();
-            f.FormClosed += new FormClosedEventHandler(Form_Closed);
-            void Form_Closed(object sender, FormClosedEventArgs e)
-            {
-            }
-            f.Show();
+            //f.FormClosed += new FormClosedEventHandler(Form_Closed);void Form_Closed(object sender, FormClosedEventArgs e){}f.Show();
             InitializeComponent();
             authUtil = new AuthUtil();
         }
@@ -60,9 +56,15 @@ namespace hospital_manager_ui.Forms
                     string token = jObject.GetValue("access_token").ToString();
                     authUtil.DecodeToken(token);
 
-                    if (AuthConfiguration.Role.Contains("ADMIN"))
+                    if (AuthConfiguration.Role.Contains("ADMIN") && AuthConfiguration.Role.Contains("DOCTOR"))
                     {
                         AdminHomePage f = new AdminHomePage();
+                        f.Show();
+                        this.Hide();
+                    }
+                    else if (AuthConfiguration.Role.Contains("PATIENT"))
+                    {
+                        UserHomePage f = new UserHomePage();
                         f.Show();
                         this.Hide();
                     }

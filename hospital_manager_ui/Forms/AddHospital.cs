@@ -1,5 +1,4 @@
 ﻿using hospital_manager_models.Models;
-using hospital_manager_models.Response_Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

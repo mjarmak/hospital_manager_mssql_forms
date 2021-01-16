@@ -57,6 +57,7 @@ namespace authentication_api.Controllers
 
             var username = GetUserName(userAccountModel);
             var user = new IdentityUser(username);
+            user.Email = userAccountModel.Email;
             var result = await _userManager.CreateAsync(user, userAccountDataModel.Password);
 
             if (!result.Succeeded)
@@ -193,11 +194,6 @@ namespace authentication_api.Controllers
             });
         }
 
-        /// <summary>
-        /// Search for the user based on role
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns></returns>
         [Route("user/username")]
         [HttpGet]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
@@ -217,12 +213,24 @@ namespace authentication_api.Controllers
             });
         }
 
+        [Route("user/exists")]
+        [HttpGet]
+        public async Task<ActionResult> GetUserExists(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null)
+            {
+                return BadRequest(new
+                {
+                    data = new List<string> { "User " + username + " doesn't exist" }
+                });
+            }
+            return Ok(new
+            {
+                data = "OK"
+            });
+        }
 
-        /// <summary>
-        /// Remove role
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns></returns>
         [Route("user/make-admin")]
         [HttpGet]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]

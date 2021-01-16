@@ -41,7 +41,7 @@ namespace hospital_manager_api.Controllers
 
         [HttpPost("register")]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public async System.Threading.Tasks.Task<ActionResult<DoctorResponse>> SaveRoomAsync(UserAccountRequest userAccountRequest)
+        public ActionResult<DoctorResponse> RegisterDoctor(UserAccountRequest userAccountRequest)
         {
             if (userAccountRequest.DoctorRequest == null)
             {
@@ -51,28 +51,21 @@ namespace hospital_manager_api.Controllers
                 });
             }
 
-            var url = "https://localhost:44321/register/doctor";
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetAccessToken());
-            var json = JsonConvert.SerializeObject(userAccountRequest);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(url, data);
-            if (response.StatusCode != HttpStatusCode.OK)
+            try
+            {
+                var result = _doctorService.RegisterDoctor(userAccountRequest, GetAccessToken());
+                return Ok(new
+                {
+                    data = result
+                });
+            }
+            catch (InvalidUserRequest e)
             {
                 return BadRequest(new
                 {
-                    data = response.ReasonPhrase
-                }); ;
+                    data = e.Message
+                });
             }
-            string result = response.Content.ReadAsStringAsync().Result;
-            JObject jObject = JObject.Parse(result);
-            string username = jObject.GetValue("username").ToString();
-            userAccountRequest.DoctorRequest.Username = username;
-            userAccountRequest.DoctorRequest.Name = userAccountRequest.Name + " " + userAccountRequest.Surname;
-            return Ok(new
-            {
-                data = _doctorService.SaveDoctor(userAccountRequest.DoctorRequest)
-        });
         }
 
         [HttpGet("hospital/{hospitalId}")]

@@ -1,12 +1,8 @@
-﻿using hospital_manager_data_access.Entities;
-using hospital_manager_models.Models;
-using hospital_manager_models.Response_Models;
+﻿using hospital_manager_models.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Http;

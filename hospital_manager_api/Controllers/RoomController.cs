@@ -86,7 +86,7 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpGet("hospital/{hospitalId}")]
-        public ActionResult<IEnumerable<RoomData>> GetRoomsByHospitalId(long hospitalId)
+        public ActionResult<List<RoomResponse>> GetRoomsByHospitalId(long hospitalId)
         {
             return Ok(new
             {
@@ -94,8 +94,18 @@ namespace hospital_manager_api.Controllers
             });
         }
 
-        [HttpGet("all")]
-        public ActionResult<IEnumerable<RoomData>> GetRooms()
+        [HttpGet("hospital/{hospitalId}/speciality/{specialityId}")]
+        public ActionResult<List<RoomResponse>> GetRoomsByHospitalIdAndSpecialityId(long hospitalId, long specialityId)
+        {
+            return Ok(new
+            {
+                data = _roomService.GetRoomsByHospitalIdAndSpecialityId(hospitalId, specialityId)
+            });
+        }
+        
+
+       [HttpGet("all")]
+        public ActionResult<List<RoomResponse>> GetRooms()
         {
             return Ok(new
             {

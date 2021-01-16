@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using hospital_manager_bl.Service;
-using hospital_manager_data_access.Entities;
 using hospital_manager_data_access.Repositories.Interfaces;
 using hospital_manager_models.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -153,8 +152,8 @@ namespace hospital_manager_api
             _appointmentService.SaveAppointment(
                 new  AppointmentRequest
                 {
-                    PatientUsername = "user1",
-                    DoctorUsername = "DRamoray",
+                    PatientUsername = "MohamadJarmak07061995",
+                    DoctorUsername = "DrakeRamoray10071995",
                     Description = "appointment for Pediatrics.",
                     RoomId = 1,
                     From = new DateTime(2021, 1, 18, 7, 0,0),
@@ -163,8 +162,8 @@ namespace hospital_manager_api
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
                 {
-                    PatientUsername = "user2",
-                    DoctorUsername = "DRamoray",
+                    PatientUsername = "MohamadJarmak07061995",
+                    DoctorUsername = "DrakeRamoray10071995",
                     Description = "appointment for Generalist.",
                     RoomId = 1,
                     From = new DateTime(2021, 1, 18, 15, 45, 00),
@@ -173,8 +172,8 @@ namespace hospital_manager_api
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
                 {
-                    PatientUsername = "user2",
-                    DoctorUsername = "DRamoray",
+                    PatientUsername = "FrancescoBigi10071995",
+                    DoctorUsername = "DrakeRamoray10071995",
                     Description = "appointment for Generalist.",
                     RoomId = 1,
                     From = new DateTime(2021, 1, 18, 16, 45, 00),
@@ -183,8 +182,8 @@ namespace hospital_manager_api
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
                 {
-                    PatientUsername = "user3",
-                    DoctorUsername = "DRamoray",
+                    PatientUsername = "FrancescoBigi10071995",
+                    DoctorUsername = "DrakeRamoray10071995",
                     Description = "appointment for Orthopedics.",
                     RoomId = 2,
                     From = new DateTime(2021, 1, 19, 16, 45, 00),
@@ -196,8 +195,8 @@ namespace hospital_manager_api
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
                 {
-                    PatientUsername = "user1",
-                    DoctorUsername = "DWho",
+                    PatientUsername = "MohamadJarmak07061995",
+                    DoctorUsername = "DoctorWho10071995",
                     Description = "appointment for Surgery.",
                     RoomId = 3,
                     From = new DateTime(2021, 1, 16, 17, 0, 0),
@@ -214,7 +213,7 @@ namespace hospital_manager_api
                 new DoctorRequest
                 {
                     Name = "Drake Ramoray",
-                    Username = "DRamoray",
+                    Username = "DrakeRamoray10071995",
                     Consultations = new List<ConsultationRequest>
                     {
                         new ConsultationRequest{HospitalId = 1, Duration = 15, SpecialityId = 1},
@@ -231,7 +230,7 @@ namespace hospital_manager_api
                 new DoctorRequest
                 {
                     Name = "Doctor Who",
-                    Username = "DWho",
+                    Username = "DoctorWho10071995",
                     Consultations = new List<ConsultationRequest>
                     {
                         new ConsultationRequest{HospitalId = 1, Duration = 30, SpecialityId = 1},
