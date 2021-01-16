@@ -17,5 +17,11 @@ namespace hospital_manager_models.Models
         public DateTime From { get; set; }
 
         public DateTime To { get; set; }
+
+        
     }
+
+
+
+
 }

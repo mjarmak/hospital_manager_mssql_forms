@@ -1,5 +1,8 @@
-﻿namespace hospital_manager_data_access.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace hospital_manager_data_access.Entities
 {
+    [Table(name: "ConsultationRequest")]
     public class ConsultationRequest
     {
         public long Id { get; set; }

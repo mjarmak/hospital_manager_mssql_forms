@@ -3,6 +3,7 @@ using hospital_manager_data_access.Entities;
 using hospital_manager_data_access.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+// ReSharper disable All
 
 namespace hospital_manager_bl.Service
 {

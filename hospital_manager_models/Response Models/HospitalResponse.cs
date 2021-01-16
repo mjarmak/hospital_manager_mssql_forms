@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace hospital_manager_models.Models
 {
+    [Table(name: "HospitalResponse")]
     public class HospitalResponse
     {
         public long Id { get; set; }
@@ -11,6 +13,7 @@ namespace hospital_manager_models.Models
         public List<RoomResponse> Rooms { get; set; }
     }
 
+    [Table(name: "AddressResponse")]
     public class AddressResponse
     {
         public long Id { get; set; }
@@ -21,6 +24,7 @@ namespace hospital_manager_models.Models
         public string BoxNumber { get; set; }
     }
 
+    [Table(name: "OpeningHoursResponse")]
     public class OpeningHoursResponse
     {
         public long Id { get; set; }

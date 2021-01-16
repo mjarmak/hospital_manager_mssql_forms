@@ -20,13 +20,6 @@ namespace hospital_manager_ui.Forms
 
         }
 
-        private void Click_Back(object sender, EventArgs e)
-        {
-            Login f = new Login();
-            f.Show();
-            this.Close();
-        }
-
         private void UserRegister_Load(object sender, EventArgs e)
         {
 
@@ -48,6 +41,23 @@ namespace hospital_manager_ui.Forms
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Login f = new Login();
+            f.Show();
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click_1(object sender, EventArgs e)
         {
 
         }
