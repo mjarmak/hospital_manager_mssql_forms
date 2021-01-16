@@ -12,8 +12,6 @@ namespace hospital_manager_models.Models
 
         public long RoomId { get; set; }
 
-        public long HospitalId { get; set; }
-
         public string Description { get; set; }
 
         public DateTime From { get; set; }

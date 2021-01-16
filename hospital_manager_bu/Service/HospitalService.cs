@@ -38,6 +38,22 @@ namespace hospital_manager_bl.Service
 
         public HospitalResponse SaveHospital(HospitalRequest hospital)
         {
+            if (hospital == null)
+            {
+                throw new InvalidHospital("Hospital is null.");
+            }
+            if (hospital.Id > 0)
+            {
+                throw new InvalidHospital("Hospital Id should be 0 on creation.");
+            }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "MONDAY") == null) { throw new InvalidHospital("Monday opening hours are missing."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "TUESDAY") == null) { throw new InvalidHospital("Tuesday opening hours are missing."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "WEDNESDAY") == null) { throw new InvalidHospital("Wednesday opening hours are missing."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "THURSDAY") == null) { throw new InvalidHospital("Thursday opening hours are missing."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "FRIDAY") == null) { throw new InvalidHospital("Friday opening hours are missing."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "SATURDAY") == null) { throw new InvalidHospital("Saturday opening hours are missing."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "SUNDAY") == null) { throw new InvalidHospital("Sunday opening hours are missing."); }
+
             var hospitalData = modelConverter.EnvelopeOf(hospital);
             _unitOfWork.Hospital.Add(hospitalData);
             _unitOfWork.Save();

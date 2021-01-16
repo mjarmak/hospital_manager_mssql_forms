@@ -22,7 +22,6 @@ namespace hospital_manager_bl.Util
                 PatientUsername = appointment.PatientUsername,
                 DoctorUsername = appointment.DoctorUsername,
                 RoomId = appointment.RoomId,
-                HospitalId = appointment.HospitalId,
                 Description = appointment.Description,
                 From = appointment.From,
                 To = appointment.To
@@ -59,7 +58,6 @@ namespace hospital_manager_bl.Util
                 PatientUsername = appointment.PatientUsername,
                 DoctorUsername = appointment.DoctorUsername,
                 RoomId = appointment.RoomId,
-                HospitalId = appointment.HospitalId,
                 Description = appointment.Description,
                 From = appointment.From,
                 To = appointment.To
