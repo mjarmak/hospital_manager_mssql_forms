@@ -52,6 +52,7 @@
             this.DoctorPhone = new System.Windows.Forms.ColumnHeader();
             this.AppointmentsTab = new System.Windows.Forms.TabPage();
             this.listViewAppointment = new System.Windows.Forms.ListView();
+            this.button5 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.SpecialitiesTab.SuspendLayout();
             this.HospitalsTab.SuspendLayout();
@@ -266,6 +267,7 @@
             // 
             // AppointmentsTab
             // 
+            this.AppointmentsTab.Controls.Add(this.button5);
             this.AppointmentsTab.Controls.Add(this.listViewAppointment);
             this.AppointmentsTab.Location = new System.Drawing.Point(4, 24);
             this.AppointmentsTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -286,6 +288,16 @@
             this.listViewAppointment.UseCompatibleStateImageBehavior = false;
             this.listViewAppointment.View = System.Windows.Forms.View.Details;
             this.listViewAppointment.SelectedIndexChanged += new System.EventHandler(this.listViewAppointment_SelectedIndexChanged);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(634, 316);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(82, 22);
+            this.button5.TabIndex = 1;
+            this.button5.Text = "Add";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // AdminHomePage
             // 
@@ -332,5 +344,6 @@
         private System.Windows.Forms.ColumnHeader DoctorPhone;
         private System.Windows.Forms.ListView listViewAppointment;
         private System.Windows.Forms.TabPage AppointmentsTab;
+        private System.Windows.Forms.Button button5;
     }
 }

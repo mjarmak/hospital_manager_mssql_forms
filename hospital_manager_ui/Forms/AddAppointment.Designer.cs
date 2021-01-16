@@ -30,17 +30,17 @@
         {
             this.hospitalComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.doctorLabel = new System.Windows.Forms.Label();
-            this.doctorComboBox = new System.Windows.Forms.ComboBox();
             this.specialityComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // hospitalComboBox
             // 
             this.hospitalComboBox.Enabled = false;
             this.hospitalComboBox.FormattingEnabled = true;
-            this.hospitalComboBox.Location = new System.Drawing.Point(78, 41);
+            this.hospitalComboBox.Location = new System.Drawing.Point(99, 41);
             this.hospitalComboBox.Name = "hospitalComboBox";
             this.hospitalComboBox.Size = new System.Drawing.Size(394, 23);
             this.hospitalComboBox.TabIndex = 0;
@@ -55,28 +55,10 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Hospital:";
             // 
-            // doctorLabel
-            // 
-            this.doctorLabel.AutoSize = true;
-            this.doctorLabel.Location = new System.Drawing.Point(12, 112);
-            this.doctorLabel.Name = "doctorLabel";
-            this.doctorLabel.Size = new System.Drawing.Size(46, 15);
-            this.doctorLabel.TabIndex = 2;
-            this.doctorLabel.Text = "Doctor:";
-            // 
-            // doctorComboBox
-            // 
-            this.doctorComboBox.Enabled = false;
-            this.doctorComboBox.FormattingEnabled = true;
-            this.doctorComboBox.Location = new System.Drawing.Point(78, 109);
-            this.doctorComboBox.Name = "doctorComboBox";
-            this.doctorComboBox.Size = new System.Drawing.Size(394, 23);
-            this.doctorComboBox.TabIndex = 3;
-            // 
             // specialityComboBox
             // 
             this.specialityComboBox.FormattingEnabled = true;
-            this.specialityComboBox.Location = new System.Drawing.Point(78, 12);
+            this.specialityComboBox.Location = new System.Drawing.Point(99, 12);
             this.specialityComboBox.Name = "specialityComboBox";
             this.specialityComboBox.Size = new System.Drawing.Size(394, 23);
             this.specialityComboBox.TabIndex = 4;
@@ -91,15 +73,33 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Speciality:";
             // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.BackColor = System.Drawing.SystemColors.Control;
+            this.monthCalendar1.Location = new System.Drawing.Point(12, 76);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 6;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(251, 76);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(537, 162);
+            this.listView1.TabIndex = 7;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
             // AddAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.specialityComboBox);
-            this.Controls.Add(this.doctorComboBox);
-            this.Controls.Add(this.doctorLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.hospitalComboBox);
             this.Name = "AddAppointment";
@@ -113,9 +113,9 @@
 
         private System.Windows.Forms.ComboBox hospitalComboBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label doctorLabel;
-        private System.Windows.Forms.ComboBox doctorComboBox;
         private System.Windows.Forms.ComboBox specialityComboBox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.ListView listView1;
     }
 }

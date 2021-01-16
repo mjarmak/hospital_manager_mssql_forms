@@ -43,8 +43,8 @@
               "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj": {
                 "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\hospital_manager_models\\hospital_manager_models.csproj"
               },
-              "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj": {
-                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj"
+              "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\oauth_api.csproj": {
+                "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\oauth_api.csproj"
               }
             }
           }
@@ -355,12 +355,12 @@
         }
       }
     },
-    "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj": {
+    "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\oauth_api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj",
-        "projectName": "authentication_api",
-        "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\authentication_api.csproj",
+        "projectUniqueName": "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\oauth_api.csproj",
+        "projectName": "oauth_api",
+        "projectPath": "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\oauth_api.csproj",
         "packagesPath": "C:\\Users\\bmaj\\.nuget\\packages\\",
         "outputPath": "C:\\Freelance\\hospital_manager_mssql_forms\\oauth_api\\obj\\",
         "projectStyle": "PackageReference",
@@ -397,37 +397,37 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "AspNet.Security.OpenIdConnect.Primitives": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
             "IdentityServer4": {
               "target": "Package",
-              "version": "[4.1.1, )"
-            },
-            "IdentityServer4.AccessTokenValidation": {
-              "target": "Package",
-              "version": "[3.0.1, )"
+              "version": "[3.0.2, )"
             },
             "IdentityServer4.AspNetIdentity": {
               "target": "Package",
-              "version": "[4.1.1, )"
+              "version": "[3.0.2, )"
             },
             "IdentityServer4.EntityFramework": {
               "target": "Package",
-              "version": "[4.1.1, )"
+              "version": "[3.0.2, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[3.1.10, )"
+              "version": "[3.1.5, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.1, )"
+              "version": "[3.1.5, )"
             },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
-              "version": "[5.0.1, )"
+              "version": "[3.1.5, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[5.0.1, )"
+              "version": "[3.1.5, )"
             }
           },
           "imports": [

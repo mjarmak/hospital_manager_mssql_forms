@@ -5,6 +5,7 @@ using hospital_manager_data_access.Entities;
 using hospital_manager_data_access.Repositories.Interfaces;
 using hospital_manager_models.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace hospital_manager_api
@@ -15,7 +16,10 @@ namespace hospital_manager_api
         {
             var host = CreateHostBuilder(args).Build();
 
+            AddSpeciality(host);
             AddHospital(host);
+            AddDoctor(host);
+            AddAppointment(host);
 
             host.Run();
         }
@@ -23,23 +27,12 @@ namespace hospital_manager_api
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
-
-        private static AppointmentService _appointmentService;
-        private static DoctorService _doctorService;
-        private static HospitalService _hospitalService;
-        private static SpecialityService _specialityService;
         
-        
-
-        public Program(IUnitOfWork unitOfWork)
-        {
-            _hospitalService = new HospitalService(unitOfWork);
-            _specialityService = new SpecialityService(unitOfWork);
-            _appointmentService = new AppointmentService(unitOfWork);
-            _doctorService = new DoctorService(unitOfWork);
-        }
         private static void AddHospital(IHost host)
         {
+            var scope = host.Services.CreateScope();
+            var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
+            HospitalService _hospitalService = new HospitalService(unitOfWork);
             _hospitalService.SaveHospital(
                 new HospitalRequest {
                     Name = "Saint pierre",
@@ -61,10 +54,10 @@ namespace hospital_manager_api
                     },
                     Rooms = new List<RoomRequest>
                     {
-                        new RoomRequest { SpecialityIds = new List<long>{1,2,3,4}, Name = "111"},
-                        new RoomRequest { SpecialityIds = new List<long>{1,2,3,4}, Name = "112"},
-                        new RoomRequest { SpecialityIds = new List<long>{1,2,3,4}, Name = "113"},
-                        new RoomRequest { SpecialityIds = new List<long>{1,2,3,4}, Name = "114"}
+                        new RoomRequest { SpecialityIds = new List<long>{ 1,2,3,4,5}, Name = "111"},
+                        new RoomRequest { SpecialityIds = new List<long>{ 1,2,3,4,5}, Name = "112"},
+                        new RoomRequest { SpecialityIds = new List<long>{ 1,2,3,4,5}, Name = "113"},
+                        new RoomRequest { SpecialityIds = new List<long>{ 1,2,3,4,5}, Name = "114"}
                     }
                 });
 
@@ -91,10 +84,10 @@ namespace hospital_manager_api
                     },
                     Rooms = new List<RoomRequest>
                     {
-                        new RoomRequest { SpecialityIds = new List<long>{1,2,3,4}, Name = "999"},
-                        new RoomRequest { SpecialityIds = new List<long>{1,2,3,4}, Name = "888"},
-                        new RoomRequest { SpecialityIds = new List<long>{1,2,3,4}, Name = "777"},
-                        new RoomRequest { SpecialityIds = new List<long>{1,2,3,4}, Name = "666"}
+                        new RoomRequest { SpecialityIds = new List<long>{ 1,2,3,4,5}, Name = "999"},
+                        new RoomRequest { SpecialityIds = new List<long>{ 1,2,3,4,5}, Name = "888"},
+                        new RoomRequest { SpecialityIds = new List<long>{ 1,2,3,4,5}, Name = "777"},
+                        new RoomRequest { SpecialityIds = new List<long>{ 1,2,3,4,5}, Name = "666"}
                     }
 
                 });
@@ -122,16 +115,19 @@ namespace hospital_manager_api
                     },
                     Rooms = new List<RoomRequest>
                     {
-                        new RoomRequest { SpecialityIds = new List<long>{1,2,3,4}, Name = "AAAA"},
-                        new RoomRequest { SpecialityIds = new List<long>{1,2,3,4}, Name = "BBBB"},
-                        new RoomRequest { SpecialityIds = new List<long>{1,2,3,4}, Name = "CCCC"},
-                        new RoomRequest { SpecialityIds = new List<long>{1,2,3,4}, Name = "DDDD"}
+                        new RoomRequest { SpecialityIds = new List<long>{ 1,2,3,4,5}, Name = "AAAA"},
+                        new RoomRequest { SpecialityIds = new List<long>{ 1,2,3,4,5}, Name = "BBBB"},
+                        new RoomRequest { SpecialityIds = new List<long>{ 1,2,3,4,5}, Name = "CCCC"},
+                        new RoomRequest { SpecialityIds = new List<long>{ 1,2,3,4,5}, Name = "DDDD"}
                     }
                 } );
         }
 
         private static void AddSpeciality(IHost host)
         {
+            var scope = host.Services.CreateScope();
+            var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
+            SpecialityService _specialityService = new SpecialityService(unitOfWork);
             _specialityService.SaveSpeciality(
                 new SpecialityRequest {Name = "Generalist" }
             );
@@ -151,7 +147,9 @@ namespace hospital_manager_api
 
         private static void AddAppointment(IHost host)
         {
-            //Doctor DRamoray
+            var scope = host.Services.CreateScope();
+            var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
+            AppointmentService _appointmentService = new AppointmentService(unitOfWork);
             _appointmentService.SaveAppointment(
                 new  AppointmentRequest
                 {
@@ -209,6 +207,9 @@ namespace hospital_manager_api
 
         private static void AddDoctor(IHost host)
         {
+            var scope = host.Services.CreateScope();
+            var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
+            DoctorService _doctorService = new DoctorService(unitOfWork);
             _doctorService.SaveDoctor(
                 new DoctorRequest
                 {
@@ -216,9 +217,15 @@ namespace hospital_manager_api
                     Username = "DRamoray",
                     Consultations = new List<ConsultationRequest>
                     {
-                        new ConsultationRequest{HospitalId = 1,Duration = 2,Id = 2,SpecialityId = 3}
+                        new ConsultationRequest{HospitalId = 1, Duration = 15, SpecialityId = 1},
+                        new ConsultationRequest{HospitalId = 1, Duration = 15, SpecialityId = 3},
+                        new ConsultationRequest{HospitalId = 2, Duration = 15, SpecialityId = 1},
+                        new ConsultationRequest{HospitalId = 2, Duration = 15, SpecialityId = 1},
+                        new ConsultationRequest{HospitalId = 2, Duration = 15, SpecialityId = 2},
+                        new ConsultationRequest{HospitalId = 2, Duration = 15, SpecialityId = 3},
+                        new ConsultationRequest{HospitalId = 3, Duration = 15, SpecialityId = 4}
                     },
-                    SpecialityIds = new List<long> {1,2,3}
+                    SpecialityIds = new List<long> {1, 2, 3, 4}
                 });
             _doctorService.SaveDoctor(
                 new DoctorRequest
@@ -227,9 +234,19 @@ namespace hospital_manager_api
                     Username = "DWho",
                     Consultations = new List<ConsultationRequest>
                     {
-                        new ConsultationRequest{HospitalId = 1,Duration = 1,Id = 2,SpecialityId = 3}
+                        new ConsultationRequest{HospitalId = 1, Duration = 30, SpecialityId = 1},
+                        new ConsultationRequest{HospitalId = 1, Duration = 30, SpecialityId = 3},
+                        new ConsultationRequest{HospitalId = 2, Duration = 30, SpecialityId = 1},
+                        new ConsultationRequest{HospitalId = 2, Duration = 30, SpecialityId = 1},
+                        new ConsultationRequest{HospitalId = 2, Duration = 30, SpecialityId = 2},
+                        new ConsultationRequest{HospitalId = 2, Duration = 30, SpecialityId = 3},
+                        new ConsultationRequest{HospitalId = 3, Duration = 30, SpecialityId = 3},
+                        new ConsultationRequest{HospitalId = 2, Duration = 30, SpecialityId = 4},
+                        new ConsultationRequest{HospitalId = 2, Duration = 30, SpecialityId = 5},
+                        new ConsultationRequest{HospitalId = 3, Duration = 30, SpecialityId = 4},
+                        new ConsultationRequest{HospitalId = 3, Duration = 30, SpecialityId = 5}
                     },
-                    SpecialityIds = new List<long> { 3, 4, 5 }
+                    SpecialityIds = new List<long> { 2, 3, 4, 5 }
                 });
         }
     }

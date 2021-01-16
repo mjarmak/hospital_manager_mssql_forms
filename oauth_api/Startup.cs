@@ -11,12 +11,6 @@ namespace authentication_api
 {
     public class Startup
     {
-        //public Startup(IConfiguration configuration)
-        //{
-        //    Configuration = configuration;
-        //}
-
-        //public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -28,14 +22,12 @@ namespace authentication_api
                     config.Authority = "https://localhost:44321/";
                     config.Audience = "auth";
                     config.Audience = "hm";
-                    //config.RequireHttpsMetadata = false;
                 });
 
             services.AddDbContext<DefaultContext>(config =>
             {
                 config.UseInMemoryDatabase("Memory");
             });
-            // AddIdentity registers the services
             services.AddIdentity<IdentityUser, IdentityRole>(config =>
             {
                 config.Password.RequiredLength = 6;
@@ -70,12 +62,6 @@ namespace authentication_api
                 app.UseDeveloperExceptionPage();
             }
 
-            //swagger
-            //app.UseSwagger(c =>
-            //{
-            //    c.SerializeAsV2 = true;
-            //});
-
             app.UseCors("AllowAll");
 
             app.UseRouting();
@@ -85,13 +71,6 @@ namespace authentication_api
             app.UseAuthorization();
 
             app.UseIdentityServer();
-
-            //Need to use an end point in order to access to swagger page
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/V1/swagger.json", "My API V1");
-            //    c.RoutePrefix = string.Empty;
-            //});
 
             app.UseEndpoints(endpoints =>
             {

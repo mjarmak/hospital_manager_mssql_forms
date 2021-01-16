@@ -19,6 +19,12 @@ namespace hospital_manager_ui.Forms
 
         public Login()
         {
+            AddAppointment f = new AddAppointment();
+            f.FormClosed += new FormClosedEventHandler(Form_Closed);
+            void Form_Closed(object sender, FormClosedEventArgs e)
+            {
+            }
+            f.Show();
             InitializeComponent();
             authUtil = new AuthUtil();
         }

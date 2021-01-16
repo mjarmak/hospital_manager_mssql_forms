@@ -67,10 +67,5 @@ namespace hospital_manager_bl.Service
 
             return modelConverter.ResponseOf(_unitOfWork.Hospital.GetHospital(hospitalData.Id));
         }
-
-        public void SaveHospital(HospitalRequest hospitalRequest, AddressRequest addressRequest, object p)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

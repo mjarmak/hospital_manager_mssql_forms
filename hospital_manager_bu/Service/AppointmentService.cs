@@ -69,6 +69,30 @@ namespace hospital_manager_bl.Service
             }
             return appointmentSuggestions;
         }
+        public List<DateTime> GetFreeDays(int hospitalId, int specialityId, DateTime dateFrom, DateTime dateTo)
+        {
+            if (!HospitalExists(hospitalId))
+            {
+                throw new InvalidAppointment("Hospital with ID " + hospitalId + " doesn't exist.");
+            }
+            if (!SpecialityExists(specialityId))
+            {
+                throw new InvalidAppointment("Speciality with ID " + specialityId + " doesn't exist.");
+            }
+            List<AppointmentRequest> appointmentSuggestions = GetAppointmentSuggestions(hospitalId, specialityId, dateFrom, dateTo);
+            List<DateTime> availableDays = new List<DateTime>();
+            foreach(AppointmentRequest appointmentSuggestion in appointmentSuggestions)
+            {
+                DateTime day_temp = appointmentSuggestion.From;
+                if (!availableDays.Any(day => day.DayOfYear == day_temp.DayOfYear))
+                {
+                    DateTime availableDay = new DateTime(day_temp.Year, day_temp.Month, day_temp.Day, 0, 0, 0);
+                    availableDays.Add(availableDay);
+                }
+            }
+
+            return availableDays;
+        }
 
         public List<RoomFromTo> GetFreeRooms(int hospitalId, int specialityId, DateTime dateFrom, DateTime dateTo)
         {
@@ -106,31 +130,40 @@ namespace hospital_manager_bl.Service
                     DateTime toSet = new DateTime();
                     long roomIdTemp = 0;
                     OpeningHoursData hospitalDay = hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == date.DayOfWeek.ToString().ToUpper());
-                    roomFromTosTakenTemp.ForEach(roomFromToTakenTemp =>
+                    if (roomFromTosTakenTemp.Count != 0)
                     {
-                        if (roomFromToTakenTemp.From.Hour > hospitalDay.HourFrom && roomFromToTakenTemp.From.Minute > hospitalDay.MinuteFrom && roomFromTosFree.Count == 0)
+                        roomFromTosTakenTemp.ForEach(roomFromToTakenTemp =>
                         {
-                            fromSet = new DateTime(date.Year, date.Month, date.Day, hospitalDay.HourFrom, hospitalDay.MinuteFrom, 0);
-                            toSet = new DateTime(date.Year, date.Month, date.Day, roomFromToTakenTemp.From.Hour, roomFromToTakenTemp.From.Minute, 0);
-                        } else
+                            if (roomFromToTakenTemp.From.Hour > hospitalDay.HourFrom && roomFromToTakenTemp.From.Minute > hospitalDay.MinuteFrom && roomFromTosFree.Count == 0)
+                            {
+                                fromSet = new DateTime(date.Year, date.Month, date.Day, hospitalDay.HourFrom, hospitalDay.MinuteFrom, 0);
+                                toSet = new DateTime(date.Year, date.Month, date.Day, roomFromToTakenTemp.From.Hour, roomFromToTakenTemp.From.Minute, 0);
+                            }
+                            else
+                            {
+                                toSet = new DateTime(date.Year, date.Month, date.Day, roomFromToTakenTemp.From.Hour, roomFromToTakenTemp.From.Minute, 0);
+                            }
+                            if (fromSet != DateTime.MinValue && toSet != DateTime.MinValue)
+                            {
+                                roomFromTosFree.Add(new RoomFromTo { RoomId = roomFromToTakenTemp.RoomId, From = fromSet, To = toSet });
+                                fromSet = new DateTime();
+                                toSet = new DateTime();
+                            }
+                            fromSet = new DateTime(date.Year, date.Month, date.Day, roomFromToTakenTemp.To.Hour, roomFromToTakenTemp.To.Minute, 0);
+                            roomIdTemp = roomFromToTakenTemp.RoomId;
+                        });
+                        toSet = new DateTime(date.Year, date.Month, date.Day, hospitalDay.HourTo, hospitalDay.MinuteTo, 0);
+                        if (fromSet != DateTime.MinValue && toSet != DateTime.MinValue && roomIdTemp > 0)
                         {
-                            toSet = new DateTime(date.Year, date.Month, date.Day, roomFromToTakenTemp.From.Hour, roomFromToTakenTemp.From.Minute, 0);
-                        }
-                        if (fromSet != DateTime.MinValue && toSet != DateTime.MinValue)
-                        {
-                            roomFromTosFree.Add(new RoomFromTo { RoomId = roomFromToTakenTemp.RoomId, From = fromSet, To = toSet });
+                            roomFromTosFree.Add(new RoomFromTo { RoomId = roomIdTemp, From = fromSet, To = toSet });
                             fromSet = new DateTime();
                             toSet = new DateTime();
                         }
-                        fromSet = new DateTime(date.Year, date.Month, date.Day, roomFromToTakenTemp.To.Hour, roomFromToTakenTemp.To.Minute, 0);
-                        roomIdTemp = roomFromToTakenTemp.RoomId;
-                    });
-                    toSet = new DateTime(date.Year, date.Month, date.Day, hospitalDay.HourTo, hospitalDay.MinuteTo, 0);
-                    if (fromSet != DateTime.MinValue && toSet != DateTime.MinValue && roomIdTemp > 0)
+                    } else
                     {
-                        roomFromTosFree.Add(new RoomFromTo { RoomId = roomIdTemp, From = fromSet, To = toSet });
-                        fromSet = new DateTime();
-                        toSet = new DateTime();
+                        fromSet = new DateTime(date.Year, date.Month, date.Day, hospitalDay.HourFrom, hospitalDay.MinuteFrom, 0);
+                        toSet = new DateTime(date.Year, date.Month, date.Day, hospitalDay.HourTo, hospitalDay.MinuteTo, 0);
+                        roomFromTosFree.Add(new RoomFromTo { RoomId = room.Id, From = fromSet, To = toSet });
                     }
                 });
                 });

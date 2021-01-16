@@ -24,6 +24,7 @@ namespace hospital_manager_ui.Forms
             InitializeComponent();
             RefreshSpecialities();
             RefreshHospitals();
+            RefreshDoctors();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -174,6 +175,16 @@ namespace hospital_manager_ui.Forms
             void Form_Closed(object sender, FormClosedEventArgs e)
             {
                 RefreshDoctors();
+            }
+            f.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            AddAppointment f = new AddAppointment();
+            f.FormClosed += new FormClosedEventHandler(Form_Closed);
+            void Form_Closed(object sender, FormClosedEventArgs e)
+            {
             }
             f.Show();
         }

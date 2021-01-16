@@ -11,6 +11,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Net.Http.Headers;
 using hospital_manager_data_access.Repositories.Interfaces;
 using hospital_manager_exceptions.Exceptions;
+using hospital_manager_models.Util_Models;
 
 namespace hospital_manager_api.Controllers
 {
@@ -114,6 +115,34 @@ namespace hospital_manager_api.Controllers
             return Ok(new
             {
                 data = _appointmentService.GetAppointmentSuggestions(hospitalId, specialityId, from, to)
+            });
+        }
+        [HttpGet("hospital/{hospitalId}/speciality/{specialityId}/freerooms")]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<List<RoomFromTo>> GetFreeRooms(
+            int hospitalId,
+            int specialityId,
+            [FromQuery] DateTime from,
+            [FromQuery] DateTime to
+            )
+        {
+            return Ok(new
+            {
+                data = _appointmentService.GetFreeRooms(hospitalId, specialityId, from, to)
+            });
+        }
+        [HttpGet("hospital/{hospitalId}/speciality/{specialityId}/freedays")]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<List<DateTime>> GetFreeDays(
+            int hospitalId,
+            int specialityId,
+            [FromQuery] DateTime from,
+            [FromQuery] DateTime to
+            )
+        {
+            return Ok(new
+            {
+                data = _appointmentService.GetFreeDays(hospitalId, specialityId, from, to)
             });
         }
         private string GetClaim(string name)

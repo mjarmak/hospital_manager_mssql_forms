@@ -22,7 +22,7 @@
     <ProjectReference Include="..\hospital_manager_data_access\hospital_manager_data_access.csproj" />
     <ProjectReference Include="..\hospital_manager_exceptions\hospital_manager_exceptions.csproj" />
     <ProjectReference Include="..\hospital_manager_models\hospital_manager_models.csproj" />
-    <ProjectReference Include="..\oauth_api\authentication_api.csproj" />
+    <ProjectReference Include="..\oauth_api\oauth_api.csproj" />
   </ItemGroup>
 
 </Project>

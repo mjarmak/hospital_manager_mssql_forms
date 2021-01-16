@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hospital_manager_exceptions
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hospital_manager_models", "hospital_manager_models\hospital_manager_models.csproj", "{C4E117A3-DA63-470A-8A45-DB391106C9D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "authentication_api", "oauth_api\authentication_api.csproj", "{4C90E657-87FF-475D-BD58-0D54DD92B836}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "oauth_api", "oauth_api\oauth_api.csproj", "{4C90E657-87FF-475D-BD58-0D54DD92B836}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hospital_manager_api", "hospital_manager_api\hospital_manager_api.csproj", "{3F45FB71-0CA8-49FF-BA26-6DB54D57A074}"
 EndProject
