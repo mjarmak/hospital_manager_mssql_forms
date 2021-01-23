@@ -21,7 +21,6 @@ namespace hospital_manager_ui.Forms
         {
             InitializeComponent();
             RefreshSpecialities();
-
             hourFromComboBox1.SelectedIndex = 9;
             hourFromComboBox2.SelectedIndex = 9;
             hourFromComboBox3.SelectedIndex = 9;
@@ -50,7 +49,6 @@ namespace hospital_manager_ui.Forms
             minuteToComboBox5.SelectedIndex = 0;
             minuteToComboBox6.SelectedIndex = 0;
             minuteToComboBox7.SelectedIndex = 0;
-
         }
         private void RefreshSpecialities()
         {

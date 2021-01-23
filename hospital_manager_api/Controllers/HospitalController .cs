@@ -43,6 +43,26 @@ namespace hospital_manager_api.Controllers
             });
         }
 
+        [HttpPut]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<HospitalResponse> UpdateHospital(HospitalRequest hospital)
+        {
+            return Ok(new
+            {
+                data = _hospitalService.UpdateHospital(hospital)
+            });
+        }
+
+        [HttpPut("{id}")]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<HospitalResponse> UpdateHospitalRooms(long id, List<RoomRequest> rooms)
+        {
+            return Ok(new
+            {
+                data = _hospitalService.UpdateHospitalRooms(id, rooms)
+            });
+        }
+
         [HttpGet("{id}")]
         //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<HospitalResponse> GetHospital(long id)

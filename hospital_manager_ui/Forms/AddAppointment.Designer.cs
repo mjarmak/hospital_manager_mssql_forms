@@ -50,6 +50,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.textBoxRoom = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             At = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
@@ -237,6 +239,22 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // textBoxRoom
+            // 
+            this.textBoxRoom.Location = new System.Drawing.Point(127, 366);
+            this.textBoxRoom.Name = "textBoxRoom";
+            this.textBoxRoom.Size = new System.Drawing.Size(212, 23);
+            this.textBoxRoom.TabIndex = 8;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(18, 369);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(42, 15);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Room:";
+            // 
             // AddAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -248,11 +266,13 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxDuration);
             this.Controls.Add(this.textBoxDoctor);
             this.Controls.Add(this.textBoxDescription);
             this.Controls.Add(this.textBoxAt);
+            this.Controls.Add(this.textBoxRoom);
             this.Controls.Add(this.textBoxPatient);
             this.Controls.Add(this.listViewSuggestions);
             this.Controls.Add(this.monthCalendar1);
@@ -290,5 +310,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBoxRoom;
+        private System.Windows.Forms.Label label8;
     }
 }

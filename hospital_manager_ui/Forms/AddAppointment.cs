@@ -213,6 +213,8 @@ namespace hospital_manager_ui.Forms
                 textBoxDescription.Text = appointmentSuggestion.Description;
                 textBoxDoctor.Text = doctors.SingleOrDefault(doctor => doctor.Username == appointmentSuggestion.DoctorUsername).Name;
                 textBoxDuration.Text = (appointmentSuggestion.To - appointmentSuggestion.From).TotalMinutes.ToString();
+                textBoxRoom.Text = rooms.SingleOrDefault(room => room.Id == appointmentSuggestion.RoomId).Name;
+
             }
         }
 

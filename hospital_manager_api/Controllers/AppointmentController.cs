@@ -78,14 +78,45 @@ namespace hospital_manager_api.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult DeleteAppointment(long id)
+        {
+            try
+            {
+                _appointmentService.DeleteAppointment(id);
+                return Ok(new
+                {
+                    data = "OK"
+                });
+            }
+            catch (InvalidAppointment e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
+        }
+
         [HttpGet("{id}")]
         //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<AppointmentData> GetAppointment(long id)
         {
-            return Ok(new
+            try
             {
-                data = _appointmentService.GetAppointment(id)
-            });
+                return Ok(new
+                {
+                    data = _appointmentService.GetAppointment(id)
+                });
+            }
+            catch (InvalidAppointment e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
         }
 
         [HttpGet("all")]

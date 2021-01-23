@@ -16,6 +16,10 @@ namespace hospital_manager_data_access.Repositories.Implementation
         {
             return Db.RoomData.Include(room => room.Specialities).Single(room => room.Id == id);
         }
+        public RoomData GetRoomByHospitalIdAndName(long hospitalId, string name)
+        {
+            return Db.RoomData.Include(room => room.Specialities).Single(room => room.HospitalId == hospitalId && room.Name == name);
+        }
         public List<RoomData> GetRooms()
         {
             return Db.RoomData.Include(room => room.Specialities).ToList();

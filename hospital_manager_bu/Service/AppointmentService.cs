@@ -25,7 +25,21 @@ namespace hospital_manager_bl.Service
 
         public AppointmentResponse GetAppointment(long id)
         {
+            if (!AppointmentExists(id))
+            {
+                throw new InvalidAppointment("Appointment with ID " + id + " doesn't exist.");
+            }
             return modelConverter.ResponseOf(_unitOfWork.Appointment.Get(id));
+        }
+        public void DeleteAppointment(long id)
+        {
+            if (!AppointmentExists(id))
+            {
+                throw new InvalidAppointment("Appointment with ID " + id + " doesn't exist.");
+            }
+            AppointmentData appointmentData = _unitOfWork.Appointment.Get(id);
+            _unitOfWork.Appointment.Remove(appointmentData);
+            _unitOfWork.Save();
         }
 
         public List<AppointmentResponse> GetAppointments()
@@ -183,6 +197,10 @@ namespace hospital_manager_bl.Service
             {
                 throw new InvalidAppointment("Appointment Id should be 0 on creation.");
             }
+            if (AppointmentTaken(appointment.RoomId, appointment.From, appointment.To))
+            {
+                throw new InvalidAppointment("An appointment is already taken in room " + appointment.RoomId + " is already taken.");
+            }
             if (!RoomExists(appointment.RoomId))
             {
                 throw new InvalidAppointment("Room with ID " + appointment.RoomId + " does not exist.");
@@ -212,6 +230,10 @@ namespace hospital_manager_bl.Service
             {
                 throw new InvalidAppointment("Appointment Id should not be 0 on creation.");
             }
+            if (AppointmentTaken(appointment.RoomId, appointment.From, appointment.To))
+            {
+                throw new InvalidAppointment("An appointment is already taken in room " + appointment.RoomId + " is already taken.");
+            }
             if (!RoomExists(appointment.RoomId))
             {
                 throw new InvalidAppointment("Room with ID " + appointment.RoomId + " does not exist.");
@@ -231,6 +253,14 @@ namespace hospital_manager_bl.Service
             return modelConverter.ResponseOf(_unitOfWork.Appointment.Get(appointmentData.Id));
         }
 
+        private bool AppointmentExists(long id)
+        {
+            return _unitOfWork.Appointment.Get(id) != null;
+        }
+        private bool AppointmentTaken(long roomId, DateTime from, DateTime to)
+        {
+            return _unitOfWork.Appointment.GetAppointmentByRoomIdAndTime(roomId, from, to) != null;
+        }
         private bool RoomExists(long id)
         {
             return _unitOfWork.Room.Get(id) != null;

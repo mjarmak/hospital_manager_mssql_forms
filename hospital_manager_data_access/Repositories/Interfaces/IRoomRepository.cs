@@ -8,6 +8,8 @@ namespace hospital_manager_data_access.Repositories.Interfaces
     {
         RoomData GetRoom(long id);
 
+        RoomData GetRoomByHospitalIdAndName(long hospitalId, string name);
+
         List<RoomData> GetRooms();
 
         List<RoomData> GetRoomsByHospitalId(long hospitalId);

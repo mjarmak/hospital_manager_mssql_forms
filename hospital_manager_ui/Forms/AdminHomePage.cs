@@ -18,6 +18,7 @@ namespace hospital_manager_ui.Forms
     {
         private protected string url = ApplicationConfiguration.hospitalManagerApiUrl;
         private List<HospitalResponse> hospitals;
+        private List<AppointmentResponse> appointments;
 
         public AdminHomePage()
         {
@@ -101,7 +102,6 @@ namespace hospital_manager_ui.Forms
         private void RefreshHospitals()
         {
             var client = new HttpClient();
-
             Task<HttpResponseMessage> response = client.GetAsync(url + "/hospital/all");
             response.Wait();
             if (response.Result.StatusCode != HttpStatusCode.OK)
@@ -109,6 +109,7 @@ namespace hospital_manager_ui.Forms
                 MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch hospitals",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                return;
             }
             else
             {
@@ -142,7 +143,6 @@ namespace hospital_manager_ui.Forms
             {
                 string result = response.Result.Content.ReadAsStringAsync().Result;
                 List<SpecialityResponse> specialities = JsonConvert.DeserializeObject<ResponseEnvelope<List<SpecialityResponse>>>(result).data;
-
                 listViewSpeciality.Items.Clear();
                 listViewSpeciality.Items.AddRange(specialities.Select(speciality =>
                 {
@@ -179,8 +179,7 @@ namespace hospital_manager_ui.Forms
             else
             {
                 string result = response.Result.Content.ReadAsStringAsync().Result;
-                List<AppointmentResponse> appointments = JsonConvert.DeserializeObject<ResponseEnvelope<List<AppointmentResponse>>>(result).data;
-
+                appointments = JsonConvert.DeserializeObject<ResponseEnvelope<List<AppointmentResponse>>>(result).data;
                 listViewAppointment.Items.Clear();
                 listViewAppointment.Items.AddRange(appointments.Select(appointment =>
                 {
@@ -242,6 +241,46 @@ namespace hospital_manager_ui.Forms
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             RefreshAppointments();
+        }
+
+        private void buttonDeleteAppointment_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection indices = listViewAppointment.SelectedIndices;
+            if (indices.Count > 0)
+            {
+                long appointmentId = appointments[indices[0]].Id;
+                var client = new HttpClient();
+                Task<HttpResponseMessage> response = client.DeleteAsync(url + "/appointment/" + appointmentId);
+                response.Wait();
+                if (response.Result.StatusCode != HttpStatusCode.OK)
+                {
+                    MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to delete appointment with ID " + appointmentId,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+                RefreshAppointments();
+            }
+        }
+
+        private void buttonEditAppointment_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void buttonEditHospital_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection indices = listViewHospital.SelectedIndices;
+            if (indices.Count > 0)
+            {
+                long hospitalId = hospitals[indices[0]].Id;
+                EditHospital f = new EditHospital(hospitalId);
+                f.FormClosed += new FormClosedEventHandler(Form_Closed);
+                void Form_Closed(object sender, FormClosedEventArgs e)
+                {
+                    RefreshHospitals();
+                }
+                f.Show();
+            }
         }
     }
 }

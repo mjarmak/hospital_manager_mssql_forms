@@ -10,6 +10,15 @@ namespace hospital_manager_data_access.Repositories.Implementation
     public class AppointmentRepository : Repository<AppointmentData>, IAppointmentRepository
     {
         public AppointmentRepository(HospitalDbContext context) : base(context) { }
+        public AppointmentData GetAppointmentByRoomIdAndTime(long roomId, DateTime dateFrom, DateTime dateTo)
+        {
+            return Db.AppointmentData
+                .SingleOrDefault(appointment =>
+                appointment.RoomId == roomId
+                && appointment.From >= dateFrom
+                && appointment.To <= dateTo
+                );
+        }
 
         public List<AppointmentData> GetAppointmentsByHospitalAndSpeciality(int hospitalId, int specialityId, DateTime dateFrom, DateTime dateTo)
         {

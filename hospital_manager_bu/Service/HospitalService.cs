@@ -67,5 +67,57 @@ namespace hospital_manager_bl.Service
 
             return modelConverter.ResponseOf(_unitOfWork.Hospital.GetHospital(hospitalData.Id));
         }
+        public HospitalResponse UpdateHospital(HospitalRequest hospital)
+        {
+            if (hospital == null)
+            {
+                throw new InvalidHospital("Hospital is null.");
+            }
+            //if (!HospitalExists(hospital.Id))
+            //{
+            //    throw new InvalidHospital("Hospital with ID " + hospital.Id + " doesn't exist.");
+            //}
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "MONDAY") == null) { throw new InvalidHospital("Monday opening hours are missing."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "TUESDAY") == null) { throw new InvalidHospital("Tuesday opening hours are missing."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "WEDNESDAY") == null) { throw new InvalidHospital("Wednesday opening hours are missing."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "THURSDAY") == null) { throw new InvalidHospital("Thursday opening hours are missing."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "FRIDAY") == null) { throw new InvalidHospital("Friday opening hours are missing."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "SATURDAY") == null) { throw new InvalidHospital("Saturday opening hours are missing."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "SUNDAY") == null) { throw new InvalidHospital("Sunday opening hours are missing."); }
+
+            HospitalData hospitalData = modelConverter.EnvelopeOf(hospital);
+            _unitOfWork.Hospital.Update(hospitalData);
+            _unitOfWork.Save();
+            return modelConverter.ResponseOf(_unitOfWork.Hospital.GetHospital(hospitalData.Id));
+        }
+        public HospitalResponse UpdateHospitalRooms(long hospitalId, List<RoomRequest> rooms)
+        {
+            if (hospitalId == 0)
+            {
+                throw new InvalidHospital("Hospital ID is invalid.");
+            }
+            if (!HospitalExists(hospitalId))
+            {
+                throw new InvalidHospital("Hospital with ID " + hospitalId + " doesn't exist.");
+            }
+            foreach (RoomRequest roomRequest in rooms)
+            {
+                RoomData roomData = modelConverter.EnvelopeOf(roomRequest);
+                if (!RoomExists(hospitalId, roomData.Name))
+                {
+                    _unitOfWork.Room.Add(roomData);
+                }
+            }
+            _unitOfWork.Save();
+            return modelConverter.ResponseOf(_unitOfWork.Hospital.GetHospital(hospitalId));
+        }
+        private bool RoomExists(long hospitalId, string name)
+        {
+            return _unitOfWork.Room.GetRoomByHospitalIdAndName(hospitalId, name) != null;
+        }
+        private bool HospitalExists(long id)
+        {
+            return _unitOfWork.Hospital.Get(id) != null;
+        }
     }
 }
