@@ -17,6 +17,7 @@ namespace hospital_manager_ui.Forms
     public partial class AdminHomePage : Form
     {
         private protected string url = ApplicationConfiguration.hospitalManagerApiUrl;
+        private List<HospitalResponse> hospitals;
 
         public AdminHomePage()
         {
@@ -24,6 +25,7 @@ namespace hospital_manager_ui.Forms
             RefreshSpecialities();
             RefreshHospitals();
             RefreshDoctors();
+            RefreshAppointments();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -111,12 +113,16 @@ namespace hospital_manager_ui.Forms
             else
             {
                 string result = response.Result.Content.ReadAsStringAsync().Result;
-                List<HospitalResponse> hospitals = JsonConvert.DeserializeObject<ResponseEnvelope<List<HospitalResponse>>>(result).data;
-
+                hospitals = JsonConvert.DeserializeObject<ResponseEnvelope<List<HospitalResponse>>>(result).data;
                 listViewHospital.Items.Clear();
                 listViewHospital.Items.AddRange(hospitals.Select(hospital =>
                 {
                     return new ListViewItem(new[] { hospital.Id.ToString(), hospital.Name, hospital.Address.Street, hospital.Address.City, hospital.Address.PostalCode, hospital.Address.Country });
+                }).ToArray());
+                hospitalComboBox.Items.Clear();
+                hospitalComboBox.Items.AddRange(hospitals.Select(hospital =>
+                {
+                    return hospital.Name;
                 }).ToArray());
             }
         }
@@ -141,6 +147,46 @@ namespace hospital_manager_ui.Forms
                 listViewSpeciality.Items.AddRange(specialities.Select(speciality =>
                 {
                     return new ListViewItem(new[] { speciality.Id.ToString(), speciality.Name });
+                }).ToArray());
+            }
+        }
+        private void RefreshAppointments()
+        {
+            if (hospitalComboBox.SelectedItem == null)
+            {
+                return;
+            }
+            long hospitalId = hospitals.Single(hospital => hospital.Name == hospitalComboBox.SelectedItem.ToString()).Id;
+            if (hospitalId == 0)
+            {
+                return;
+            }
+            DateTime current = monthCalendar1.SelectionStart;
+            DateTime From = new DateTime(current.Year, current.Month, current.Day, 0, 0, 0);
+            DateTime To = new DateTime(current.Year, current.Month, current.Day, 23, 59, 59);
+            var client = new HttpClient();
+            string dateFormat = "yyyy-MM-ddTHH:mm:ss";
+            string path = "/appointment/hospital/" + hospitalId + "?From=" + From.ToString(dateFormat) + "&To=" + To.ToString(dateFormat);
+
+            Task<HttpResponseMessage> response = client.GetAsync(url + path);
+            response.Wait();
+            if (response.Result.StatusCode != HttpStatusCode.OK)
+            {
+                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch specialities",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            else
+            {
+                string result = response.Result.Content.ReadAsStringAsync().Result;
+                List<AppointmentResponse> appointments = JsonConvert.DeserializeObject<ResponseEnvelope<List<AppointmentResponse>>>(result).data;
+
+                listViewAppointment.Items.Clear();
+                listViewAppointment.Items.AddRange(appointments.Select(appointment =>
+                {
+                    return new ListViewItem(new[] { appointment.Room.Name, appointment.From.ToString(),
+                            (appointment.To - appointment.From).TotalMinutes.ToString(),
+                            appointment.Doctor.Name, appointment.PatientUsername, appointment.Description });
                 }).ToArray());
             }
         }
@@ -186,6 +232,16 @@ namespace hospital_manager_ui.Forms
             {
             }
             f.Show();
+        }
+
+        private void hospitalComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshAppointments();
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            RefreshAppointments();
         }
     }
 }

@@ -195,8 +195,35 @@ namespace hospital_manager_bl.Service
             {
                 throw new InvalidAppointment("Patient with username " + appointment.PatientUsername + " does not exist.");
             }
+            var appointmentData = modelConverter.EnvelopeOf(appointment);
+            _unitOfWork.Appointment.Add(appointmentData);
+            _unitOfWork.Save();
 
+            return modelConverter.ResponseOf(_unitOfWork.Appointment.Get(appointmentData.Id));
+        }
 
+        public AppointmentResponse UpdateAppointment(AppointmentRequest appointment)
+        {
+            if (appointment == null)
+            {
+                throw new InvalidAppointment("Appointment is null.");
+            }
+            if (appointment.Id == 0)
+            {
+                throw new InvalidAppointment("Appointment Id should not be 0 on creation.");
+            }
+            if (!RoomExists(appointment.RoomId))
+            {
+                throw new InvalidAppointment("Room with ID " + appointment.RoomId + " does not exist.");
+            }
+            if (!oAuthService.UserExists(appointment.DoctorUsername))
+            {
+                throw new InvalidAppointment("Doctor with username " + appointment.DoctorUsername + " does not exist.");
+            }
+            if (!oAuthService.UserExists(appointment.PatientUsername))
+            {
+                throw new InvalidAppointment("Patient with username " + appointment.PatientUsername + " does not exist.");
+            }
             var appointmentData = modelConverter.EnvelopeOf(appointment);
             _unitOfWork.Appointment.Add(appointmentData);
             _unitOfWork.Save();

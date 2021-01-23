@@ -11,6 +11,10 @@ namespace hospital_manager_data_access.Repositories.Implementation
     {
         public DoctorRepository(HospitalDbContext context) : base(context) { }
 
+        public DoctorData GetDoctorSimple(string username)
+        {
+            return Db.DoctorData.Single(doctor => doctor.Username == username);
+        }
         public DoctorData GetDoctor(string username)
         {
             return Db.DoctorData.Include(doctor => doctor.Specialities).Include(doctor => doctor.Consultations).Single(doctor => doctor.Username == username);

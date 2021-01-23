@@ -10,7 +10,11 @@ namespace hospital_manager_models.Models
 
         public string DoctorUsername { get; set; }
 
+        public DoctorResponse Doctor { get; set; }
+
         public long RoomId { get; set; }
+
+        public RoomResponse Room { get; set; }
 
         public string Description { get; set; }
 

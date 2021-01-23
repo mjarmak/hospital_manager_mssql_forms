@@ -56,7 +56,7 @@ namespace hospital_manager_ui.Forms
                     string token = jObject.GetValue("access_token").ToString();
                     authUtil.DecodeToken(token);
 
-                    if (AuthConfiguration.Role.Contains("ADMIN") && AuthConfiguration.Role.Contains("DOCTOR"))
+                    if (AuthConfiguration.Role.Contains("ADMIN") || AuthConfiguration.Role.Contains("DOCTOR"))
                     {
                         AdminHomePage f = new AdminHomePage();
                         f.Show();

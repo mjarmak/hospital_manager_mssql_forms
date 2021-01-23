@@ -51,8 +51,17 @@
             this.DoctorEmail = new System.Windows.Forms.ColumnHeader();
             this.DoctorPhone = new System.Windows.Forms.ColumnHeader();
             this.AppointmentsTab = new System.Windows.Forms.TabPage();
+            this.hospitalComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.button5 = new System.Windows.Forms.Button();
             this.listViewAppointment = new System.Windows.Forms.ListView();
+            this.Room = new System.Windows.Forms.ColumnHeader();
+            this.At = new System.Windows.Forms.ColumnHeader();
+            this.Duration = new System.Windows.Forms.ColumnHeader();
+            this.Doctor = new System.Windows.Forms.ColumnHeader();
+            this.Patient = new System.Windows.Forms.ColumnHeader();
+            this.Description = new System.Windows.Forms.ColumnHeader();
             this.tabControl1.SuspendLayout();
             this.SpecialitiesTab.SuspendLayout();
             this.HospitalsTab.SuspendLayout();
@@ -73,7 +82,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(728, 367);
+            this.tabControl1.Size = new System.Drawing.Size(890, 494);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -85,7 +94,7 @@
             this.SpecialitiesTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SpecialitiesTab.Name = "SpecialitiesTab";
             this.SpecialitiesTab.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.SpecialitiesTab.Size = new System.Drawing.Size(720, 339);
+            this.SpecialitiesTab.Size = new System.Drawing.Size(882, 466);
             this.SpecialitiesTab.TabIndex = 0;
             this.SpecialitiesTab.Text = "Specialities";
             this.SpecialitiesTab.UseVisualStyleBackColor = true;
@@ -103,7 +112,7 @@
             this.listViewSpeciality.Location = new System.Drawing.Point(3, 2);
             this.listViewSpeciality.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewSpeciality.Name = "listViewSpeciality";
-            this.listViewSpeciality.Size = new System.Drawing.Size(714, 309);
+            this.listViewSpeciality.Size = new System.Drawing.Size(876, 436);
             this.listViewSpeciality.TabIndex = 1;
             this.listViewSpeciality.UseCompatibleStateImageBehavior = false;
             this.listViewSpeciality.View = System.Windows.Forms.View.Details;
@@ -121,7 +130,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(635, 315);
+            this.button1.Location = new System.Drawing.Point(797, 442);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 22);
@@ -138,7 +147,7 @@
             this.HospitalsTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.HospitalsTab.Name = "HospitalsTab";
             this.HospitalsTab.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.HospitalsTab.Size = new System.Drawing.Size(720, 339);
+            this.HospitalsTab.Size = new System.Drawing.Size(882, 466);
             this.HospitalsTab.TabIndex = 1;
             this.HospitalsTab.Text = "Hospitals";
             this.HospitalsTab.UseVisualStyleBackColor = true;
@@ -146,7 +155,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(635, 315);
+            this.button2.Location = new System.Drawing.Point(797, 442);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(82, 22);
@@ -171,7 +180,7 @@
             this.listViewHospital.Location = new System.Drawing.Point(3, 2);
             this.listViewHospital.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewHospital.Name = "listViewHospital";
-            this.listViewHospital.Size = new System.Drawing.Size(714, 309);
+            this.listViewHospital.Size = new System.Drawing.Size(876, 436);
             this.listViewHospital.TabIndex = 0;
             this.listViewHospital.UseCompatibleStateImageBehavior = false;
             this.listViewHospital.View = System.Windows.Forms.View.Details;
@@ -208,7 +217,7 @@
             this.DoctorsTab.Location = new System.Drawing.Point(4, 24);
             this.DoctorsTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DoctorsTab.Name = "DoctorsTab";
-            this.DoctorsTab.Size = new System.Drawing.Size(720, 339);
+            this.DoctorsTab.Size = new System.Drawing.Size(882, 466);
             this.DoctorsTab.TabIndex = 2;
             this.DoctorsTab.Text = "Doctors";
             this.DoctorsTab.UseVisualStyleBackColor = true;
@@ -216,7 +225,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(635, 315);
+            this.button3.Location = new System.Drawing.Point(797, 442);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(82, 22);
@@ -239,7 +248,7 @@
             this.listViewDoctor.Location = new System.Drawing.Point(3, 2);
             this.listViewDoctor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewDoctor.Name = "listViewDoctor";
-            this.listViewDoctor.Size = new System.Drawing.Size(714, 309);
+            this.listViewDoctor.Size = new System.Drawing.Size(876, 436);
             this.listViewDoctor.TabIndex = 0;
             this.listViewDoctor.UseCompatibleStateImageBehavior = false;
             this.listViewDoctor.View = System.Windows.Forms.View.Details;
@@ -267,20 +276,48 @@
             // 
             // AppointmentsTab
             // 
+            this.AppointmentsTab.Controls.Add(this.hospitalComboBox);
+            this.AppointmentsTab.Controls.Add(this.label1);
+            this.AppointmentsTab.Controls.Add(this.monthCalendar1);
             this.AppointmentsTab.Controls.Add(this.button5);
             this.AppointmentsTab.Controls.Add(this.listViewAppointment);
             this.AppointmentsTab.Location = new System.Drawing.Point(4, 24);
             this.AppointmentsTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AppointmentsTab.Name = "AppointmentsTab";
-            this.AppointmentsTab.Size = new System.Drawing.Size(720, 339);
+            this.AppointmentsTab.Size = new System.Drawing.Size(882, 466);
             this.AppointmentsTab.TabIndex = 3;
             this.AppointmentsTab.Text = "Appointments";
             this.AppointmentsTab.UseVisualStyleBackColor = true;
             // 
+            // hospitalComboBox
+            // 
+            this.hospitalComboBox.FormattingEnabled = true;
+            this.hospitalComboBox.Location = new System.Drawing.Point(63, 9);
+            this.hospitalComboBox.Name = "hospitalComboBox";
+            this.hospitalComboBox.Size = new System.Drawing.Size(167, 23);
+            this.hospitalComboBox.TabIndex = 0;
+            this.hospitalComboBox.SelectedIndexChanged += new System.EventHandler(this.hospitalComboBox_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 15);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Hospital:";
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(3, 36);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 2;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            // 
             // button5
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(635, 315);
+            this.button5.Location = new System.Drawing.Point(797, 442);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(82, 22);
             this.button5.TabIndex = 1;
@@ -293,21 +330,56 @@
             this.listViewAppointment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewAppointment.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Room,
+            this.At,
+            this.Duration,
+            this.Doctor,
+            this.Patient,
+            this.Description});
             this.listViewAppointment.HideSelection = false;
-            this.listViewAppointment.Location = new System.Drawing.Point(3, 2);
+            this.listViewAppointment.Location = new System.Drawing.Point(239, 2);
             this.listViewAppointment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewAppointment.Name = "listViewAppointment";
-            this.listViewAppointment.Size = new System.Drawing.Size(714, 309);
+            this.listViewAppointment.Size = new System.Drawing.Size(640, 436);
             this.listViewAppointment.TabIndex = 0;
             this.listViewAppointment.UseCompatibleStateImageBehavior = false;
             this.listViewAppointment.View = System.Windows.Forms.View.Details;
             this.listViewAppointment.SelectedIndexChanged += new System.EventHandler(this.listViewAppointment_SelectedIndexChanged);
             // 
+            // Room
+            // 
+            this.Room.Text = "Room";
+            // 
+            // At
+            // 
+            this.At.Text = "At";
+            this.At.Width = 100;
+            // 
+            // Duration
+            // 
+            this.Duration.Text = "Duration";
+            // 
+            // Doctor
+            // 
+            this.Doctor.Text = "Doctor";
+            this.Doctor.Width = 120;
+            // 
+            // Patient
+            // 
+            this.Patient.Text = "Patient";
+            this.Patient.Width = 120;
+            // 
+            // Description
+            // 
+            this.Description.Text = "Description";
+            this.Description.Width = 150;
+            // 
             // AdminHomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 389);
+            this.ClientSize = new System.Drawing.Size(914, 516);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AdminHomePage";
@@ -317,6 +389,7 @@
             this.HospitalsTab.ResumeLayout(false);
             this.DoctorsTab.ResumeLayout(false);
             this.AppointmentsTab.ResumeLayout(false);
+            this.AppointmentsTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -349,5 +422,14 @@
         private System.Windows.Forms.ListView listViewAppointment;
         private System.Windows.Forms.TabPage AppointmentsTab;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.ComboBox hospitalComboBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ColumnHeader Room;
+        private System.Windows.Forms.ColumnHeader At;
+        private System.Windows.Forms.ColumnHeader Duration;
+        private System.Windows.Forms.ColumnHeader Doctor;
+        private System.Windows.Forms.ColumnHeader Patient;
+        private System.Windows.Forms.ColumnHeader Description;
     }
 }

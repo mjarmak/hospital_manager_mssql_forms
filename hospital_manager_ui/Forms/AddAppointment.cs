@@ -152,6 +152,7 @@ namespace hospital_manager_ui.Forms
                     MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch available days",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
+                    return;
                 }
                 else
                 {
@@ -181,6 +182,7 @@ namespace hospital_manager_ui.Forms
                     MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch appointment suggestions",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
+                    return;
                 }
                 else
                 {
@@ -229,12 +231,14 @@ namespace hospital_manager_ui.Forms
                 MessageBox.Show("Patient missing", "Please add the patient username",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+                return;
             }
             if (String.IsNullOrWhiteSpace(appointmentSuggestion.Description))
             {
                 MessageBox.Show("Description missing", "Please give a description for the appointment",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+                return;
             }
 
             var client = new HttpClient();

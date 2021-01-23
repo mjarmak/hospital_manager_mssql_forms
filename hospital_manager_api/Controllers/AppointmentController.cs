@@ -56,6 +56,28 @@ namespace hospital_manager_api.Controllers
             }
         }
 
+
+        [HttpPut]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<AppointmentData> UpdateAppointment(AppointmentRequest appointment)
+        {
+            try
+            {
+                var appointmentData = _appointmentService.UpdateAppointment(appointment);
+                return Ok(new
+                {
+                    data = appointmentData
+                });
+            }
+            catch (InvalidAppointment e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
+        }
+
         [HttpGet("{id}")]
         //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<AppointmentData> GetAppointment(long id)

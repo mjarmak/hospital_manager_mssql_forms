@@ -57,7 +57,9 @@ namespace hospital_manager_bl.Util
                 Id = appointment.Id,
                 PatientUsername = appointment.PatientUsername,
                 DoctorUsername = appointment.DoctorUsername,
+                Doctor = ResponseOf(_unitOfWork.Doctor.GetDoctorSimple(appointment.DoctorUsername)),
                 RoomId = appointment.RoomId,
+                Room = ResponseOf(_unitOfWork.Room.Get(appointment.RoomId)),
                 Description = appointment.Description,
                 From = appointment.From,
                 To = appointment.To
