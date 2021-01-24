@@ -7,9 +7,9 @@ namespace hospital_manager_data_access.Repositories.Interfaces
     public interface IAppointmentRepository : IRepository<AppointmentData>
     {
 
-        List<AppointmentData> GetAppointmentByDoctorUsername(string doctorUsername);
+        List<AppointmentData> GetAppointmentByDoctorUsername(string doctorUsername, DateTime from, DateTime to);
 
-        List<AppointmentData> GetAppointmentByPatientUsername(string doctorUsername);
+        List<AppointmentData> GetAppointmentByPatientUsername(string doctorUsername, DateTime from, DateTime to);
 
         AppointmentData GetAppointmentByRoomIdAndTimeExclusive(long roomId, DateTime dateFrom, DateTime dateTo);
 

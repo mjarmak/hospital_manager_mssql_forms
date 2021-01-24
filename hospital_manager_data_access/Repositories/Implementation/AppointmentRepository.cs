@@ -11,17 +11,23 @@ namespace hospital_manager_data_access.Repositories.Implementation
     {
         public AppointmentRepository(HospitalDbContext context) : base(context) { }
 
-        public List<AppointmentData> GetAppointmentByDoctorUsername(string doctorUsername)
+        public List<AppointmentData> GetAppointmentByDoctorUsername(string doctorUsername, DateTime dateFrom, DateTime dateTo)
         {
             return Db.AppointmentData
                 .Where(appointment =>
-                appointment.DoctorUsername == doctorUsername).ToList();
+                appointment.DoctorUsername == doctorUsername
+                && appointment.From >= dateFrom
+                && appointment.To <= dateTo
+                ).ToList();
         }
-        public List<AppointmentData> GetAppointmentByPatientUsername(string patientUsername)
+        public List<AppointmentData> GetAppointmentByPatientUsername(string patientUsername, DateTime dateFrom, DateTime dateTo)
         {
             return Db.AppointmentData
                 .Where(appointment =>
-                appointment.PatientUsername == patientUsername).ToList();
+                appointment.PatientUsername == patientUsername
+                && appointment.From >= dateFrom
+                && appointment.To <= dateTo
+                ).ToList();
         }
 
         public AppointmentData GetAppointmentByRoomIdAndTimeExclusive(long roomId, DateTime dateFrom, DateTime dateTo)

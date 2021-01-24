@@ -131,21 +131,29 @@ namespace hospital_manager_api.Controllers
 
         [HttpGet("patient/{patientUsername}")]
         //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public ActionResult<IEnumerable<AppointmentData>> GetAppointmentByPatientUsername(string patientUsername)
+        public ActionResult<IEnumerable<AppointmentData>> GetAppointmentByPatientUsername(
+            string patientUsername,
+            [FromQuery] DateTime from,
+            [FromQuery] DateTime to
+            )
         {
             return Ok(new
             {
-                data = _appointmentService.GetAppointmentByPatientUsername(patientUsername)
+                data = _appointmentService.GetAppointmentByPatientUsername(patientUsername, from, to)
             });
         }
 
         [HttpGet("doctor/{doctorUsername}")]
         //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public ActionResult<IEnumerable<AppointmentData>> GetAppointmentByDoctorUsername(string doctorUsername)
+        public ActionResult<IEnumerable<AppointmentData>> GetAppointmentByDoctorUsername(
+            string doctorUsername,
+            [FromQuery] DateTime from,
+            [FromQuery] DateTime to
+            )
         {
             return Ok(new
             {
-                data = _appointmentService.GetAppointmentByDoctorUsername(doctorUsername)
+                data = _appointmentService.GetAppointmentByDoctorUsername(doctorUsername, from, to)
             });
         }
 

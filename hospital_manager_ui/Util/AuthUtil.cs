@@ -1,9 +1,7 @@
 ﻿using hospital_manager_ui.Configuration;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Text;
 
 namespace hospital_manager_ui.Util
 {
@@ -27,6 +25,7 @@ namespace hospital_manager_ui.Util
             {
                 var accessToken = _tokenHandler.ReadToken(token) as JwtSecurityToken;
 
+                AuthConfiguration.AccessToken = token;
                 AuthConfiguration.Email = accessToken.Claims.Single(claim => claim.Type == "email").Value;
                 AuthConfiguration.Name = accessToken.Claims.Single(claim => claim.Type == "name").Value;
                 AuthConfiguration.LastName = accessToken.Claims.Single(claim => claim.Type == "family_name").Value;

@@ -1,4 +1,5 @@
 ﻿using hospital_manager_models.Models;
+using hospital_manager_ui.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -100,6 +102,7 @@ namespace hospital_manager_ui.Forms
 
             string json = JsonConvert.SerializeObject(doctorRequest);
             StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthConfiguration.AccessToken);
             Task<HttpResponseMessage> response = client.PostAsync(url + "/doctor/register", httpContent);
             response.Wait();
             if (response.Result.StatusCode != HttpStatusCode.OK)

@@ -54,7 +54,7 @@ namespace hospital_manager_ui.Forms
                     string result = response.Result.Content.ReadAsStringAsync().Result;
                     JObject jObject = JObject.Parse(result);
                     string token = jObject.GetValue("access_token").ToString();
-                    AuthConfiguration.AccessToken = token;
+                    AuthConfiguration.Username = text_username.Text;
                     authUtil.DecodeToken(token);
 
                     if (AuthConfiguration.Role.Contains("ADMIN") || AuthConfiguration.Role.Contains("DOCTOR"))

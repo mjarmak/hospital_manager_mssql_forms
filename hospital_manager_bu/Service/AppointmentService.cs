@@ -47,14 +47,14 @@ namespace hospital_manager_bl.Service
             return _unitOfWork.Appointment.All()?.Select(appointment => modelConverter.ResponseOf(appointment)).ToList();
         }
 
-        public List<AppointmentResponse> GetAppointmentByDoctorUsername(string doctorUsername)
+        public List<AppointmentResponse> GetAppointmentByDoctorUsername(string doctorUsername, DateTime from, DateTime to)
         {
-            return _unitOfWork.Appointment.GetAppointmentByDoctorUsername(doctorUsername)?.Select(appointment => modelConverter.ResponseOf(appointment)).ToList();
+            return _unitOfWork.Appointment.GetAppointmentByDoctorUsername(doctorUsername, from, to)?.Select(appointment => modelConverter.ResponseOf(appointment)).ToList();
         }
 
-        public List<AppointmentResponse> GetAppointmentByPatientUsername(string patientUsername)
+        public List<AppointmentResponse> GetAppointmentByPatientUsername(string patientUsername, DateTime from, DateTime to)
         {
-            return _unitOfWork.Appointment.GetAppointmentByPatientUsername(patientUsername)?.Select(appointment => modelConverter.ResponseOf(appointment)).ToList();
+            return _unitOfWork.Appointment.GetAppointmentByPatientUsername(patientUsername, from, to)?.Select(appointment => modelConverter.ResponseOf(appointment)).ToList();
         }
 
         public List<AppointmentResponse> GetAppointmentsByHospitalAndSpeciality(int hospitalId, int specialityId, DateTime dateFrom, DateTime dateTo)

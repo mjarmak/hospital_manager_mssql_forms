@@ -1,16 +1,15 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using hospital_manager_models.Models;
 using System.Linq;
+using hospital_manager_ui.Configuration;
+using System.Net.Http.Headers;
 
 namespace hospital_manager_ui.Forms
 {
@@ -251,6 +250,7 @@ namespace hospital_manager_ui.Forms
             {
                 long appointmentId = appointments[indices[0]].Id;
                 var client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthConfiguration.AccessToken);
                 Task<HttpResponseMessage> response = client.DeleteAsync(url + "/appointment/" + appointmentId);
                 response.Wait();
                 if (response.Result.StatusCode != HttpStatusCode.OK)

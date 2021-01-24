@@ -1,19 +1,32 @@
-﻿using hospital_manager_ui.Configuration;
+﻿using hospital_manager_models.Models;
+using hospital_manager_ui.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace hospital_manager_ui.Forms
 {
     public partial class UserHomePage : Form
     {
+        private protected string url = ApplicationConfiguration.hospitalManagerApiUrl;
+        private List<AppointmentResponse> appointments;
+        private string patientUsername;
+        private List<HospitalResponse> hospitals;
         public UserHomePage()
         {
             InitializeComponent();
+
+            this.patientUsername = AuthConfiguration.Username;
 
             labelUsername.Text = String.IsNullOrEmpty(AuthConfiguration.Username) ? "" : AuthConfiguration.Username;
             labelEmail.Text = String.IsNullOrEmpty(AuthConfiguration.Email) ? "" : AuthConfiguration.Email;
@@ -23,11 +36,86 @@ namespace hospital_manager_ui.Forms
             labelBirthday.Text = String.IsNullOrEmpty(AuthConfiguration.Birthdate) ? "" : AuthConfiguration.Birthdate;
             labelGender.Text = String.IsNullOrEmpty(AuthConfiguration.Gender) ? "" : AuthConfiguration.Gender;
 
+            RefreshHospitals();
+            RefreshAppointments();
+
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void RefreshAppointments()
+        {
+            DateTime current = DateTime.Now;
+            DateTime From = new DateTime(current.Year, current.Month, current.Day - 7, 0, 0, 0);
+            DateTime To = new DateTime(current.AddYears(10).Year, current.Month, current.Day, 0, 0, 0);
+            var client = new HttpClient();
+            string dateFormat = "yyyy-MM-ddTHH:mm:ss";
+            string path = "/appointment/patient/" + patientUsername + "?from=" + From.ToString(dateFormat) + "&to=" + To.ToString(dateFormat);
+
+            Task<HttpResponseMessage> response = client.GetAsync(url + path);
+            response.Wait();
+            if (response.Result.StatusCode != HttpStatusCode.OK)
+            {
+                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch appointments",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            else
+            {
+                string result = response.Result.Content.ReadAsStringAsync().Result;
+                appointments = JsonConvert.DeserializeObject<ResponseEnvelope<List<AppointmentResponse>>>(result).data;
+                listViewAppointmentUser.Items.Clear();
+                listViewAppointmentUser.Items.AddRange(appointments.Select(appointment =>
+                {
+                    return new ListViewItem(new[] {
+                        hospitals.SingleOrDefault(hospital => hospital.Id == appointment.Room.HospitalId).Name,
+                        appointment.Room.Name, appointment.From.ToString(),
+                            (appointment.To - appointment.From).TotalMinutes.ToString(),
+                            appointment.Doctor.Name, appointment.Description });
+                }).ToArray());
+            }
+        }
+        private void RefreshHospitals()
+        {
+            var client = new HttpClient();
+            Task<HttpResponseMessage> response = client.GetAsync(url + "/hospital/all");
+            response.Wait();
+            if (response.Result.StatusCode != HttpStatusCode.OK)
+            {
+                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch hospitals",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                string result = response.Result.Content.ReadAsStringAsync().Result;
+                hospitals = JsonConvert.DeserializeObject<ResponseEnvelope<List<HospitalResponse>>>(result).data;
+            }
+        }
+
+        private void buttonDeleteAppointment_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection indices = listViewAppointmentUser.SelectedIndices;
+            if (indices.Count > 0)
+            {
+                long appointmentId = appointments[indices[0]].Id;
+                var client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthConfiguration.AccessToken);
+                Task<HttpResponseMessage> response = client.DeleteAsync(url + "/appointment/" + appointmentId);
+                response.Wait();
+                if (response.Result.StatusCode != HttpStatusCode.OK)
+                {
+                    MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to delete appointment with ID " + appointmentId,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+                RefreshAppointments();
+            }
         }
     }
 }
