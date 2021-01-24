@@ -11,7 +11,7 @@ namespace hospital_manager_models.Models
     {
         public long Id { get; set; }
 
-        public HospitalResponse Hospital { get; set; }
+        public long HospitalId { get; set; }
 
         public SpecialityResponse Speciality { get; set; }
 

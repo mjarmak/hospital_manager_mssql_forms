@@ -129,6 +129,40 @@ namespace hospital_manager_api.Controllers
             });
         }
 
+        [HttpGet("patient/{patientUsername}")]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<IEnumerable<AppointmentData>> GetAppointmentByPatientUsername(string patientUsername)
+        {
+            return Ok(new
+            {
+                data = _appointmentService.GetAppointmentByPatientUsername(patientUsername)
+            });
+        }
+
+        [HttpGet("doctor/{doctorUsername}")]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<IEnumerable<AppointmentData>> GetAppointmentByDoctorUsername(string doctorUsername)
+        {
+            return Ok(new
+            {
+                data = _appointmentService.GetAppointmentByDoctorUsername(doctorUsername)
+            });
+        }
+
+        [HttpGet("room/{roomId}/taken")]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<bool> GetAppointmentTaken(
+            long roomId,
+            [FromQuery] DateTime from,
+            [FromQuery] DateTime to
+            )
+        {
+            return Ok(new
+            {
+                data = _appointmentService.AppointmentTaken(roomId, from, to)
+            });
+        }
+
         [HttpGet("hospital/{hospitalId}/speciality/{specialityId}")]
         //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<List<AppointmentData>> GetAppointmentsByHospitalAndSpeciality(

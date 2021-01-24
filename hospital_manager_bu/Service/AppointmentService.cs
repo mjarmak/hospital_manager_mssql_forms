@@ -47,6 +47,16 @@ namespace hospital_manager_bl.Service
             return _unitOfWork.Appointment.All()?.Select(appointment => modelConverter.ResponseOf(appointment)).ToList();
         }
 
+        public List<AppointmentResponse> GetAppointmentByDoctorUsername(string doctorUsername)
+        {
+            return _unitOfWork.Appointment.GetAppointmentByDoctorUsername(doctorUsername)?.Select(appointment => modelConverter.ResponseOf(appointment)).ToList();
+        }
+
+        public List<AppointmentResponse> GetAppointmentByPatientUsername(string patientUsername)
+        {
+            return _unitOfWork.Appointment.GetAppointmentByPatientUsername(patientUsername)?.Select(appointment => modelConverter.ResponseOf(appointment)).ToList();
+        }
+
         public List<AppointmentResponse> GetAppointmentsByHospitalAndSpeciality(int hospitalId, int specialityId, DateTime dateFrom, DateTime dateTo)
         {
             return _unitOfWork.Appointment.GetAppointmentsByHospitalAndSpeciality(hospitalId, specialityId, dateFrom, dateTo)?.Select(appointment => modelConverter.ResponseOf(appointment)).ToList();
@@ -257,9 +267,9 @@ namespace hospital_manager_bl.Service
         {
             return _unitOfWork.Appointment.Get(id) != null;
         }
-        private bool AppointmentTaken(long roomId, DateTime from, DateTime to)
+        public bool AppointmentTaken(long roomId, DateTime from, DateTime to)
         {
-            return _unitOfWork.Appointment.GetAppointmentByRoomIdAndTime(roomId, from, to) != null;
+            return _unitOfWork.Appointment.GetAppointmentByRoomIdAndTimeExclusive(roomId, from, to) != null;
         }
         private bool RoomExists(long id)
         {

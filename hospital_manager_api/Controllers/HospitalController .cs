@@ -10,6 +10,7 @@ using hospital_manager_models.Models;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Net.Http.Headers;
 using hospital_manager_data_access.Repositories.Interfaces;
+using hospital_manager_exceptions.Exceptions;
 
 namespace hospital_manager_api.Controllers
 {
@@ -53,7 +54,7 @@ namespace hospital_manager_api.Controllers
             });
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}/room")]
         //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<HospitalResponse> UpdateHospitalRooms(long id, List<RoomRequest> rooms)
         {
@@ -61,6 +62,34 @@ namespace hospital_manager_api.Controllers
             {
                 data = _hospitalService.UpdateHospitalRooms(id, rooms)
             });
+        }
+
+        [HttpDelete("room/{id}")]
+        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        public ActionResult<HospitalResponse> DeleteHospitalRoom(long id)
+        {
+            try
+            {
+                _hospitalService.DeleteHospitalRoom(id);
+                return Ok(new
+                {
+                    data = "OK"
+                });
+            }
+            catch (InvalidAppointment e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
+            catch (InvalidRoom e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
         }
 
         [HttpGet("{id}")]

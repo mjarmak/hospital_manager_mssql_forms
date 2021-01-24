@@ -42,16 +42,17 @@
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBoxAt = new System.Windows.Forms.TextBox();
             this.textBoxDoctor = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxDuration = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.textBoxRoom = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.dateTimePickerAppointmenFrom = new System.Windows.Forms.DateTimePicker();
+            this.labelTimeSlotBooked = new System.Windows.Forms.Label();
             At = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
@@ -168,14 +169,6 @@
             this.label4.TabIndex = 11;
             this.label4.Text = "Description:";
             // 
-            // textBoxAt
-            // 
-            this.textBoxAt.Enabled = false;
-            this.textBoxAt.Location = new System.Drawing.Point(127, 279);
-            this.textBoxAt.Name = "textBoxAt";
-            this.textBoxAt.Size = new System.Drawing.Size(212, 23);
-            this.textBoxAt.TabIndex = 8;
-            // 
             // textBoxDoctor
             // 
             this.textBoxDoctor.Enabled = false;
@@ -219,15 +212,15 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "Duration:";
             // 
-            // button1
+            // buttonSave
             // 
-            this.button1.Location = new System.Drawing.Point(423, 415);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonSave.Location = new System.Drawing.Point(423, 415);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 12;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -255,13 +248,35 @@
             this.label8.TabIndex = 10;
             this.label8.Text = "Room:";
             // 
+            // dateTimePickerAppointmenFrom
+            // 
+            this.dateTimePickerAppointmenFrom.Enabled = false;
+            this.dateTimePickerAppointmenFrom.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePickerAppointmenFrom.Location = new System.Drawing.Point(127, 279);
+            this.dateTimePickerAppointmenFrom.Name = "dateTimePickerAppointmenFrom";
+            this.dateTimePickerAppointmenFrom.Size = new System.Drawing.Size(212, 23);
+            this.dateTimePickerAppointmenFrom.TabIndex = 14;
+            this.dateTimePickerAppointmenFrom.ValueChanged += new System.EventHandler(this.dateTimePickerAppointmenFrom_ValueChanged);
+            // 
+            // labelTimeSlotBooked
+            // 
+            this.labelTimeSlotBooked.AutoSize = true;
+            this.labelTimeSlotBooked.Location = new System.Drawing.Point(345, 282);
+            this.labelTimeSlotBooked.Name = "labelTimeSlotBooked";
+            this.labelTimeSlotBooked.Size = new System.Drawing.Size(148, 15);
+            this.labelTimeSlotBooked.TabIndex = 15;
+            this.labelTimeSlotBooked.Text = "*Time slot already booked.";
+            this.labelTimeSlotBooked.Visible = false;
+            // 
             // AddAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.labelTimeSlotBooked);
+            this.Controls.Add(this.dateTimePickerAppointmenFrom);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
@@ -271,7 +286,6 @@
             this.Controls.Add(this.textBoxDuration);
             this.Controls.Add(this.textBoxDoctor);
             this.Controls.Add(this.textBoxDescription);
-            this.Controls.Add(this.textBoxAt);
             this.Controls.Add(this.textBoxRoom);
             this.Controls.Add(this.textBoxPatient);
             this.Controls.Add(this.listViewSuggestions);
@@ -302,15 +316,16 @@
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxAt;
         private System.Windows.Forms.TextBox textBoxDoctor;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxDuration;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBoxRoom;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DateTimePicker dateTimePickerAppointmenFrom;
+        private System.Windows.Forms.Label labelTimeSlotBooked;
     }
 }

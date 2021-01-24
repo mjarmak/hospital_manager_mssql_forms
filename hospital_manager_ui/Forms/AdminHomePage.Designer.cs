@@ -35,6 +35,8 @@
             this.SpecialityName = new System.Windows.Forms.ColumnHeader();
             this.button1 = new System.Windows.Forms.Button();
             this.HospitalsTab = new System.Windows.Forms.TabPage();
+            this.buttonAddRooms = new System.Windows.Forms.Button();
+            this.buttonEditHospital = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.listViewHospital = new System.Windows.Forms.ListView();
             this.HospitalId = new System.Windows.Forms.ColumnHeader();
@@ -48,10 +50,7 @@
             this.listViewDoctor = new System.Windows.Forms.ListView();
             this.DoctorUsername = new System.Windows.Forms.ColumnHeader();
             this.DoctorName = new System.Windows.Forms.ColumnHeader();
-            this.DoctorEmail = new System.Windows.Forms.ColumnHeader();
-            this.DoctorPhone = new System.Windows.Forms.ColumnHeader();
             this.AppointmentsTab = new System.Windows.Forms.TabPage();
-            this.buttonEditAppointment = new System.Windows.Forms.Button();
             this.buttonDeleteAppointment = new System.Windows.Forms.Button();
             this.hospitalComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -64,7 +63,7 @@
             this.Doctor = new System.Windows.Forms.ColumnHeader();
             this.Patient = new System.Windows.Forms.ColumnHeader();
             this.Description = new System.Windows.Forms.ColumnHeader();
-            this.buttonEditHospital = new System.Windows.Forms.Button();
+            this.buttonDoctorDetails = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.SpecialitiesTab.SuspendLayout();
             this.HospitalsTab.SuspendLayout();
@@ -143,6 +142,7 @@
             // 
             // HospitalsTab
             // 
+            this.HospitalsTab.Controls.Add(this.buttonAddRooms);
             this.HospitalsTab.Controls.Add(this.buttonEditHospital);
             this.HospitalsTab.Controls.Add(this.button2);
             this.HospitalsTab.Controls.Add(this.listViewHospital);
@@ -154,6 +154,26 @@
             this.HospitalsTab.TabIndex = 1;
             this.HospitalsTab.Text = "Hospitals";
             this.HospitalsTab.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddRooms
+            // 
+            this.buttonAddRooms.Location = new System.Drawing.Point(623, 440);
+            this.buttonAddRooms.Name = "buttonAddRooms";
+            this.buttonAddRooms.Size = new System.Drawing.Size(94, 23);
+            this.buttonAddRooms.TabIndex = 3;
+            this.buttonAddRooms.Text = "Add Rooms";
+            this.buttonAddRooms.UseVisualStyleBackColor = true;
+            this.buttonAddRooms.Click += new System.EventHandler(this.buttonAddRooms_Click);
+            // 
+            // buttonEditHospital
+            // 
+            this.buttonEditHospital.Location = new System.Drawing.Point(723, 440);
+            this.buttonEditHospital.Name = "buttonEditHospital";
+            this.buttonEditHospital.Size = new System.Drawing.Size(75, 23);
+            this.buttonEditHospital.TabIndex = 2;
+            this.buttonEditHospital.Text = "Edit";
+            this.buttonEditHospital.UseVisualStyleBackColor = true;
+            this.buttonEditHospital.Click += new System.EventHandler(this.buttonEditHospital_Click);
             // 
             // button2
             // 
@@ -214,6 +234,7 @@
             // 
             // DoctorsTab
             // 
+            this.DoctorsTab.Controls.Add(this.buttonDoctorDetails);
             this.DoctorsTab.Controls.Add(this.button3);
             this.DoctorsTab.Controls.Add(this.listViewDoctor);
             this.DoctorsTab.Location = new System.Drawing.Point(4, 24);
@@ -242,9 +263,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewDoctor.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.DoctorUsername,
-            this.DoctorName,
-            this.DoctorEmail,
-            this.DoctorPhone});
+            this.DoctorName});
             this.listViewDoctor.HideSelection = false;
             this.listViewDoctor.Location = new System.Drawing.Point(3, 2);
             this.listViewDoctor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -265,19 +284,8 @@
             this.DoctorName.Text = "Name";
             this.DoctorName.Width = 200;
             // 
-            // DoctorEmail
-            // 
-            this.DoctorEmail.Text = "Email";
-            this.DoctorEmail.Width = 150;
-            // 
-            // DoctorPhone
-            // 
-            this.DoctorPhone.Text = "Phone";
-            this.DoctorPhone.Width = 100;
-            // 
             // AppointmentsTab
             // 
-            this.AppointmentsTab.Controls.Add(this.buttonEditAppointment);
             this.AppointmentsTab.Controls.Add(this.buttonDeleteAppointment);
             this.AppointmentsTab.Controls.Add(this.hospitalComboBox);
             this.AppointmentsTab.Controls.Add(this.label1);
@@ -291,16 +299,6 @@
             this.AppointmentsTab.TabIndex = 3;
             this.AppointmentsTab.Text = "Appointments";
             this.AppointmentsTab.UseVisualStyleBackColor = true;
-            // 
-            // buttonEditAppointment
-            // 
-            this.buttonEditAppointment.Location = new System.Drawing.Point(642, 440);
-            this.buttonEditAppointment.Name = "buttonEditAppointment";
-            this.buttonEditAppointment.Size = new System.Drawing.Size(75, 23);
-            this.buttonEditAppointment.TabIndex = 4;
-            this.buttonEditAppointment.Text = "Edit";
-            this.buttonEditAppointment.UseVisualStyleBackColor = true;
-            this.buttonEditAppointment.Click += new System.EventHandler(this.buttonEditAppointment_Click);
             // 
             // buttonDeleteAppointment
             // 
@@ -398,15 +396,15 @@
             this.Description.Text = "Description";
             this.Description.Width = 150;
             // 
-            // buttonEditHospital
+            // buttonDoctorDetails
             // 
-            this.buttonEditHospital.Location = new System.Drawing.Point(723, 440);
-            this.buttonEditHospital.Name = "buttonEditHospital";
-            this.buttonEditHospital.Size = new System.Drawing.Size(75, 23);
-            this.buttonEditHospital.TabIndex = 2;
-            this.buttonEditHospital.Text = "Edit";
-            this.buttonEditHospital.UseVisualStyleBackColor = true;
-            this.buttonEditHospital.Click += new System.EventHandler(this.buttonEditHospital_Click);
+            this.buttonDoctorDetails.Location = new System.Drawing.Point(723, 440);
+            this.buttonDoctorDetails.Name = "buttonDoctorDetails";
+            this.buttonDoctorDetails.Size = new System.Drawing.Size(75, 23);
+            this.buttonDoctorDetails.TabIndex = 2;
+            this.buttonDoctorDetails.Text = "Details";
+            this.buttonDoctorDetails.UseVisualStyleBackColor = true;
+            this.buttonDoctorDetails.Click += new System.EventHandler(this.buttonDoctorDetails_Click);
             // 
             // AdminHomePage
             // 
@@ -450,8 +448,6 @@
         private System.Windows.Forms.ListView listViewDoctor;
         private System.Windows.Forms.ColumnHeader DoctorUsername;
         private System.Windows.Forms.ColumnHeader DoctorName;
-        private System.Windows.Forms.ColumnHeader DoctorEmail;
-        private System.Windows.Forms.ColumnHeader DoctorPhone;
         private System.Windows.Forms.ListView listViewAppointment;
         private System.Windows.Forms.TabPage AppointmentsTab;
         private System.Windows.Forms.Button button5;
@@ -464,8 +460,9 @@
         private System.Windows.Forms.ColumnHeader Doctor;
         private System.Windows.Forms.ColumnHeader Patient;
         private System.Windows.Forms.ColumnHeader Description;
-        private System.Windows.Forms.Button buttonEditAppointment;
         private System.Windows.Forms.Button buttonDeleteAppointment;
         private System.Windows.Forms.Button buttonEditHospital;
+        private System.Windows.Forms.Button buttonAddRooms;
+        private System.Windows.Forms.Button buttonDoctorDetails;
     }
 }

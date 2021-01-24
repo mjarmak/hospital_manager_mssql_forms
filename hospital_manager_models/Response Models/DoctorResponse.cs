@@ -1,6 +1,4 @@
-﻿using hospital_manager_models.Models;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 
 namespace hospital_manager_models.Models
 {

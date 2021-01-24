@@ -121,12 +121,11 @@ namespace hospital_manager_bl.Util
         }
         public ConsultationResponse ResponseOf(ConsultationData consultationData)
         {
-            HospitalResponse hospital = ResponseOf(_unitOfWork.Hospital.GetHospital(consultationData.HospitalId));
             SpecialityResponse speciality = ResponseOf(_unitOfWork.Speciality.Get(consultationData.SpecialityId));
             return new ConsultationResponse
             {
                 Id = consultationData.Id,
-                Hospital = hospital,
+                HospitalId = consultationData.HospitalId,
                 Speciality = speciality,
                 Duration = consultationData.Duration
             };

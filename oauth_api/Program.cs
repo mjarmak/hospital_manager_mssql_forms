@@ -52,6 +52,7 @@ namespace authentication_api
             var username = name + familyName + birthdate.Replace("/", "");
             var user = new IdentityUser(username);
             user.Email = email;
+            user.PhoneNumber = phoneNumber;
             userManager.CreateAsync(user, "password").GetAwaiter().GetResult();
             userManager.AddToRoleAsync(user, role);
             userManager.AddClaimAsync(user, new Claim(JwtClaimTypes.Email, email));

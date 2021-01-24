@@ -24,6 +24,7 @@ namespace hospital_manager_ui.Forms
 
         private long specialityId;
         private long hospitalId;
+        private int duration;
 
         public AddAppointment()
         {
@@ -203,18 +204,23 @@ namespace hospital_manager_ui.Forms
             }
         }
 
-        private void listViewSuggestions_SelectedIndexChanged(object sender, EventArgs e)
+            private void listViewSuggestions_SelectedIndexChanged(object sender, EventArgs e)
         {
             ListView.SelectedIndexCollection indices = listViewSuggestions.SelectedIndices;
             if (indices.Count > 0)
             {
                 appointmentSuggestion = appointmentSuggestions[indices[0]];
-                textBoxAt.Text = appointmentSuggestion.From.ToString("HH:mm");
                 textBoxDescription.Text = appointmentSuggestion.Description;
                 textBoxDoctor.Text = doctors.SingleOrDefault(doctor => doctor.Username == appointmentSuggestion.DoctorUsername).Name;
-                textBoxDuration.Text = (appointmentSuggestion.To - appointmentSuggestion.From).TotalMinutes.ToString();
                 textBoxRoom.Text = rooms.SingleOrDefault(room => room.Id == appointmentSuggestion.RoomId).Name;
 
+                //textBoxAt.Text = appointmentSuggestion.From.ToString("HH:mm");
+                textBoxDuration.Text = (appointmentSuggestion.To - appointmentSuggestion.From).TotalMinutes.ToString();
+                duration = (int)(appointmentSuggestion.To - appointmentSuggestion.From).TotalMinutes; 
+                dateTimePickerAppointmenFrom.Enabled = true;
+                dateTimePickerAppointmenFrom.Value = appointmentSuggestion.From;
+
+                ProcessAppointmentAvailability();
             }
         }
 
@@ -257,6 +263,51 @@ namespace hospital_manager_ui.Forms
             else
             {
                 this.Close();
+            }
+        }
+
+        private void dateTimePickerAppointmenFrom_ValueChanged(object sender, EventArgs e)
+        {
+            if (duration != 0)
+            {
+                appointmentSuggestion.From = dateTimePickerAppointmenFrom.Value;
+                appointmentSuggestion.To = dateTimePickerAppointmenFrom.Value.AddMinutes(duration);
+                ProcessAppointmentAvailability();
+            }
+        }
+        private void ProcessAppointmentAvailability()
+        {
+            bool taken = GetAppointmentTaken(appointmentSuggestion.RoomId, appointmentSuggestion.From, appointmentSuggestion.To);
+            if (taken)
+            {
+                buttonSave.Enabled = false;
+                labelTimeSlotBooked.Visible = true;
+            }
+            else
+            {
+                buttonSave.Enabled = true;
+                labelTimeSlotBooked.Visible = false;
+            }
+        }
+        private bool GetAppointmentTaken(long roomId, DateTime from, DateTime to)
+        {
+            var client = new HttpClient();
+            string dateFormat = "yyyy-MM-ddTHH:mm:ss";
+            string path = "/appointment/room/" + roomId + "/taken?from=" + from.ToString(dateFormat) + "&to=" + to.ToString(dateFormat);
+            Task<HttpResponseMessage> response = client.GetAsync(url + path);
+            response.Wait();
+            if (response.Result.StatusCode != HttpStatusCode.OK)
+            {
+                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch appointment suggestions",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return false;
+            }
+            else
+            {
+                string result = response.Result.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<ResponseEnvelope<bool>>(result).data;
+
             }
         }
     }

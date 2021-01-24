@@ -106,8 +106,8 @@
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.roomsListView = new System.Windows.Forms.ListView();
-            this.HospitalName = new System.Windows.Forms.ColumnHeader();
-            this.Specialities = new System.Windows.Forms.ColumnHeader();
+            this.RoomName = new System.Windows.Forms.ColumnHeader();
+            this.RoomSpecialities = new System.Windows.Forms.ColumnHeader();
             this.specialititesCheckList = new System.Windows.Forms.CheckedListBox();
             this.streetTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -1187,8 +1187,8 @@
             // roomsListView
             // 
             this.roomsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.HospitalName,
-            this.Specialities});
+            this.RoomName,
+            this.RoomSpecialities});
             this.roomsListView.HideSelection = false;
             this.roomsListView.Location = new System.Drawing.Point(448, 209);
             this.roomsListView.Name = "roomsListView";
@@ -1197,15 +1197,15 @@
             this.roomsListView.UseCompatibleStateImageBehavior = false;
             this.roomsListView.View = System.Windows.Forms.View.Details;
             // 
-            // HospitalName
+            // RoomName
             // 
-            this.HospitalName.Text = "Name";
-            this.HospitalName.Width = 180;
+            this.RoomName.Text = "RoomName";
+            this.RoomName.Width = 180;
             // 
-            // Specialities
+            // RoomSpecialities
             // 
-            this.Specialities.Text = "Specialities";
-            this.Specialities.Width = 180;
+            this.RoomSpecialities.Text = "RoomSpecialities";
+            this.RoomSpecialities.Width = 180;
             // 
             // specialititesCheckList
             // 
@@ -1306,7 +1306,6 @@
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.cancelButton);
             this.Name = "AddHospital";
-            this.Text = "Add Hospital";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1393,8 +1392,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ListView roomsListView;
         private System.Windows.Forms.CheckedListBox specialititesCheckList;
-        private System.Windows.Forms.ColumnHeader HospitalName;
-        private System.Windows.Forms.ColumnHeader Specialities;
+        private System.Windows.Forms.ColumnHeader RoomName;
+        private System.Windows.Forms.ColumnHeader RoomSpecialities;
         private System.Windows.Forms.TextBox streetTextBox;
     }
 }

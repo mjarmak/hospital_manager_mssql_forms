@@ -6,6 +6,8 @@ namespace hospital_manager_data_access.Repositories.Interfaces
 {
     public interface IRoomRepository : IRepository<RoomData>
     {
+        RoomData GetRoomSimple(long id);
+
         RoomData GetRoom(long id);
 
         RoomData GetRoomByHospitalIdAndName(long hospitalId, string name);

@@ -58,6 +58,7 @@ namespace authentication_api.Controllers
             var username = GetUserName(userAccountModel);
             var user = new IdentityUser(username);
             user.Email = userAccountModel.Email;
+            user.PhoneNumber = userAccountModel.Phone;
             var result = await _userManager.CreateAsync(user, userAccountDataModel.Password);
 
             if (!result.Succeeded)
@@ -121,6 +122,8 @@ namespace authentication_api.Controllers
 
             var username = GetUserName(userAccountModel);
             var user = new IdentityUser(username);
+            user.Email = userAccountModel.Email;
+            user.PhoneNumber = userAccountModel.Phone;
             var result = await _userManager.CreateAsync(user, userAccountDataModel.Password);
 
             if (!result.Succeeded)
@@ -197,7 +200,7 @@ namespace authentication_api.Controllers
         [Route("user/username")]
         [HttpGet]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public async Task<ActionResult> GetUsersByUserName(string username)
+        public async Task<ActionResult<UserDetailsResponse>> GetUsersByUserName(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
@@ -207,9 +210,13 @@ namespace authentication_api.Controllers
                     data = new List<string> { "User " + username + " doesn't exist" }
                 });
             }
+            UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
+            userDetailsResponse.Username = user.UserName;
+            userDetailsResponse.Email = user.Email;
+            userDetailsResponse.Phone = user.PhoneNumber;
             return Ok(new
             {
-                data = user
+                data = userDetailsResponse
             });
         }
 

@@ -19,6 +19,7 @@ namespace hospital_manager_ui.Forms
         private protected string url = ApplicationConfiguration.hospitalManagerApiUrl;
         private List<HospitalResponse> hospitals;
         private List<AppointmentResponse> appointments;
+        private List<DoctorResponse> doctors;
 
         public AdminHomePage()
         {
@@ -131,7 +132,7 @@ namespace hospital_manager_ui.Forms
         {
             var client = new HttpClient();
 
-            Task<HttpResponseMessage> response = client.GetAsync(url + "/speciality/all");
+            Task<HttpResponseMessage> response = client.GetAsync(url + "/doctor/all");
             response.Wait();
             if (response.Result.StatusCode != HttpStatusCode.OK)
             {
@@ -142,11 +143,11 @@ namespace hospital_manager_ui.Forms
             else
             {
                 string result = response.Result.Content.ReadAsStringAsync().Result;
-                List<SpecialityResponse> specialities = JsonConvert.DeserializeObject<ResponseEnvelope<List<SpecialityResponse>>>(result).data;
-                listViewSpeciality.Items.Clear();
-                listViewSpeciality.Items.AddRange(specialities.Select(speciality =>
+                doctors = JsonConvert.DeserializeObject<ResponseEnvelope<List<DoctorResponse>>>(result).data;
+                listViewDoctor.Items.Clear();
+                listViewDoctor.Items.AddRange(doctors.Select(doctor =>
                 {
-                    return new ListViewItem(new[] { speciality.Id.ToString(), speciality.Name });
+                    return new ListViewItem(new[] { doctor.Username, doctor.Name });
                 }).ToArray());
             }
         }
@@ -279,6 +280,28 @@ namespace hospital_manager_ui.Forms
                 {
                     RefreshHospitals();
                 }
+                f.Show();
+            }
+        }
+
+        private void buttonAddRooms_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection indices = listViewHospital.SelectedIndices;
+            if (indices.Count > 0)
+            {
+                long hospitalId = hospitals[indices[0]].Id;
+                EditDeleteHospitalRooms f = new EditDeleteHospitalRooms(hospitalId);
+                f.Show();
+            }
+        }
+
+        private void buttonDoctorDetails_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection indices = listViewDoctor.SelectedIndices;
+            if (indices.Count > 0)
+            {
+                string doctorUsername = doctors[indices[0]].Username;
+                DoctorDetails f = new DoctorDetails(doctorUsername);
                 f.Show();
             }
         }

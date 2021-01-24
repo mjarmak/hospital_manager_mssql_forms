@@ -105,11 +105,30 @@ namespace hospital_manager_bl.Service
                 RoomData roomData = modelConverter.EnvelopeOf(roomRequest);
                 if (!RoomExists(hospitalId, roomData.Name))
                 {
+                    roomData.HospitalId = hospitalId;
                     _unitOfWork.Room.Add(roomData);
                 }
             }
             _unitOfWork.Save();
             return modelConverter.ResponseOf(_unitOfWork.Hospital.GetHospital(hospitalId));
+        }
+        public void DeleteHospitalRoom(long roomId)
+        {
+            if (roomId == 0)
+            {
+                throw new InvalidRoom("Room ID is invalid.");
+            }
+            if (!RoomExists(roomId))
+            {
+                throw new InvalidRoom("Room with ID " + roomId + ".");
+            }
+            RoomData roomData = _unitOfWork.Room.Get(roomId);
+            _unitOfWork.Room.Remove(roomData);
+            _unitOfWork.Save();
+        }
+        private bool RoomExists(long roomId)
+        {
+            return _unitOfWork.Room.GetRoomSimple(roomId) != null;
         }
         private bool RoomExists(long hospitalId, string name)
         {

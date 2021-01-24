@@ -12,13 +12,18 @@ namespace hospital_manager_data_access.Repositories.Implementation
     {
         public RoomRepository(HospitalDbContext context) : base(context) { }
 
+        public RoomData GetRoomSimple(long id)
+        {
+            return Db.RoomData.SingleOrDefault(room => room.Id == id);
+        }
+
         public RoomData GetRoom(long id)
         {
-            return Db.RoomData.Include(room => room.Specialities).Single(room => room.Id == id);
+            return Db.RoomData.Include(room => room.Specialities).SingleOrDefault(room => room.Id == id);
         }
         public RoomData GetRoomByHospitalIdAndName(long hospitalId, string name)
         {
-            return Db.RoomData.Include(room => room.Specialities).Single(room => room.HospitalId == hospitalId && room.Name == name);
+            return Db.RoomData.Include(room => room.Specialities).SingleOrDefault(room => room.HospitalId == hospitalId && room.Name == name);
         }
         public List<RoomData> GetRooms()
         {

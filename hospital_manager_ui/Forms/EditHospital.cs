@@ -13,7 +13,7 @@ namespace hospital_manager_ui.Forms
     public partial class EditHospital : Form
     {
         private protected string url = ApplicationConfiguration.hospitalManagerApiUrl;
-        long hospitalId;
+        private long hospitalId;
         public EditHospital(long hospitalId)
         {
             InitializeComponent();
