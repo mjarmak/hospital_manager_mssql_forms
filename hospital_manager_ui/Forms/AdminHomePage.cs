@@ -41,11 +41,11 @@ namespace hospital_manager_ui.Forms
             }
             else if (tabControl1.SelectedTab == DoctorsTab)
             {
-
+                RefreshDoctors();
             }
             else if (tabControl1.SelectedTab == AppointmentsTab)
             {
-
+                RefreshAppointments();
             }
 
         }

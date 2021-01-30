@@ -1,6 +1,7 @@
 ﻿using hospital_manager_bl.Util;
 using hospital_manager_data_access.Entities;
 using hospital_manager_data_access.Repositories.Interfaces;
+using hospital_manager_exceptions.Exceptions;
 using hospital_manager_models.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,10 +49,15 @@ namespace hospital_manager_bl.Service
         }
         public DoctorResponse RegisterDoctor(UserAccountRequest userAccountRequest, string token)
         {
-            string username = oAuthService.RegisterUser(userAccountRequest, token);
-            var url = "https://localhost:44321/register/doctor";
-            userAccountRequest.DoctorRequest.Username = username;
-            userAccountRequest.DoctorRequest.Name = userAccountRequest.Name + " " + userAccountRequest.Surname;
+            try
+            {
+                string username = oAuthService.RegisterUser(userAccountRequest, token);
+                userAccountRequest.DoctorRequest.Username = username;
+                userAccountRequest.DoctorRequest.Name = userAccountRequest.Name + " " + userAccountRequest.Surname;
+            } catch (InvalidUserRequest e)
+            {
+                throw new InvalidUserRequest(e.Message);
+            }
 
             var doctorData = modelConverter.EnvelopeOf(userAccountRequest.DoctorRequest);
             _unitOfWork.Doctor.Add(doctorData);

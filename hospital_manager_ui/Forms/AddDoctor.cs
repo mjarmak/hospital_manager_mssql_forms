@@ -101,7 +101,9 @@ namespace hospital_manager_ui.Forms
             doctorRequest.SpecialityIds = checkedSpecialities.Select(name => specialities.Find(speciality => speciality.Name == name).Id).ToList();
             doctorRequest.Consultations = consultationRequests;
 
-            string json = JsonConvert.SerializeObject(doctorRequest);
+            userAccountRequest.DoctorRequest = doctorRequest;
+
+            string json = JsonConvert.SerializeObject(userAccountRequest);
             StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthConfiguration.AccessToken);
             Task<HttpResponseMessage> response = client.PostAsync(url + "/doctor/register", httpContent);

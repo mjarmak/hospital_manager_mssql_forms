@@ -36,12 +36,12 @@ namespace hospital_manager_bl.Service
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var json = JsonConvert.SerializeObject(userAccountRequest);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            Task<HttpResponseMessage> response = client.PostAsync(url, data);
+            StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            Task<HttpResponseMessage> response = client.PostAsync(url + "/register/doctor", httpContent);
             response.Wait();
             if (response.Result.StatusCode != HttpStatusCode.OK)
             {
-                throw new InvalidUserRequest(response.Result.Content.ToString());
+                throw new InvalidUserRequest(response.Result.ToString());
             }
             string result = response.Result.Content.ReadAsStringAsync().Result;
             JObject jObject = JObject.Parse(result);

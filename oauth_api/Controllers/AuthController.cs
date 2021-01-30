@@ -130,7 +130,7 @@ namespace authentication_api.Controllers
             {
                 return BadRequest(new
                 {
-                    data = new List<string> { result.Errors.ToList()[0].Description }
+                    data = result.Errors.ToList()[0].Description
                 });
             }
             await _userManager.AddToRoleAsync(user, "DOCTOR");
@@ -284,7 +284,10 @@ namespace authentication_api.Controllers
 
         private static string GetUserName(UserAccountRequest userAccountModel)
         {
-            return userAccountModel.Name + userAccountModel.Surname + userAccountModel.BirthDate.Replace("/", "");
+            string result = userAccountModel.Name + userAccountModel.Surname + userAccountModel.BirthDate.Replace("/", "");
+            result = result.Replace(":", "");
+            result = result.Replace(" ", "");
+            return result;
         }
 
         private string GetClaim(string name)

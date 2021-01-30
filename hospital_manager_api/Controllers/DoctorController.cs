@@ -3,19 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using hospital_manager_bl.Service;
-using hospital_manager_data_access.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Net.Http.Headers;
 using hospital_manager_data_access.Repositories.Interfaces;
 using hospital_manager_exceptions.Exceptions;
 using Microsoft.AspNetCore.Authorization;
-using System.Net.Http;
 using hospital_manager_models.Models;
-using System.Text;
-using Newtonsoft.Json;
-using System.Net;
-using System.Net.Http.Headers;
-using Newtonsoft.Json.Linq;
 
 namespace hospital_manager_api.Controllers
 {
