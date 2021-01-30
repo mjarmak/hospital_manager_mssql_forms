@@ -14,6 +14,7 @@ namespace authentication_api
                 new IdentityResources.OpenId {
                     UserClaims =
                     {
+                        JwtClaimTypes.PreferredUserName,
                         JwtClaimTypes.Name,
                         JwtClaimTypes.FamilyName,
                         JwtClaimTypes.Email,
@@ -29,6 +30,7 @@ namespace authentication_api
         {
             return new List<ApiResource> {
                 new ApiResource("hm", new[] {
+                        JwtClaimTypes.PreferredUserName,
                         JwtClaimTypes.Name,
                         JwtClaimTypes.FamilyName,
                         JwtClaimTypes.Email,

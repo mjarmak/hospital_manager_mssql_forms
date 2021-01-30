@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text;
+using System.Net.Http.Headers;
+using hospital_manager_ui.Configuration;
 
 namespace hospital_manager_ui.Forms
 {
@@ -115,6 +117,7 @@ namespace hospital_manager_ui.Forms
         private void saveButton_Click(object sender, EventArgs e)
         {
             var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthConfiguration.AccessToken);
 
             HospitalRequest hospitalRequest = new HospitalRequest();
             hospitalRequest.Rooms = roomRequests;
@@ -129,13 +132,13 @@ namespace hospital_manager_ui.Forms
 
             hospitalRequest.OpeningHours = new List<OpeningHoursRequest>
             {
-                new OpeningHoursRequest("MONDAY", ToInt(hourFromComboBox1), ToInt(hourToComboBox1), ToInt(minuteFromComboBox1), ToInt(minuteToComboBox1), closedDay1.Checked),
-                new OpeningHoursRequest("TUESDAY", ToInt(hourFromComboBox2), ToInt(hourToComboBox2), ToInt(minuteFromComboBox2), ToInt(minuteToComboBox2), closedDay2.Checked),
-                new OpeningHoursRequest("WEDNESDAY", ToInt(hourFromComboBox3), ToInt(hourToComboBox3), ToInt(minuteFromComboBox3), ToInt(minuteToComboBox3), closedDay3.Checked),
-                new OpeningHoursRequest("THURSDAY", ToInt(hourFromComboBox4), ToInt(hourToComboBox4), ToInt(minuteFromComboBox4), ToInt(minuteToComboBox4), closedDay4.Checked),
-                new OpeningHoursRequest("FRIDAY", ToInt(hourFromComboBox5), ToInt(hourToComboBox5), ToInt(minuteFromComboBox5), ToInt(minuteToComboBox5), closedDay5.Checked),
-                new OpeningHoursRequest("SATURDAY", ToInt(hourFromComboBox6), ToInt(hourToComboBox6), ToInt(minuteFromComboBox6), ToInt(minuteToComboBox6), closedDay6.Checked),
-                new OpeningHoursRequest("SUNDAY", ToInt(hourFromComboBox7), ToInt(hourToComboBox7), ToInt(minuteFromComboBox7), ToInt(minuteToComboBox7), closedDay7.Checked)
+                new OpeningHoursRequest(0, "MONDAY", ToInt(hourFromComboBox1), ToInt(hourToComboBox1), ToInt(minuteFromComboBox1), ToInt(minuteToComboBox1), closedDay1.Checked),
+                new OpeningHoursRequest(0, "TUESDAY", ToInt(hourFromComboBox2), ToInt(hourToComboBox2), ToInt(minuteFromComboBox2), ToInt(minuteToComboBox2), closedDay2.Checked),
+                new OpeningHoursRequest(0, "WEDNESDAY", ToInt(hourFromComboBox3), ToInt(hourToComboBox3), ToInt(minuteFromComboBox3), ToInt(minuteToComboBox3), closedDay3.Checked),
+                new OpeningHoursRequest(0, "THURSDAY", ToInt(hourFromComboBox4), ToInt(hourToComboBox4), ToInt(minuteFromComboBox4), ToInt(minuteToComboBox4), closedDay4.Checked),
+                new OpeningHoursRequest(0, "FRIDAY", ToInt(hourFromComboBox5), ToInt(hourToComboBox5), ToInt(minuteFromComboBox5), ToInt(minuteToComboBox5), closedDay5.Checked),
+                new OpeningHoursRequest(0, "SATURDAY", ToInt(hourFromComboBox6), ToInt(hourToComboBox6), ToInt(minuteFromComboBox6), ToInt(minuteToComboBox6), closedDay6.Checked),
+                new OpeningHoursRequest(0, "SUNDAY", ToInt(hourFromComboBox7), ToInt(hourToComboBox7), ToInt(minuteFromComboBox7), ToInt(minuteToComboBox7), closedDay7.Checked)
             };
 
             string json = JsonConvert.SerializeObject(hospitalRequest);

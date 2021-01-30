@@ -34,6 +34,13 @@ namespace hospital_manager_data_access.Repositories.Implementation
             return DbSet.Find(id);
         }
 
+        public T GetDetached(long id)
+        {
+            T entity = DbSet.Find(id);
+            Db.Entry(entity).State = EntityState.Detached;
+            return entity;
+        }
+
         public IEnumerable<T> All()
         {
             return DbSet.ToList();

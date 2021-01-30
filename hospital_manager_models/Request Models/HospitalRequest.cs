@@ -34,8 +34,9 @@ namespace hospital_manager_models.Models
         public OpeningHoursRequest()
         {
         }
-        public OpeningHoursRequest(string Day, int HourFrom, int HourTo, int MinuteFrom, int MinuteTo, bool Closed)
+        public OpeningHoursRequest(long Id, string Day, int HourFrom, int HourTo, int MinuteFrom, int MinuteTo, bool Closed)
         {
+            this.Id = Id;
             this.Day = Day;
             this.HourFrom = HourFrom;
             this.HourTo = HourTo;
@@ -48,13 +49,13 @@ namespace hospital_manager_models.Models
         {
             return new List<OpeningHoursRequest>
             {
-                new OpeningHoursRequest("MONDAY", 0, 0, 0, 0, false),
-                new OpeningHoursRequest("TUESDAY", 0, 0, 0, 0, false),
-                new OpeningHoursRequest("WEDNESDAY", 0, 0, 0, 0, false),
-                new OpeningHoursRequest("THURSDAY", 0, 0, 0, 0, false),
-                new OpeningHoursRequest("FRIDAY", 0, 0, 0, 0, false),
-                new OpeningHoursRequest("SATURDAY", 0, 0, 0, 0, false),
-                new OpeningHoursRequest("SUNDAY", 0, 0, 0, 0, false)
+                new OpeningHoursRequest(0, "MONDAY", 0, 0, 0, 0, false),
+                new OpeningHoursRequest(0, "TUESDAY", 0, 0, 0, 0, false),
+                new OpeningHoursRequest(0, "WEDNESDAY", 0, 0, 0, 0, false),
+                new OpeningHoursRequest(0, "THURSDAY", 0, 0, 0, 0, false),
+                new OpeningHoursRequest(0, "FRIDAY", 0, 0, 0, 0, false),
+                new OpeningHoursRequest(0, "SATURDAY", 0, 0, 0, 0, false),
+                new OpeningHoursRequest(0, "SUNDAY", 0, 0, 0, 0, false)
             };
         }
     }

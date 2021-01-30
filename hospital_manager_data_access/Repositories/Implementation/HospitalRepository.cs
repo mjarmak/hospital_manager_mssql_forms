@@ -11,6 +11,11 @@ namespace hospital_manager_data_access.Repositories.Implementation
     {
         public HospitalRepository(HospitalDbContext context) : base(context) { }
 
+        public void UpdateHospital(HospitalData hospital)
+        {
+            Db.HospitalData.Update(hospital);
+        }
+
         public HospitalData GetHospital(long id)
         {
             return Db.HospitalData.Include(hospital => hospital.Address).Include(hospital => hospital.OpeningHours).SingleOrDefault(hospital => hospital.Id == id);

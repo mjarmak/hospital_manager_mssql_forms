@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using hospital_manager_bl.Service;
-using hospital_manager_data_access.Entities;
 using Microsoft.AspNetCore.Authorization;
 using hospital_manager_models.Models;
 using System.IdentityModel.Tokens.Jwt;
@@ -33,9 +31,8 @@ namespace hospital_manager_api.Controllers
         {
             return "OK";
         }
-
         [HttpPost]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<RoomResponse> SaveRoom(RoomRequest room)
         {
             try
@@ -54,9 +51,8 @@ namespace hospital_manager_api.Controllers
                 });
             }
         }
-
         [HttpPost("all")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<List<RoomResponse>> SaveRooms(List<RoomRequest> rooms)
         {
             try
@@ -75,7 +71,6 @@ namespace hospital_manager_api.Controllers
                 });
             }
         }
-
         [HttpGet("{id}")]
         public ActionResult<RoomResponse> GetRoom(long id)
         {
@@ -84,7 +79,6 @@ namespace hospital_manager_api.Controllers
                 data = _roomService.GetRoom(id)
             });
         }
-
         [HttpGet("hospital/{hospitalId}")]
         public ActionResult<List<RoomResponse>> GetRoomsByHospitalId(long hospitalId)
         {
@@ -93,7 +87,6 @@ namespace hospital_manager_api.Controllers
                 data = _roomService.GetRoomsByHospitalId(hospitalId)
             });
         }
-
         [HttpGet("hospital/{hospitalId}/speciality/{specialityId}")]
         public ActionResult<List<RoomResponse>> GetRoomsByHospitalIdAndSpecialityId(long hospitalId, long specialityId)
         {
@@ -102,8 +95,6 @@ namespace hospital_manager_api.Controllers
                 data = _roomService.GetRoomsByHospitalIdAndSpecialityId(hospitalId, specialityId)
             });
         }
-        
-
        [HttpGet("all")]
         public ActionResult<List<RoomResponse>> GetRooms()
         {

@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Reflection;
 using hospital_manager_api.Configuration;
-using hospital_manager_api.Util;
 using hospital_manager_data_access.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,10 +16,7 @@ namespace hospital_manager_api
 {
     public class Startup
     {
-        //readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication("Bearer")
@@ -37,19 +33,8 @@ namespace hospital_manager_api
                 }
                 );
 
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: MyAllowSpecificOrigins,
-            //                      builder =>
-            //                      {
-            //                          builder.WithOrigins("https://localhost:44383")
-            //                          .AllowAnyMethod()
-            //                          .AllowAnyHeader();
-            //                      });
-            //});
-
             services.AddControllers();
-            services.AddMvc();
+            //services.AddMvc();
 
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("V1", new OpenApiInfo
@@ -94,16 +79,9 @@ namespace hospital_manager_api
                 c.SerializeAsV2 = true;
             });
 
-            //app.UseSession();
             app.UseHttpsRedirection();
-            //app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseRouting();
-
-            //app.UseCors(MyAllowSpecificOrigins);
-
-            app.UseAuthentication();
-
-            app.UseAuthorization();
 
             //Need to use an end point in order to access to swagger page
             app.UseSwaggerUI(c =>
@@ -111,6 +89,10 @@ namespace hospital_manager_api
                 c.SwaggerEndpoint("/swagger/V1/swagger.json", "My API V1");
                 c.RoutePrefix = string.Empty;
             });
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -5,6 +5,8 @@ namespace hospital_manager_data_access.Repositories.Interfaces
 {
     public interface IHospitalRepository : IRepository<HospitalData>
     {
+        void UpdateHospital(HospitalData hospital);
+
         HospitalData GetHospital(long id);
 
         List<HospitalData> GetHospitals();

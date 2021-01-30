@@ -6,7 +6,6 @@ namespace hospital_manager_data_access
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello Worlsd!");
         }
     }
 }

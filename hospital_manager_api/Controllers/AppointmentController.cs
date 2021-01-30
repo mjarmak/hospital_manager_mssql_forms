@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using hospital_manager_bl.Service;
 using hospital_manager_data_access.Entities;
@@ -36,9 +35,29 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpPost]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize]
         public ActionResult<AppointmentData> SaveAppointment(AppointmentRequest appointment)
         {
+
+            string role = GetClaim("role");
+            string username = GetClaim("preferred_username");
+            if (!role.Contains("ADMIN"))
+            {
+                if (role.Contains("DOCTOR") && !username.Equals(appointment.DoctorUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A doctor can only create his own appointments."
+                    });
+                }
+                else if (role.Contains("PATIENT") && !username.Equals(appointment.PatientUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A patient can only create his own appointments."
+                    });
+                }
+            }
             try
             {
                 var appointmentData = _appointmentService.SaveAppointment(appointment);
@@ -58,9 +77,28 @@ namespace hospital_manager_api.Controllers
 
 
         [HttpPut]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize]
         public ActionResult<AppointmentData> UpdateAppointment(AppointmentRequest appointment)
         {
+            string role = GetClaim("role");
+            string username = GetClaim("preferred_username");
+            if (!role.Contains("ADMIN"))
+            {
+                if (role.Contains("DOCTOR") && !username.Equals(appointment.DoctorUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A doctor can only update his own appointments."
+                    });
+                }
+                else if (role.Contains("PATIENT") && !username.Equals(appointment.PatientUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A patient can only update his own appointments."
+                    });
+                }
+            }
             try
             {
                 var appointmentData = _appointmentService.UpdateAppointment(appointment);
@@ -79,9 +117,29 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpDelete("{id}")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize]
         public ActionResult DeleteAppointment(long id)
         {
+            string role = GetClaim("role");
+            string username = GetClaim("preferred_username");
+            AppointmentResponse appointment = _appointmentService.GetAppointment(id);
+            if (!role.Contains("ADMIN"))
+            {
+                if (role.Contains("DOCTOR") && !username.Equals(appointment.DoctorUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A doctor can only delete his own appointments."
+                    });
+                }
+                else if (role.Contains("PATIENT") && !username.Equals(appointment.PatientUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A patient can only delete his own appointments."
+                    });
+                }
+            }
             try
             {
                 _appointmentService.DeleteAppointment(id);
@@ -100,14 +158,34 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpGet("{id}")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize]
         public ActionResult<AppointmentData> GetAppointment(long id)
         {
+            string role = GetClaim("role");
+            string username = GetClaim("preferred_username");
+            AppointmentResponse appointment = _appointmentService.GetAppointment(id);
+            if (!role.Contains("ADMIN"))
+            {
+                if (role.Contains("DOCTOR") && !username.Equals(appointment.DoctorUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A doctor can only get his own appointments."
+                    });
+                }
+                else if (role.Contains("PATIENT") && !username.Equals(appointment.PatientUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A patient can only get his own appointments."
+                    });
+                }
+            }
             try
             {
                 return Ok(new
                 {
-                    data = _appointmentService.GetAppointment(id)
+                    data = appointment
                 });
             }
             catch (InvalidAppointment e)
@@ -120,7 +198,7 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpGet("all")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<IEnumerable<AppointmentData>> GetAppointments()
         {
             return Ok(new
@@ -130,13 +208,32 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpGet("patient/{patientUsername}")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public ActionResult<IEnumerable<AppointmentData>> GetAppointmentByPatientUsername(
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "PATIENT")]
+        public ActionResult<List<AppointmentData>> GetAppointmentByPatientUsername(
             string patientUsername,
             [FromQuery] DateTime from,
             [FromQuery] DateTime to
             )
         {
+            string role = GetClaim("role");
+            string username = GetClaim("preferred_username");
+            if (!role.Contains("ADMIN"))
+            {
+                if (role.Contains("DOCTOR") && !username.Equals(patientUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A doctor can only get his own appointments."
+                    });
+                }
+                else if (role.Contains("PATIENT") && !username.Equals(patientUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A patient can only get his own appointments."
+                    });
+                }
+            }
             return Ok(new
             {
                 data = _appointmentService.GetAppointmentByPatientUsername(patientUsername, from, to)
@@ -144,13 +241,32 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpGet("doctor/{doctorUsername}")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public ActionResult<IEnumerable<AppointmentData>> GetAppointmentByDoctorUsername(
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "DOCTOR")]
+        public ActionResult<List<AppointmentData>> GetAppointmentByDoctorUsername(
             string doctorUsername,
             [FromQuery] DateTime from,
             [FromQuery] DateTime to
             )
         {
+            string role = GetClaim("role");
+            string username = GetClaim("preferred_username");
+            if (!role.Contains("ADMIN"))
+            {
+                if (role.Contains("DOCTOR") && !username.Equals(doctorUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A doctor can only get his own appointments."
+                    });
+                }
+                else if (role.Contains("PATIENT") && !username.Equals(doctorUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A patient can only get his own appointments."
+                    });
+                }
+            }
             return Ok(new
             {
                 data = _appointmentService.GetAppointmentByDoctorUsername(doctorUsername, from, to)
@@ -158,7 +274,6 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpGet("room/{roomId}/taken")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<bool> GetAppointmentTaken(
             long roomId,
             [FromQuery] DateTime from,
@@ -172,7 +287,7 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpGet("hospital/{hospitalId}/speciality/{specialityId}")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<List<AppointmentData>> GetAppointmentsByHospitalAndSpeciality(
             int hospitalId,
             int specialityId,
@@ -186,7 +301,7 @@ namespace hospital_manager_api.Controllers
             });
         }
         [HttpGet("hospital/{hospitalId}")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<List<AppointmentData>> GetAppointmentsByHospital(
             int hospitalId,
             [FromQuery] DateTime from,
@@ -199,7 +314,6 @@ namespace hospital_manager_api.Controllers
             });
         }
         [HttpGet("hospital/{hospitalId}/speciality/{specialityId}/suggestions")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<List<AppointmentData>> GetAppointmentSuggestions(
             int hospitalId,
             int specialityId,
@@ -213,7 +327,6 @@ namespace hospital_manager_api.Controllers
             });
         }
         [HttpGet("hospital/{hospitalId}/speciality/{specialityId}/freerooms")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<List<RoomFromTo>> GetFreeRooms(
             int hospitalId,
             int specialityId,
@@ -227,7 +340,6 @@ namespace hospital_manager_api.Controllers
             });
         }
         [HttpGet("hospital/{hospitalId}/speciality/{specialityId}/freedays")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<List<DateTime>> GetFreeDays(
             int hospitalId,
             int specialityId,

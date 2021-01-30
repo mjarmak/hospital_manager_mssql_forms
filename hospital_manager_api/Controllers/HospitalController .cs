@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using hospital_manager_bl.Service;
-using hospital_manager_data_access.Entities;
 using Microsoft.AspNetCore.Authorization;
 using hospital_manager_models.Models;
 using System.IdentityModel.Tokens.Jwt;
@@ -35,29 +33,63 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpPost]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<HospitalResponse> SaveHospital(HospitalRequest hospital)
         {
-            return Ok(new
+            try
             {
-                data = _hospitalService.SaveHospital(hospital)
-            });
+                return Ok(new
+                {
+                    data = _hospitalService.SaveHospital(hospital)
+                });
+            }
+            catch (InvalidHospital e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
         }
 
         [HttpPut]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<HospitalResponse> UpdateHospital(HospitalRequest hospital)
         {
-            return Ok(new
+            try
             {
-                data = _hospitalService.UpdateHospital(hospital)
-            });
+                return Ok(new
+                {
+                    data = _hospitalService.UpdateHospital(hospital)
+                });
+            }
+            catch (InvalidHospital e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
         }
 
         [HttpPut("{id}/room")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<HospitalResponse> UpdateHospitalRooms(long id, List<RoomRequest> rooms)
         {
+            try
+            {
+                return Ok(new
+                {
+                    data = _hospitalService.UpdateHospitalRooms(id, rooms)
+                });
+            }
+            catch (InvalidHospital e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
             return Ok(new
             {
                 data = _hospitalService.UpdateHospitalRooms(id, rooms)
@@ -65,7 +97,7 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpDelete("room/{id}")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<HospitalResponse> DeleteHospitalRoom(long id)
         {
             try
@@ -76,14 +108,7 @@ namespace hospital_manager_api.Controllers
                     data = "OK"
                 });
             }
-            catch (InvalidAppointment e)
-            {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
-            }
-            catch (InvalidRoom e)
+            catch (InvalidHospital e)
             {
                 return BadRequest(new
                 {
@@ -93,7 +118,6 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpGet("{id}")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<HospitalResponse> GetHospital(long id)
         {
             return Ok(new
@@ -103,7 +127,6 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpGet("all")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<List<HospitalResponse>> GetHospitals()
         {
             return Ok(new
@@ -112,7 +135,6 @@ namespace hospital_manager_api.Controllers
             });
         }
         [HttpGet("speciality/{specialityId}")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<List<HospitalResponse>> GetHospitalsBySpecialityId(long specialityId)
         {
             return Ok(new

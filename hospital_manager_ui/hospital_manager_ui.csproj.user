@@ -20,9 +20,6 @@
     <Compile Update="Forms\DoctorDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\EditAppointment.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Forms\EditHospital.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -161,7 +161,7 @@
             this.buttonAddRooms.Name = "buttonAddRooms";
             this.buttonAddRooms.Size = new System.Drawing.Size(94, 23);
             this.buttonAddRooms.TabIndex = 3;
-            this.buttonAddRooms.Text = "Add Rooms";
+            this.buttonAddRooms.Text = "Edit Rooms";
             this.buttonAddRooms.UseVisualStyleBackColor = true;
             this.buttonAddRooms.Click += new System.EventHandler(this.buttonAddRooms_Click);
             // 

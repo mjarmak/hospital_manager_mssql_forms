@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace hospital_manager_data_access.Entities
 {
@@ -29,7 +27,7 @@ namespace hospital_manager_data_access.Entities
         public string BoxNumber { get; set; }
     }
 
-    [Table(name: "WorkHours")]
+    [Table(name: "OpeningHours")]
     public class OpeningHoursData
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

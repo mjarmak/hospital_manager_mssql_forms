@@ -3,14 +3,11 @@ using hospital_manager_ui.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -52,6 +49,7 @@ namespace hospital_manager_ui.Forms
             DateTime From = new DateTime(current.Year, current.Month, current.Day - 7, 0, 0, 0);
             DateTime To = new DateTime(current.AddYears(10).Year, current.Month, current.Day, 0, 0, 0);
             var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthConfiguration.AccessToken);
             string dateFormat = "yyyy-MM-ddTHH:mm:ss";
             string path = "";
             if (AuthConfiguration.Role != null && AuthConfiguration.Role.Contains("PATIENT"))

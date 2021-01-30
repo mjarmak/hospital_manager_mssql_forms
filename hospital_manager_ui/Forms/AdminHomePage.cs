@@ -83,7 +83,7 @@ namespace hospital_manager_ui.Forms
             response.Wait();
             if (response.Result.StatusCode != HttpStatusCode.OK)
             {
-                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch specialities",
+                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch specialities.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -106,7 +106,7 @@ namespace hospital_manager_ui.Forms
             response.Wait();
             if (response.Result.StatusCode != HttpStatusCode.OK)
             {
-                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch hospitals",
+                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch hospitals.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return;
@@ -130,12 +130,11 @@ namespace hospital_manager_ui.Forms
         private void RefreshDoctors()
         {
             var client = new HttpClient();
-
             Task<HttpResponseMessage> response = client.GetAsync(url + "/doctor/all");
             response.Wait();
             if (response.Result.StatusCode != HttpStatusCode.OK)
             {
-                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch specialities",
+                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch doctors.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -165,6 +164,7 @@ namespace hospital_manager_ui.Forms
             DateTime From = new DateTime(current.Year, current.Month, current.Day, 0, 0, 0);
             DateTime To = new DateTime(current.Year, current.Month, current.Day, 23, 59, 59);
             var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthConfiguration.AccessToken);
             string dateFormat = "yyyy-MM-ddTHH:mm:ss";
             string path = "/appointment/hospital/" + hospitalId + "?From=" + From.ToString(dateFormat) + "&To=" + To.ToString(dateFormat);
 
@@ -172,7 +172,7 @@ namespace hospital_manager_ui.Forms
             response.Wait();
             if (response.Result.StatusCode != HttpStatusCode.OK)
             {
-                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch specialities",
+                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch appointments.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -263,10 +263,6 @@ namespace hospital_manager_ui.Forms
                 }
                 RefreshAppointments();
             }
-        }
-
-        private void buttonEditAppointment_Click(object sender, EventArgs e)
-        {
         }
 
         private void buttonEditHospital_Click(object sender, EventArgs e)

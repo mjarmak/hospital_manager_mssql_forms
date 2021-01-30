@@ -16,6 +16,7 @@ namespace hospital_manager_data_access.Repositories.Implementation
         public IHospitalRepository Hospital { get; private set; }
         public IRoomRepository Room { get; private set; }
         public ISpecialityRepository Speciality { get; private set; }
+        public IOpeningHoursRepository OpeningHours { get; private set; }
 
         public UnitOfWork(HospitalDbContext context, IHttpContextAccessor httpContextAccessor)
         {
@@ -26,6 +27,7 @@ namespace hospital_manager_data_access.Repositories.Implementation
             Hospital = new HospitalRepository(_context);
             Room = new RoomRepository(_context);
             Speciality = new SpecialityRepository(_context);
+            OpeningHours = new OpeningHoursRepository(_context);
         }
 
         public int Save()

@@ -11,6 +11,7 @@ namespace hospital_manager_data_access.Repositories.Interfaces
         void Update(T entity);
         void Remove(T entity);
         T Get(long id);
+        T GetDetached(long id);
         IEnumerable<T> All();
         IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
     }

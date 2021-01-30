@@ -46,6 +46,10 @@ namespace hospital_manager_bl.Service
             {
                 throw new InvalidHospital("Hospital Id should be 0 on creation.");
             }
+            if (hospital.Address.Id > 0)
+            {
+                throw new InvalidHospital("Hospital address Id should be 0 on creation.");
+            }
             if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "MONDAY") == null) { throw new InvalidHospital("Monday opening hours are missing."); }
             if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "TUESDAY") == null) { throw new InvalidHospital("Tuesday opening hours are missing."); }
             if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "WEDNESDAY") == null) { throw new InvalidHospital("Wednesday opening hours are missing."); }
@@ -53,6 +57,15 @@ namespace hospital_manager_bl.Service
             if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "FRIDAY") == null) { throw new InvalidHospital("Friday opening hours are missing."); }
             if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "SATURDAY") == null) { throw new InvalidHospital("Saturday opening hours are missing."); }
             if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "SUNDAY") == null) { throw new InvalidHospital("Sunday opening hours are missing."); }
+
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "MONDAY").Id != 0) { throw new InvalidHospital("Monday opening hours ID should be 0."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "TUESDAY").Id != 0) { throw new InvalidHospital("Tuesday opening hours ID should be 0."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "WEDNESDAY").Id != 0) { throw new InvalidHospital("Wednesday opening hours ID should be 0."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "THURSDAY").Id != 0) { throw new InvalidHospital("Thursday opening hours ID should be 0."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "FRIDAY").Id != 0) { throw new InvalidHospital("Friday opening hours ID should be 0."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "SATURDAY").Id != 0) { throw new InvalidHospital("Saturday opening hours ID should be 0."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "SUNDAY").Id != 0) { throw new InvalidHospital("Sunday opening hours ID should be 0."); }
+
 
             var hospitalData = modelConverter.EnvelopeOf(hospital);
             _unitOfWork.Hospital.Add(hospitalData);
@@ -73,10 +86,18 @@ namespace hospital_manager_bl.Service
             {
                 throw new InvalidHospital("Hospital is null.");
             }
-            //if (!HospitalExists(hospital.Id))
-            //{
-            //    throw new InvalidHospital("Hospital with ID " + hospital.Id + " doesn't exist.");
-            //}
+            if (hospital.Id == 0)
+            {
+                throw new InvalidHospital("Hospital Id should not be 0 on creation.");
+            }
+            if (hospital.Address.Id == 0)
+            {
+                throw new InvalidHospital("Hospital address Id should not be 0 on creation.");
+            }
+            if (!HospitalExists(hospital.Id))
+            {
+                throw new InvalidHospital("Hospital with ID " + hospital.Id + " doesn't exist.");
+            }
             if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "MONDAY") == null) { throw new InvalidHospital("Monday opening hours are missing."); }
             if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "TUESDAY") == null) { throw new InvalidHospital("Tuesday opening hours are missing."); }
             if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "WEDNESDAY") == null) { throw new InvalidHospital("Wednesday opening hours are missing."); }
@@ -85,8 +106,17 @@ namespace hospital_manager_bl.Service
             if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "SATURDAY") == null) { throw new InvalidHospital("Saturday opening hours are missing."); }
             if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "SUNDAY") == null) { throw new InvalidHospital("Sunday opening hours are missing."); }
 
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "MONDAY").Id == 0) { throw new InvalidHospital("Monday opening hours ID should not be 0."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "TUESDAY").Id == 0) { throw new InvalidHospital("Tuesday opening hours ID should not be 0."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "WEDNESDAY").Id == 0) { throw new InvalidHospital("Wednesday opening hours ID should not be 0."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "THURSDAY").Id == 0) { throw new InvalidHospital("Thursday opening hours ID should not be 0."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "FRIDAY").Id == 0) { throw new InvalidHospital("Friday opening hours ID should not be 0."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "SATURDAY").Id == 0) { throw new InvalidHospital("Saturday opening hours ID should not be 0."); }
+            if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "SUNDAY").Id == 0) { throw new InvalidHospital("Sunday opening hours ID should not be 0."); }
+
+
             HospitalData hospitalData = modelConverter.EnvelopeOf(hospital);
-            _unitOfWork.Hospital.Update(hospitalData);
+            _unitOfWork.Hospital.UpdateHospital(hospitalData);
             _unitOfWork.Save();
             return modelConverter.ResponseOf(_unitOfWork.Hospital.GetHospital(hospitalData.Id));
         }
@@ -136,7 +166,7 @@ namespace hospital_manager_bl.Service
         }
         private bool HospitalExists(long id)
         {
-            return _unitOfWork.Hospital.Get(id) != null;
+            return _unitOfWork.Hospital.GetDetached(id) != null;
         }
     }
 }

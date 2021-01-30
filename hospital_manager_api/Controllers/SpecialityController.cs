@@ -33,9 +33,8 @@ namespace hospital_manager_api.Controllers
         {
             return "OK";
         }
-
         [HttpPost]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<SpecialityResponse> SaveSpeciality(SpecialityRequest speciality)
         {
             try
@@ -56,7 +55,6 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpGet("{id}")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<SpecialityResponse> GetSpeciality(long id)
         {
             return Ok(new
@@ -66,7 +64,6 @@ namespace hospital_manager_api.Controllers
         }
 
         [HttpGet("all")]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
         public ActionResult<IEnumerable<SpecialityResponse>> GetSpecialities()
         {
             return Ok(new

@@ -85,6 +85,7 @@ namespace hospital_manager_ui.Forms
         private void button2_Click(object sender, EventArgs e)
         {
             var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthConfiguration.AccessToken);
 
             UserAccountRequest userAccountRequest = new UserAccountRequest();
             userAccountRequest.Name = textBoxName.Text;

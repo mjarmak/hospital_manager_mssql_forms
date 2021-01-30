@@ -92,6 +92,19 @@ namespace hospital_manager_bl.Util
 
             };
         }
+        public OpeningHoursData EnvelopeOf(OpeningHoursRequest openingHours)
+        {
+            return new OpeningHoursData
+            {
+                Id = openingHours.Id,
+                Day = openingHours.Day,
+                HourFrom = openingHours.HourFrom,
+                HourTo = openingHours.HourTo,
+                MinuteTo = openingHours.MinuteTo,
+                MinuteFrom = openingHours.MinuteFrom,
+                Closed = openingHours.Closed
+            };
+        }
         public List<OpeningHoursResponse> ResponseOf(List<OpeningHoursData> openingHoursData)
         {
             return openingHoursData?.Select(openingHours => new OpeningHoursResponse()

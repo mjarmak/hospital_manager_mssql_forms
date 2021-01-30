@@ -1,9 +1,11 @@
 ﻿using hospital_manager_models.Models;
+using hospital_manager_ui.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,6 +16,14 @@ namespace hospital_manager_ui.Forms
     {
         private protected string url = ApplicationConfiguration.hospitalManagerApiUrl;
         private long hospitalId;
+        private long addressId;
+        private long day1Id;
+        private long day2Id;
+        private long day3Id;
+        private long day4Id;
+        private long day5Id;
+        private long day6Id;
+        private long day7Id;
         public EditHospital(long hospitalId)
         {
             InitializeComponent();
@@ -23,6 +33,7 @@ namespace hospital_manager_ui.Forms
                 return;
             }
             this.hospitalId = hospitalId;
+            this.addressId = hospitalResponse.Address.Id;
             textBoxEditHospitalName.Text = hospitalResponse.Name;
             textBoxEditHospitalCity.Text = hospitalResponse.Address.City;
             textBoxEditHospitalCountry.Text = hospitalResponse.Address.Country;
@@ -66,6 +77,14 @@ namespace hospital_manager_ui.Forms
             checkBoxEditHospitalClosed5.Checked = hospitalResponse.OpeningHours.Find(openingHour => openingHour.Day == "FRIDAY").Closed;
             checkBoxEditHospitalClosed6.Checked = hospitalResponse.OpeningHours.Find(openingHour => openingHour.Day == "SATURDAY").Closed;
             checkBoxEditHospitalClosed7.Checked = hospitalResponse.OpeningHours.Find(openingHour => openingHour.Day == "SUNDAY").Closed;
+
+            day1Id = hospitalResponse.OpeningHours.Find(openingHour => openingHour.Day == "MONDAY").Id;
+            day2Id = hospitalResponse.OpeningHours.Find(openingHour => openingHour.Day == "TUESDAY").Id;
+            day3Id = hospitalResponse.OpeningHours.Find(openingHour => openingHour.Day == "WEDNESDAY").Id;
+            day4Id = hospitalResponse.OpeningHours.Find(openingHour => openingHour.Day == "THURSDAY").Id;
+            day5Id = hospitalResponse.OpeningHours.Find(openingHour => openingHour.Day == "FRIDAY").Id;
+            day6Id = hospitalResponse.OpeningHours.Find(openingHour => openingHour.Day == "SATURDAY").Id;
+            day7Id = hospitalResponse.OpeningHours.Find(openingHour => openingHour.Day == "SUNDAY").Id;
         }
 
         private HospitalResponse GetHospital(long hospitalId)
@@ -96,11 +115,13 @@ namespace hospital_manager_ui.Forms
         private void buttonSave_Click(object sender, EventArgs e)
         {
             var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthConfiguration.AccessToken);
 
             HospitalRequest hospitalRequest = new HospitalRequest();
             hospitalRequest.Id = hospitalId;
             hospitalRequest.Address = new AddressRequest();
             hospitalRequest.Name = textBoxEditHospitalName.Text;
+            hospitalRequest.Address.Id = addressId;
             hospitalRequest.Address.Street = textBoxEditHospitalStreet.Text;
             hospitalRequest.Address.City = textBoxEditHospitalCity.Text;
             hospitalRequest.Address.Country = textBoxEditHospitalCountry.Text;
@@ -109,13 +130,13 @@ namespace hospital_manager_ui.Forms
 
             hospitalRequest.OpeningHours = new List<OpeningHoursRequest>
             {
-                new OpeningHoursRequest("MONDAY", ToInt(comboBoxEditHospitalFrom11), ToInt(comboBoxEditHospitalTo11), ToInt(comboBoxEditHospitalFrom12), ToInt(comboBoxEditHospitalTo12), checkBoxEditHospitalClosed1.Checked),
-                new OpeningHoursRequest("TUESDAY", ToInt(comboBoxEditHospitalFrom21), ToInt(comboBoxEditHospitalTo21), ToInt(comboBoxEditHospitalFrom22), ToInt(comboBoxEditHospitalTo22), checkBoxEditHospitalClosed2.Checked),
-                new OpeningHoursRequest("WEDNESDAY", ToInt(comboBoxEditHospitalFrom31), ToInt(comboBoxEditHospitalTo31), ToInt(comboBoxEditHospitalFrom32), ToInt(comboBoxEditHospitalTo32), checkBoxEditHospitalClosed3.Checked),
-                new OpeningHoursRequest("THURSDAY", ToInt(comboBoxEditHospitalFrom41), ToInt(comboBoxEditHospitalTo41), ToInt(comboBoxEditHospitalFrom42), ToInt(comboBoxEditHospitalTo42), checkBoxEditHospitalClosed4.Checked),
-                new OpeningHoursRequest("FRIDAY", ToInt(comboBoxEditHospitalFrom51), ToInt(comboBoxEditHospitalTo51), ToInt(comboBoxEditHospitalFrom52), ToInt(comboBoxEditHospitalTo52), checkBoxEditHospitalClosed5.Checked),
-                new OpeningHoursRequest("SATURDAY", ToInt(comboBoxEditHospitalFrom61), ToInt(comboBoxEditHospitalTo61), ToInt(comboBoxEditHospitalFrom62), ToInt(comboBoxEditHospitalTo62), checkBoxEditHospitalClosed6.Checked),
-                new OpeningHoursRequest("SUNDAY", ToInt(comboBoxEditHospitalFrom71), ToInt(comboBoxEditHospitalTo71), ToInt(comboBoxEditHospitalFrom72), ToInt(comboBoxEditHospitalTo72), checkBoxEditHospitalClosed7.Checked)
+                new OpeningHoursRequest(day1Id, "MONDAY", ToInt(comboBoxEditHospitalFrom11), ToInt(comboBoxEditHospitalTo11), ToInt(comboBoxEditHospitalFrom12), ToInt(comboBoxEditHospitalTo12), checkBoxEditHospitalClosed1.Checked),
+                new OpeningHoursRequest(day2Id, "TUESDAY", ToInt(comboBoxEditHospitalFrom21), ToInt(comboBoxEditHospitalTo21), ToInt(comboBoxEditHospitalFrom22), ToInt(comboBoxEditHospitalTo22), checkBoxEditHospitalClosed2.Checked),
+                new OpeningHoursRequest(day3Id, "WEDNESDAY", ToInt(comboBoxEditHospitalFrom31), ToInt(comboBoxEditHospitalTo31), ToInt(comboBoxEditHospitalFrom32), ToInt(comboBoxEditHospitalTo32), checkBoxEditHospitalClosed3.Checked),
+                new OpeningHoursRequest(day4Id, "THURSDAY", ToInt(comboBoxEditHospitalFrom41), ToInt(comboBoxEditHospitalTo41), ToInt(comboBoxEditHospitalFrom42), ToInt(comboBoxEditHospitalTo42), checkBoxEditHospitalClosed4.Checked),
+                new OpeningHoursRequest(day5Id, "FRIDAY", ToInt(comboBoxEditHospitalFrom51), ToInt(comboBoxEditHospitalTo51), ToInt(comboBoxEditHospitalFrom52), ToInt(comboBoxEditHospitalTo52), checkBoxEditHospitalClosed5.Checked),
+                new OpeningHoursRequest(day6Id, "SATURDAY", ToInt(comboBoxEditHospitalFrom61), ToInt(comboBoxEditHospitalTo61), ToInt(comboBoxEditHospitalFrom62), ToInt(comboBoxEditHospitalTo62), checkBoxEditHospitalClosed6.Checked),
+                new OpeningHoursRequest(day7Id, "SUNDAY", ToInt(comboBoxEditHospitalFrom71), ToInt(comboBoxEditHospitalTo71), ToInt(comboBoxEditHospitalFrom72), ToInt(comboBoxEditHospitalTo72), checkBoxEditHospitalClosed7.Checked)
             };
 
             string json = JsonConvert.SerializeObject(hospitalRequest);
