@@ -45,6 +45,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Appointments = new System.Windows.Forms.TabPage();
+            this.buttonDeleteAppointment = new System.Windows.Forms.Button();
             this.listViewAppointmentUser = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -53,7 +54,6 @@
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.button1 = new System.Windows.Forms.Button();
-            this.buttonDeleteAppointment = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.Home.SuspendLayout();
             this.Appointments.SuspendLayout();
@@ -69,7 +69,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 11);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(728, 367);
+            this.tabControl1.Size = new System.Drawing.Size(890, 494);
             this.tabControl1.TabIndex = 2;
             // 
             // Home
@@ -91,7 +91,7 @@
             this.Home.Location = new System.Drawing.Point(4, 24);
             this.Home.Name = "Home";
             this.Home.Padding = new System.Windows.Forms.Padding(3);
-            this.Home.Size = new System.Drawing.Size(720, 339);
+            this.Home.Size = new System.Drawing.Size(882, 466);
             this.Home.TabIndex = 0;
             this.Home.Text = "Home";
             this.Home.UseVisualStyleBackColor = true;
@@ -238,10 +238,21 @@
             this.Appointments.Location = new System.Drawing.Point(4, 24);
             this.Appointments.Name = "Appointments";
             this.Appointments.Padding = new System.Windows.Forms.Padding(3);
-            this.Appointments.Size = new System.Drawing.Size(720, 339);
+            this.Appointments.Size = new System.Drawing.Size(882, 466);
             this.Appointments.TabIndex = 1;
             this.Appointments.Text = "Appointments";
             this.Appointments.UseVisualStyleBackColor = true;
+            // 
+            // buttonDeleteAppointment
+            // 
+            this.buttonDeleteAppointment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDeleteAppointment.Location = new System.Drawing.Point(716, 440);
+            this.buttonDeleteAppointment.Name = "buttonDeleteAppointment";
+            this.buttonDeleteAppointment.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeleteAppointment.TabIndex = 2;
+            this.buttonDeleteAppointment.Text = "Delete";
+            this.buttonDeleteAppointment.UseVisualStyleBackColor = true;
+            this.buttonDeleteAppointment.Click += new System.EventHandler(this.buttonDeleteAppointment_Click);
             // 
             // listViewAppointmentUser
             // 
@@ -256,10 +267,10 @@
             this.columnHeader5,
             this.columnHeader6});
             this.listViewAppointmentUser.HideSelection = false;
-            this.listViewAppointmentUser.Location = new System.Drawing.Point(3, 2);
+            this.listViewAppointmentUser.Location = new System.Drawing.Point(3, 0);
             this.listViewAppointmentUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewAppointmentUser.Name = "listViewAppointmentUser";
-            this.listViewAppointmentUser.Size = new System.Drawing.Size(714, 309);
+            this.listViewAppointmentUser.Size = new System.Drawing.Size(876, 435);
             this.listViewAppointmentUser.TabIndex = 1;
             this.listViewAppointmentUser.UseCompatibleStateImageBehavior = false;
             this.listViewAppointmentUser.View = System.Windows.Forms.View.Details;
@@ -276,7 +287,7 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "At";
-            this.columnHeader3.Width = 140;
+            this.columnHeader3.Width = 100;
             // 
             // columnHeader4
             // 
@@ -284,7 +295,7 @@
             // 
             // columnHeader5
             // 
-            this.columnHeader5.Text = "Doctor";
+            this.columnHeader5.Text = "With";
             this.columnHeader5.Width = 120;
             // 
             // columnHeader6
@@ -295,28 +306,19 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(635, 314);
+            this.button1.Location = new System.Drawing.Point(797, 441);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 22);
             this.button1.TabIndex = 0;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // buttonDeleteAppointment
-            // 
-            this.buttonDeleteAppointment.Location = new System.Drawing.Point(554, 313);
-            this.buttonDeleteAppointment.Name = "buttonDeleteAppointment";
-            this.buttonDeleteAppointment.Size = new System.Drawing.Size(75, 23);
-            this.buttonDeleteAppointment.TabIndex = 2;
-            this.buttonDeleteAppointment.Text = "Delete";
-            this.buttonDeleteAppointment.UseVisualStyleBackColor = true;
-            this.buttonDeleteAppointment.Click += new System.EventHandler(this.buttonDeleteAppointment_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // UserHomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 389);
+            this.ClientSize = new System.Drawing.Size(914, 516);
             this.Controls.Add(this.tabControl1);
             this.Name = "UserHomePage";
             this.Text = "UserHomePage";

@@ -229,6 +229,7 @@ namespace hospital_manager_ui.Forms
             f.FormClosed += new FormClosedEventHandler(Form_Closed);
             void Form_Closed(object sender, FormClosedEventArgs e)
             {
+                RefreshAppointments();
             }
             f.Show();
         }

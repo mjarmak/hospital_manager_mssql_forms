@@ -33,6 +33,16 @@ namespace hospital_manager_ui.Forms
             InitializeComponent();
             RefreshSpecialities();
             RefreshDoctors();
+
+            if (AuthConfiguration.Role != null && AuthConfiguration.Role.Contains("PATIENT"))
+            {
+                textBoxPatient.Text = AuthConfiguration.Username;
+                textBoxPatient.Enabled = false;
+            } else if (AuthConfiguration.Role != null && AuthConfiguration.Role.Contains("DOCTOR"))
+            {
+                textBoxDoctor.Text = AuthConfiguration.Username;
+                textBoxDoctor.Enabled = false;
+            }
         }
 
         private void RefreshSpecialities()
@@ -191,6 +201,11 @@ namespace hospital_manager_ui.Forms
                 {
                     string result = response.Result.Content.ReadAsStringAsync().Result;
                     appointmentSuggestions = JsonConvert.DeserializeObject<ResponseEnvelope<List<AppointmentRequest>>>(result).data;
+
+                    if (AuthConfiguration.Role != null && AuthConfiguration.Role.Contains("DOCTOR"))
+                    {
+                        appointmentSuggestions = appointmentSuggestions.Where(appointmentSuggestion => appointmentSuggestion.DoctorUsername == AuthConfiguration.Username).ToList();
+                    }
 
                     listViewSuggestions.Items.Clear();
                     listViewSuggestions.Items.AddRange(appointmentSuggestions.Select(appointmentSuggestion =>

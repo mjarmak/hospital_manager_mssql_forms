@@ -242,14 +242,14 @@
             // 
             this.consultationDurationComboBox.FormattingEnabled = true;
             this.consultationDurationComboBox.Items.AddRange(new object[] {
-            "15",
-            "30",
-            "45",
-            "60",
-            "75",
-            "90",
-            "105",
-            "120"});
+            "14",
+            "29",
+            "44",
+            "59",
+            "74",
+            "89",
+            "104",
+            "119"});
             this.consultationDurationComboBox.Location = new System.Drawing.Point(514, 72);
             this.consultationDurationComboBox.Name = "consultationDurationComboBox";
             this.consultationDurationComboBox.Size = new System.Drawing.Size(121, 23);

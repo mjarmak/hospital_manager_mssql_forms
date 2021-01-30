@@ -23,6 +23,7 @@ namespace hospital_manager_ui.Forms
             //f.FormClosed += new FormClosedEventHandler(Form_Closed);void Form_Closed(object sender, FormClosedEventArgs e){}f.Show();
             InitializeComponent();
             authUtil = new AuthUtil();
+            text_password.Text = "password";
         }
 
         private void Click_Login(object sender, EventArgs e)
@@ -57,13 +58,13 @@ namespace hospital_manager_ui.Forms
                     AuthConfiguration.Username = text_username.Text;
                     authUtil.DecodeToken(token);
 
-                    if (AuthConfiguration.Role.Contains("ADMIN") || AuthConfiguration.Role.Contains("DOCTOR"))
+                    if (AuthConfiguration.Role.Contains("ADMIN"))
                     {
                         AdminHomePage f = new AdminHomePage();
                         f.Show();
                         this.Hide();
                     }
-                    else if (AuthConfiguration.Role.Contains("PATIENT"))
+                    else if (AuthConfiguration.Role.Contains("PATIENT") || AuthConfiguration.Role.Contains("DOCTOR"))
                     {
                         UserHomePage f = new UserHomePage();
                         f.Show();

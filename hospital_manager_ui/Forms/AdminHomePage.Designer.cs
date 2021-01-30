@@ -46,6 +46,7 @@
             this.HospitalPostCode = new System.Windows.Forms.ColumnHeader();
             this.HospitalCountry = new System.Windows.Forms.ColumnHeader();
             this.DoctorsTab = new System.Windows.Forms.TabPage();
+            this.buttonDoctorDetails = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.listViewDoctor = new System.Windows.Forms.ListView();
             this.DoctorUsername = new System.Windows.Forms.ColumnHeader();
@@ -63,7 +64,6 @@
             this.Doctor = new System.Windows.Forms.ColumnHeader();
             this.Patient = new System.Windows.Forms.ColumnHeader();
             this.Description = new System.Windows.Forms.ColumnHeader();
-            this.buttonDoctorDetails = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.SpecialitiesTab.SuspendLayout();
             this.HospitalsTab.SuspendLayout();
@@ -245,6 +245,16 @@
             this.DoctorsTab.Text = "Doctors";
             this.DoctorsTab.UseVisualStyleBackColor = true;
             // 
+            // buttonDoctorDetails
+            // 
+            this.buttonDoctorDetails.Location = new System.Drawing.Point(723, 440);
+            this.buttonDoctorDetails.Name = "buttonDoctorDetails";
+            this.buttonDoctorDetails.Size = new System.Drawing.Size(75, 23);
+            this.buttonDoctorDetails.TabIndex = 2;
+            this.buttonDoctorDetails.Text = "Details";
+            this.buttonDoctorDetails.UseVisualStyleBackColor = true;
+            this.buttonDoctorDetails.Click += new System.EventHandler(this.buttonDoctorDetails_Click);
+            // 
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -395,16 +405,6 @@
             // 
             this.Description.Text = "Description";
             this.Description.Width = 150;
-            // 
-            // buttonDoctorDetails
-            // 
-            this.buttonDoctorDetails.Location = new System.Drawing.Point(723, 440);
-            this.buttonDoctorDetails.Name = "buttonDoctorDetails";
-            this.buttonDoctorDetails.Size = new System.Drawing.Size(75, 23);
-            this.buttonDoctorDetails.TabIndex = 2;
-            this.buttonDoctorDetails.Text = "Details";
-            this.buttonDoctorDetails.UseVisualStyleBackColor = true;
-            this.buttonDoctorDetails.Click += new System.EventHandler(this.buttonDoctorDetails_Click);
             // 
             // AdminHomePage
             // 

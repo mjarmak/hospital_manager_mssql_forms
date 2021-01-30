@@ -157,7 +157,37 @@ namespace hospital_manager_api
                     Description = "appointment for Pediatrics.",
                     RoomId = 1,
                     From = new DateTime(2021, 1, 18, 7, 0,0),
-                    To = new DateTime(2021, 1, 18, 7, 15, 0),
+                    To = new DateTime(2021, 1, 18, 7, 14, 0),
+                });
+            _appointmentService.SaveAppointment(
+                new AppointmentRequest
+                {
+                    PatientUsername = "MohamadJarmak07061995",
+                    DoctorUsername = "DrakeRamoray10071995",
+                    Description = "appointment for Pediatrics.",
+                    RoomId = 1,
+                    From = new DateTime(2021, 1, 30, 7, 0, 0),
+                    To = new DateTime(2021, 1, 30, 7, 14, 0),
+                });
+            _appointmentService.SaveAppointment(
+                new AppointmentRequest
+                {
+                    PatientUsername = "MohamadJarmak07061995",
+                    DoctorUsername = "DrakeRamoray10071995",
+                    Description = "appointment for Pediatrics.",
+                    RoomId = 1,
+                    From = new DateTime(2021, 2, 1, 7, 0, 0),
+                    To = new DateTime(2021, 2, 1, 7, 14, 0),
+                });
+            _appointmentService.SaveAppointment(
+                new AppointmentRequest
+                {
+                    PatientUsername = "MohamadJarmak07061995",
+                    DoctorUsername = "DrakeRamoray10071995",
+                    Description = "appointment for Pediatrics.",
+                    RoomId = 1,
+                    From = new DateTime(2021, 2, 2, 7, 0, 0),
+                    To = new DateTime(2021, 2, 2, 7, 14, 0),
                 });
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
@@ -167,7 +197,7 @@ namespace hospital_manager_api
                     Description = "appointment for Generalist.",
                     RoomId = 1,
                     From = new DateTime(2021, 1, 18, 15, 45, 00),
-                    To = new DateTime(2021, 1, 18, 16, 00, 00),
+                    To = new DateTime(2021, 1, 18, 15, 59, 00),
                 });
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
@@ -177,7 +207,7 @@ namespace hospital_manager_api
                     Description = "appointment for Generalist.",
                     RoomId = 1,
                     From = new DateTime(2021, 1, 18, 16, 45, 00),
-                    To = new DateTime(2021, 1, 18, 17, 00, 00),
+                    To = new DateTime(2021, 1, 18, 16, 59, 00),
                 });
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
@@ -187,7 +217,7 @@ namespace hospital_manager_api
                     Description = "appointment for Orthopedics.",
                     RoomId = 2,
                     From = new DateTime(2021, 1, 19, 16, 45, 00),
-                    To = new DateTime(2021, 1, 19, 17, 00, 00),
+                    To = new DateTime(2021, 1, 19, 16, 59, 00),
                     
                 });
 
@@ -200,7 +230,7 @@ namespace hospital_manager_api
                     Description = "appointment for Surgery.",
                     RoomId = 3,
                     From = new DateTime(2021, 1, 16, 17, 0, 0),
-                    To = new DateTime(2021, 1, 18, 17, 15, 0),
+                    To = new DateTime(2021, 1, 18, 17, 14, 0),
                 });
         }
 
@@ -216,13 +246,13 @@ namespace hospital_manager_api
                     Username = "DrakeRamoray10071995",
                     Consultations = new List<ConsultationRequest>
                     {
-                        new ConsultationRequest{HospitalId = 1, Duration = 15, SpecialityId = 1},
-                        new ConsultationRequest{HospitalId = 1, Duration = 15, SpecialityId = 3},
-                        new ConsultationRequest{HospitalId = 2, Duration = 15, SpecialityId = 1},
-                        new ConsultationRequest{HospitalId = 2, Duration = 15, SpecialityId = 1},
-                        new ConsultationRequest{HospitalId = 2, Duration = 15, SpecialityId = 2},
-                        new ConsultationRequest{HospitalId = 2, Duration = 15, SpecialityId = 3},
-                        new ConsultationRequest{HospitalId = 3, Duration = 15, SpecialityId = 4}
+                        new ConsultationRequest{HospitalId = 1, Duration = 14, SpecialityId = 1},
+                        new ConsultationRequest{HospitalId = 1, Duration = 14, SpecialityId = 3},
+                        new ConsultationRequest{HospitalId = 2, Duration = 14, SpecialityId = 1},
+                        new ConsultationRequest{HospitalId = 2, Duration = 14, SpecialityId = 1},
+                        new ConsultationRequest{HospitalId = 2, Duration = 14, SpecialityId = 2},
+                        new ConsultationRequest{HospitalId = 2, Duration = 14, SpecialityId = 3},
+                        new ConsultationRequest{HospitalId = 3, Duration = 14, SpecialityId = 4}
                     },
                     SpecialityIds = new List<long> {1, 2, 3, 4}
                 });
@@ -233,17 +263,17 @@ namespace hospital_manager_api
                     Username = "DoctorWho10071995",
                     Consultations = new List<ConsultationRequest>
                     {
-                        new ConsultationRequest{HospitalId = 1, Duration = 30, SpecialityId = 1},
-                        new ConsultationRequest{HospitalId = 1, Duration = 30, SpecialityId = 3},
-                        new ConsultationRequest{HospitalId = 2, Duration = 30, SpecialityId = 1},
-                        new ConsultationRequest{HospitalId = 2, Duration = 30, SpecialityId = 1},
-                        new ConsultationRequest{HospitalId = 2, Duration = 30, SpecialityId = 2},
-                        new ConsultationRequest{HospitalId = 2, Duration = 30, SpecialityId = 3},
-                        new ConsultationRequest{HospitalId = 3, Duration = 30, SpecialityId = 3},
-                        new ConsultationRequest{HospitalId = 2, Duration = 30, SpecialityId = 4},
-                        new ConsultationRequest{HospitalId = 2, Duration = 30, SpecialityId = 5},
-                        new ConsultationRequest{HospitalId = 3, Duration = 30, SpecialityId = 4},
-                        new ConsultationRequest{HospitalId = 3, Duration = 30, SpecialityId = 5}
+                        new ConsultationRequest{HospitalId = 1, Duration = 29, SpecialityId = 1},
+                        new ConsultationRequest{HospitalId = 1, Duration = 29, SpecialityId = 3},
+                        new ConsultationRequest{HospitalId = 2, Duration = 29, SpecialityId = 1},
+                        new ConsultationRequest{HospitalId = 2, Duration = 29, SpecialityId = 1},
+                        new ConsultationRequest{HospitalId = 2, Duration = 29, SpecialityId = 2},
+                        new ConsultationRequest{HospitalId = 2, Duration = 29, SpecialityId = 3},
+                        new ConsultationRequest{HospitalId = 3, Duration = 29, SpecialityId = 3},
+                        new ConsultationRequest{HospitalId = 2, Duration = 29, SpecialityId = 4},
+                        new ConsultationRequest{HospitalId = 2, Duration = 29, SpecialityId = 5},
+                        new ConsultationRequest{HospitalId = 3, Duration = 29, SpecialityId = 4},
+                        new ConsultationRequest{HospitalId = 3, Duration = 29, SpecialityId = 5}
                     },
                     SpecialityIds = new List<long> { 2, 3, 4, 5 }
                 });

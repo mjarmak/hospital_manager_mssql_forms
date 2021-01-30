@@ -20,13 +20,13 @@ namespace hospital_manager_ui.Forms
     {
         private protected string url = ApplicationConfiguration.hospitalManagerApiUrl;
         private List<AppointmentResponse> appointments;
-        private string patientUsername;
+        private string username;
         private List<HospitalResponse> hospitals;
         public UserHomePage()
         {
             InitializeComponent();
 
-            this.patientUsername = AuthConfiguration.Username;
+            this.username = AuthConfiguration.Username;
 
             labelUsername.Text = String.IsNullOrEmpty(AuthConfiguration.Username) ? "" : AuthConfiguration.Username;
             labelEmail.Text = String.IsNullOrEmpty(AuthConfiguration.Email) ? "" : AuthConfiguration.Email;
@@ -53,7 +53,15 @@ namespace hospital_manager_ui.Forms
             DateTime To = new DateTime(current.AddYears(10).Year, current.Month, current.Day, 0, 0, 0);
             var client = new HttpClient();
             string dateFormat = "yyyy-MM-ddTHH:mm:ss";
-            string path = "/appointment/patient/" + patientUsername + "?from=" + From.ToString(dateFormat) + "&to=" + To.ToString(dateFormat);
+            string path = "";
+            if (AuthConfiguration.Role != null && AuthConfiguration.Role.Contains("PATIENT"))
+            {
+                path = "/appointment/patient/" + username + "?from=" + From.ToString(dateFormat) + "&to=" + To.ToString(dateFormat);
+            }
+            else if (AuthConfiguration.Role != null && AuthConfiguration.Role.Contains("DOCTOR"))
+            {
+                path = "/appointment/doctor/" + username + "?from=" + From.ToString(dateFormat) + "&to=" + To.ToString(dateFormat);
+            }
 
             Task<HttpResponseMessage> response = client.GetAsync(url + path);
             response.Wait();
@@ -70,11 +78,22 @@ namespace hospital_manager_ui.Forms
                 listViewAppointmentUser.Items.Clear();
                 listViewAppointmentUser.Items.AddRange(appointments.Select(appointment =>
                 {
+                    string withWho = "";
+                    if (AuthConfiguration.Role != null && AuthConfiguration.Role.Contains("PATIENT"))
+                    {
+                        withWho = appointment.Doctor.Name;
+                    }
+                    else if (AuthConfiguration.Role != null && AuthConfiguration.Role.Contains("DOCTOR"))
+                    {
+                        withWho = appointment.PatientUsername;
+                    }
                     return new ListViewItem(new[] {
                         hospitals.SingleOrDefault(hospital => hospital.Id == appointment.Room.HospitalId).Name,
-                        appointment.Room.Name, appointment.From.ToString(),
-                            (appointment.To - appointment.From).TotalMinutes.ToString(),
-                            appointment.Doctor.Name, appointment.Description });
+                        appointment.Room.Name,
+                        appointment.From.ToString(),
+                        (appointment.To - appointment.From).TotalMinutes.ToString(),
+                        withWho,
+                        appointment.Description });
                 }).ToArray());
             }
         }
@@ -116,6 +135,17 @@ namespace hospital_manager_ui.Forms
                 }
                 RefreshAppointments();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AddAppointment f = new AddAppointment();
+            f.FormClosed += new FormClosedEventHandler(Form_Closed);
+            void Form_Closed(object sender, FormClosedEventArgs e)
+            {
+                RefreshAppointments();
+            }
+            f.Show();
         }
     }
 }
