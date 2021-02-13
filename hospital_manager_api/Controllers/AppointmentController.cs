@@ -73,6 +73,20 @@ namespace hospital_manager_api.Controllers
                     data = e.Message
                 });
             }
+            catch (NotFoundRoom e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
+            catch (NotFoundUser e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
         }
 
 
@@ -114,6 +128,20 @@ namespace hospital_manager_api.Controllers
                     data = e.Message
                 });
             }
+            catch (NotFoundRoom e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
+            catch (NotFoundUser e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
         }
 
         [HttpDelete("{id}")]
@@ -122,7 +150,18 @@ namespace hospital_manager_api.Controllers
         {
             string role = GetClaim("role");
             string username = GetClaim("preferred_username");
-            AppointmentResponse appointment = _appointmentService.GetAppointment(id);
+            AppointmentResponse appointment;
+            try
+            {
+                appointment = _appointmentService.GetAppointment(id);
+            }
+            catch (NotFoundAppointment e)
+            {
+                return NotFound(new
+                {
+                    data = e.Message
+                });
+            }
             if (!role.Contains("ADMIN"))
             {
                 if (role.Contains("DOCTOR") && !username.Equals(appointment.DoctorUsername))
@@ -148,7 +187,7 @@ namespace hospital_manager_api.Controllers
                     data = "OK"
                 });
             }
-            catch (InvalidAppointment e)
+            catch (NotFoundAppointment e)
             {
                 return BadRequest(new
                 {
@@ -163,7 +202,17 @@ namespace hospital_manager_api.Controllers
         {
             string role = GetClaim("role");
             string username = GetClaim("preferred_username");
-            AppointmentResponse appointment = _appointmentService.GetAppointment(id);
+            AppointmentResponse appointment;
+            try
+            {
+                appointment = _appointmentService.GetAppointment(id);
+            } catch (NotFoundAppointment e)
+            {
+                return NotFound(new
+                {
+                    data = e.Message
+                });
+            }
             if (!role.Contains("ADMIN"))
             {
                 if (role.Contains("DOCTOR") && !username.Equals(appointment.DoctorUsername))
@@ -181,20 +230,10 @@ namespace hospital_manager_api.Controllers
                     });
                 }
             }
-            try
+            return Ok(new
             {
-                return Ok(new
-                {
-                    data = appointment
-                });
-            }
-            catch (InvalidAppointment e)
-            {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
-            }
+                data = appointment
+            });
         }
 
         [HttpGet("all")]
@@ -283,6 +322,22 @@ namespace hospital_manager_api.Controllers
             return Ok(new
             {
                 data = _appointmentService.AppointmentTaken(roomId, from, to)
+            });
+        }
+
+        [HttpGet("room/{roomId}/possible")]
+        public ActionResult<bool> GetAppointmentPossible(
+            long roomId,
+            [FromQuery] DateTime from,
+            [FromQuery] DateTime to,
+            [FromQuery] string doctorUsername
+            )
+        {
+            bool taken = !_appointmentService.AppointmentTaken(roomId, from, to);
+            bool valid = _appointmentService.AppointmentHalfDayValid(doctorUsername, roomId, from, to);
+            return Ok(new
+            {
+                data = taken && valid
             });
         }
 

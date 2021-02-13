@@ -21,7 +21,12 @@ namespace hospital_manager_bl.Service
 
         public SpecialityResponse GetSpeciality(long id)
         {
-            return modelConverter.ResponseOf(_unitOfWork.Speciality.Get(id));
+            SpecialityData specialityData = _unitOfWork.Speciality.Get(id);
+            if (specialityData == null)
+            {
+                throw new NotFoundSpeciality("Speciality with ID " + id + " does not exist.");
+            }
+            return modelConverter.ResponseOf(specialityData);
         }
 
         public IEnumerable<SpecialityResponse> GetSpecialities()

@@ -234,6 +234,7 @@
             // 
             // textBoxRoom
             // 
+            this.textBoxRoom.Enabled = false;
             this.textBoxRoom.Location = new System.Drawing.Point(127, 366);
             this.textBoxRoom.Name = "textBoxRoom";
             this.textBoxRoom.Size = new System.Drawing.Size(212, 23);
@@ -263,9 +264,9 @@
             this.labelTimeSlotBooked.AutoSize = true;
             this.labelTimeSlotBooked.Location = new System.Drawing.Point(345, 282);
             this.labelTimeSlotBooked.Name = "labelTimeSlotBooked";
-            this.labelTimeSlotBooked.Size = new System.Drawing.Size(148, 15);
+            this.labelTimeSlotBooked.Size = new System.Drawing.Size(375, 15);
             this.labelTimeSlotBooked.TabIndex = 15;
-            this.labelTimeSlotBooked.Text = "*Time slot already booked.";
+            this.labelTimeSlotBooked.Text = "*Time slot already booked or not in the same half day for the hospital.";
             this.labelTimeSlotBooked.Visible = false;
             // 
             // AddAppointment

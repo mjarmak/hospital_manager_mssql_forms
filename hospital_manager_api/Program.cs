@@ -228,6 +228,16 @@ namespace hospital_manager_api
                     PatientUsername = "MohamadJarmak07061995",
                     DoctorUsername = "DoctorWho10071995",
                     Description = "appointment for Surgery.",
+                    RoomId = 5,
+                    From = new DateTime(2021, 1, 16, 12, 0, 0),
+                    To = new DateTime(2021, 1, 18, 12, 14, 0),
+                });
+            _appointmentService.SaveAppointment(
+                new AppointmentRequest
+                {
+                    PatientUsername = "MohamadJarmak07061995",
+                    DoctorUsername = "DoctorWho10071995",
+                    Description = "appointment for Surgery.",
                     RoomId = 3,
                     From = new DateTime(2021, 1, 16, 17, 0, 0),
                     To = new DateTime(2021, 1, 18, 17, 14, 0),

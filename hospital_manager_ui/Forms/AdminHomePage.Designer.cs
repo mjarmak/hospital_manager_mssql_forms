@@ -157,6 +157,7 @@
             // 
             // buttonAddRooms
             // 
+            this.buttonAddRooms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAddRooms.Location = new System.Drawing.Point(623, 440);
             this.buttonAddRooms.Name = "buttonAddRooms";
             this.buttonAddRooms.Size = new System.Drawing.Size(94, 23);
@@ -167,6 +168,7 @@
             // 
             // buttonEditHospital
             // 
+            this.buttonEditHospital.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonEditHospital.Location = new System.Drawing.Point(723, 440);
             this.buttonEditHospital.Name = "buttonEditHospital";
             this.buttonEditHospital.Size = new System.Drawing.Size(75, 23);
@@ -247,6 +249,7 @@
             // 
             // buttonDoctorDetails
             // 
+            this.buttonDoctorDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonDoctorDetails.Location = new System.Drawing.Point(723, 440);
             this.buttonDoctorDetails.Name = "buttonDoctorDetails";
             this.buttonDoctorDetails.Size = new System.Drawing.Size(75, 23);
@@ -312,6 +315,7 @@
             // 
             // buttonDeleteAppointment
             // 
+            this.buttonDeleteAppointment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonDeleteAppointment.Location = new System.Drawing.Point(723, 440);
             this.buttonDeleteAppointment.Name = "buttonDeleteAppointment";
             this.buttonDeleteAppointment.Size = new System.Drawing.Size(75, 23);

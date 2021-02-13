@@ -57,10 +57,20 @@ namespace hospital_manager_api.Controllers
         [HttpGet("{id}")]
         public ActionResult<SpecialityResponse> GetSpeciality(long id)
         {
-            return Ok(new
+            try
             {
-                data = _specialityService.GetSpeciality(id)
-            });
+                return Ok(new
+                {
+                    data = _specialityService.GetSpeciality(id)
+                });
+            }
+            catch (NotFoundSpeciality e)
+            {
+                return NotFound(new
+                {
+                    data = e.Message
+                });
+            }
         }
 
         [HttpGet("all")]

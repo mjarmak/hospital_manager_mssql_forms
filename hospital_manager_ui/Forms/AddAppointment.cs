@@ -223,6 +223,7 @@ namespace hospital_manager_ui.Forms
 
             private void listViewSuggestions_SelectedIndexChanged(object sender, EventArgs e)
         {
+            RefreshRooms();
             ListView.SelectedIndexCollection indices = listViewSuggestions.SelectedIndices;
             if (indices.Count > 0)
             {
@@ -295,8 +296,8 @@ namespace hospital_manager_ui.Forms
         }
         private void ProcessAppointmentAvailability()
         {
-            bool taken = GetAppointmentTaken(appointmentSuggestion.RoomId, appointmentSuggestion.From, appointmentSuggestion.To);
-            if (taken)
+            bool possible = GetAppointmentPossible(appointmentSuggestion.DoctorUsername, appointmentSuggestion.RoomId, appointmentSuggestion.From, appointmentSuggestion.To);
+            if (!possible)
             {
                 buttonSave.Enabled = false;
                 labelTimeSlotBooked.Visible = true;
@@ -307,11 +308,11 @@ namespace hospital_manager_ui.Forms
                 labelTimeSlotBooked.Visible = false;
             }
         }
-        private bool GetAppointmentTaken(long roomId, DateTime from, DateTime to)
+        private bool GetAppointmentPossible(string doctorUsername, long roomId, DateTime from, DateTime to)
         {
             var client = new HttpClient();
             string dateFormat = "yyyy-MM-ddTHH:mm:ss";
-            string path = "/appointment/room/" + roomId + "/taken?from=" + from.ToString(dateFormat) + "&to=" + to.ToString(dateFormat);
+            string path = "/appointment/room/" + roomId + "/possible?doctorUsername=" + doctorUsername + "&from=" + from.ToString(dateFormat) + "&to=" + to.ToString(dateFormat);
             Task<HttpResponseMessage> response = client.GetAsync(url + path);
             response.Wait();
             if (response.Result.StatusCode != HttpStatusCode.OK)

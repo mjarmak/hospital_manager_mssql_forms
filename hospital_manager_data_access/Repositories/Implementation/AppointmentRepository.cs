@@ -72,5 +72,29 @@ namespace hospital_manager_data_access.Repositories.Implementation
                 && appointment.To <= dateTo
                 ).OrderBy(appointment => appointment.From).ToList();
         }
+        public List<AppointmentData> GetAppointmentsByHospitalAndDoctorUsername(string doctorUsername, long hospitalId, DateTime dateFrom, DateTime dateTo)
+        {
+            return Db.AppointmentData
+                .Where(appointment =>
+                Db.RoomData.Any(room =>
+                room.Id == appointment.RoomId
+                && room.HospitalId == hospitalId)
+                && appointment.DoctorUsername == doctorUsername
+                && appointment.From >= dateFrom
+                && appointment.To <= dateTo
+                ).OrderBy(appointment => appointment.From).ToList();
+        }
+        public List<AppointmentData> GetAppointmentsByNotHospitalAndDoctorUsername(string doctorUsername, long hospitalId, DateTime dateFrom, DateTime dateTo)
+        {
+            return Db.AppointmentData
+                .Where(appointment =>
+                Db.RoomData.Any(room =>
+                room.Id == appointment.RoomId
+                && room.HospitalId != hospitalId)
+                && appointment.DoctorUsername == doctorUsername
+                && appointment.From >= dateFrom
+                && appointment.To <= dateTo
+                ).OrderBy(appointment => appointment.From).ToList();
+        }
     }
 }

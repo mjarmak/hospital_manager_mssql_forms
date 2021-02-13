@@ -22,6 +22,10 @@ namespace hospital_manager_bl.Service
         public RoomResponse GetRoom(long id)
         {
             RoomData roomData = _unitOfWork.Room.GetRoom(id);
+            if (roomData == null)
+            {
+                throw new NotFoundRoom("Room with ID " + id + " does not exist.");
+            }
             return modelConverter.ResponseOf(roomData);
         }
 

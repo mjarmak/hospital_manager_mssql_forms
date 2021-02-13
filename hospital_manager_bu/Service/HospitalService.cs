@@ -24,7 +24,12 @@ namespace hospital_manager_bl.Service
 
         public HospitalResponse GetHospital(long id)
         {
-            return modelConverter.ResponseOf(_unitOfWork.Hospital.GetHospital(id));
+            HospitalData hospitalData = _unitOfWork.Hospital.GetHospital(id);
+            if (hospitalData == null)
+            {
+                throw new NotFoundHospital("Hospital with ID " + id + " does not exist.");
+            }
+            return modelConverter.ResponseOf(hospitalData);
         }
 
         public List<HospitalResponse> GetHospitals()
@@ -35,6 +40,11 @@ namespace hospital_manager_bl.Service
         {
             return _unitOfWork.Hospital.GetHospitalsBySpecialityId(specialityId)?.Select(hospital => modelConverter.ResponseOf(hospital)).ToList();
         }
+        public HospitalResponse GetHospitalsByRoomId(long roomId)
+        {
+            return modelConverter.ResponseOf(_unitOfWork.Hospital.GetHospitalByRoomId(roomId));
+        }
+
 
         public HospitalResponse SaveHospital(HospitalRequest hospital)
         {
@@ -96,7 +106,7 @@ namespace hospital_manager_bl.Service
             }
             if (!HospitalExists(hospital.Id))
             {
-                throw new InvalidHospital("Hospital with ID " + hospital.Id + " doesn't exist.");
+                throw new NotFoundHospital("Hospital with ID " + hospital.Id + " doesn't exist.");
             }
             if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "MONDAY") == null) { throw new InvalidHospital("Monday opening hours are missing."); }
             if (hospital.OpeningHours.SingleOrDefault(openingHour => openingHour.Day == "TUESDAY") == null) { throw new InvalidHospital("Tuesday opening hours are missing."); }
@@ -128,7 +138,7 @@ namespace hospital_manager_bl.Service
             }
             if (!HospitalExists(hospitalId))
             {
-                throw new InvalidHospital("Hospital with ID " + hospitalId + " doesn't exist.");
+                throw new NotFoundHospital("Hospital with ID " + hospitalId + " doesn't exist.");
             }
             foreach (RoomRequest roomRequest in rooms)
             {

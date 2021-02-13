@@ -70,6 +70,13 @@ namespace hospital_manager_api.Controllers
                     data = e.Message
                 });
             }
+            catch (NotFoundHospital e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
         }
 
         [HttpPut("{id}/room")]
@@ -90,10 +97,13 @@ namespace hospital_manager_api.Controllers
                     data = e.Message
                 });
             }
-            return Ok(new
+            catch (NotFoundHospital e)
             {
-                data = _hospitalService.UpdateHospitalRooms(id, rooms)
-            });
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
         }
 
         [HttpDelete("room/{id}")]
@@ -120,10 +130,20 @@ namespace hospital_manager_api.Controllers
         [HttpGet("{id}")]
         public ActionResult<HospitalResponse> GetHospital(long id)
         {
-            return Ok(new
+            try
             {
-                data = _hospitalService.GetHospital(id)
-            });
+                return Ok(new
+                {
+                    data = _hospitalService.GetHospital(id)
+                });
+            }
+            catch (NotFoundHospital e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
         }
 
         [HttpGet("all")]
@@ -140,6 +160,14 @@ namespace hospital_manager_api.Controllers
             return Ok(new
             {
                 data = _hospitalService.GetHospitalsBySpecialityId(specialityId)
+            });
+        }
+        [HttpGet("room/{roomId}")]
+        public ActionResult<List<HospitalResponse>> GetHospitalsByRoomId(long roomId)
+        {
+            return Ok(new
+            {
+                data = _hospitalService.GetHospitalsByRoomId(roomId)
             });
         }
         private string GetClaim(string name)

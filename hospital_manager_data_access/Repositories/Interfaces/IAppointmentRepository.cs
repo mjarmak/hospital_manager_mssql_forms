@@ -18,5 +18,9 @@ namespace hospital_manager_data_access.Repositories.Interfaces
         List<AppointmentData> GetAppointmentsByHospitalAndSpeciality(int hospitalId, int specialityId, DateTime dateFrom, DateTime dateTo);
 
         List<AppointmentData> GetAppointmentsByHospital(int hospitalId, DateTime dateFrom, DateTime dateTo);
+
+        List<AppointmentData> GetAppointmentsByHospitalAndDoctorUsername(string doctorUsername, long hospitalId, DateTime dateFrom, DateTime dateTo);
+
+        List<AppointmentData> GetAppointmentsByNotHospitalAndDoctorUsername(string doctorUsername, long hospitalId, DateTime dateFrom, DateTime dateTo);
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
@@ -16,6 +17,11 @@ namespace hospital_manager_api
 {
     public class Startup
     {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -26,12 +32,22 @@ namespace hospital_manager_api
                     config.Audience = "hm";
                 });
 
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //// Do first:
+            //// dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/IdentityServer/PersistedGrantDb
+            //// dotnet ef migrations add InitialIdentityServerConfigurationDbMigration - c ConfigurationDbContext - o Data/Migrations/IdentityServer/ConfigurationDb
+            //// dotnet ef migrations add InitialIdentityServerDefaultDbMigration -c DefaultDbContext -o Data/Migrations/IdentityServer/DefaultDbContext
+            //services.AddDbContext<HospitalDbContext>(
+            //    options => options.UseSqlServer(connectionString,
+            //    b => b.MigrationsAssembly(typeof(HospitalDbContext).Assembly.FullName))
+            //);
+
             services.AddDbContext<HospitalDbContext>(
                 config =>
                 {
                     config.UseInMemoryDatabase("Memory");
                 }
-                );
+            );
 
             services.AddControllers();
             //services.AddMvc();

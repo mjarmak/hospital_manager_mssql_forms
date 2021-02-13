@@ -74,10 +74,20 @@ namespace hospital_manager_api.Controllers
         [HttpGet("{id}")]
         public ActionResult<RoomResponse> GetRoom(long id)
         {
-            return Ok(new
+            try
             {
-                data = _roomService.GetRoom(id)
-            });
+                return Ok(new
+                {
+                    data = _roomService.GetRoom(id)
+                });
+            }
+            catch (NotFoundRoom e)
+            {
+                return NotFound(new
+                {
+                    data = e.Message
+                });
+            }
         }
         [HttpGet("hospital/{hospitalId}")]
         public ActionResult<List<RoomResponse>> GetRoomsByHospitalId(long hospitalId)

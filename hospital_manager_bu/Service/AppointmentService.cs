@@ -15,6 +15,7 @@ namespace hospital_manager_bl.Service
         private readonly IUnitOfWork _unitOfWork;
         private readonly ModelConverter modelConverter;
         private readonly OAuthService oAuthService;
+        public int halfDayHour = 13;
 
         public AppointmentService(IUnitOfWork unitOfWork)
         {
@@ -27,7 +28,7 @@ namespace hospital_manager_bl.Service
         {
             if (!AppointmentExists(id))
             {
-                throw new InvalidAppointment("Appointment with ID " + id + " doesn't exist.");
+                throw new NotFoundAppointment("Appointment with ID " + id + " doesn't exist.");
             }
             return modelConverter.ResponseOf(_unitOfWork.Appointment.Get(id));
         }
@@ -35,7 +36,7 @@ namespace hospital_manager_bl.Service
         {
             if (!AppointmentExists(id))
             {
-                throw new InvalidAppointment("Appointment with ID " + id + " doesn't exist.");
+                throw new NotFoundAppointment("Appointment with ID " + id + " doesn't exist.");
             }
             AppointmentData appointmentData = _unitOfWork.Appointment.Get(id);
             _unitOfWork.Appointment.Remove(appointmentData);
@@ -71,11 +72,11 @@ namespace hospital_manager_bl.Service
         {
             if (!HospitalExists(hospitalId))
             {
-                throw new InvalidAppointment("Hospital with ID " + hospitalId + " doesn't exist.");
+                throw new NotFoundHospital("Hospital with ID " + hospitalId + " doesn't exist.");
             }
             if (!SpecialityExists(specialityId))
             {
-                throw new InvalidAppointment("Speciality with ID " + specialityId + " doesn't exist.");
+                throw new NotFoundSpeciality("Speciality with ID " + specialityId + " doesn't exist.");
             }
             SpecialityData speciality = _unitOfWork.Speciality.Get(specialityId);
             List<AppointmentRequest> appointmentSuggestions = new List<AppointmentRequest>();
@@ -213,15 +214,19 @@ namespace hospital_manager_bl.Service
             }
             if (!RoomExists(appointment.RoomId))
             {
-                throw new InvalidAppointment("Room with ID " + appointment.RoomId + " does not exist.");
+                throw new NotFoundRoom("Room with ID " + appointment.RoomId + " does not exist.");
             }
             if (!oAuthService.UserExists(appointment.DoctorUsername))
             {
-                throw new InvalidAppointment("Doctor with username " + appointment.DoctorUsername + " does not exist.");
+                throw new NotFoundUser("Doctor with username " + appointment.DoctorUsername + " does not exist.");
             }
             if (!oAuthService.UserExists(appointment.PatientUsername))
             {
-                throw new InvalidAppointment("Patient with username " + appointment.PatientUsername + " does not exist.");
+                throw new NotFoundUser("Patient with username " + appointment.PatientUsername + " does not exist.");
+            }
+            if (!AppointmentHalfDayValid(appointment.DoctorUsername, appointment.RoomId, appointment.From, appointment.To))
+            {
+                throw new InvalidAppointment("2 appointment of different hospitals cannot be taken in the same half day.");
             }
             var appointmentData = modelConverter.EnvelopeOf(appointment);
             _unitOfWork.Appointment.Add(appointmentData);
@@ -246,15 +251,19 @@ namespace hospital_manager_bl.Service
             }
             if (!RoomExists(appointment.RoomId))
             {
-                throw new InvalidAppointment("Room with ID " + appointment.RoomId + " does not exist.");
+                throw new NotFoundRoom("Room with ID " + appointment.RoomId + " does not exist.");
             }
             if (!oAuthService.UserExists(appointment.DoctorUsername))
             {
-                throw new InvalidAppointment("Doctor with username " + appointment.DoctorUsername + " does not exist.");
+                throw new NotFoundUser("Doctor with username " + appointment.DoctorUsername + " does not exist.");
             }
             if (!oAuthService.UserExists(appointment.PatientUsername))
             {
-                throw new InvalidAppointment("Patient with username " + appointment.PatientUsername + " does not exist.");
+                throw new NotFoundUser("Patient with username " + appointment.PatientUsername + " does not exist.");
+            }
+            if (!AppointmentHalfDayValid(appointment.DoctorUsername, appointment.RoomId, appointment.From, appointment.To))
+            {
+                throw new InvalidAppointment("2 appointment of different hospitals cannot be taken in the same half day.");
             }
             var appointmentData = modelConverter.EnvelopeOf(appointment);
             _unitOfWork.Appointment.Add(appointmentData);
@@ -266,6 +275,24 @@ namespace hospital_manager_bl.Service
         private bool AppointmentExists(long id)
         {
             return _unitOfWork.Appointment.Get(id) != null;
+        }
+        public bool AppointmentHalfDayValid(string doctorUsername, long roomId, DateTime from, DateTime to)
+        { 
+            HospitalData hospitalData = _unitOfWork.Hospital.GetHospitalByRoomId(roomId);
+            OpeningHoursData openingHoursData = hospitalData.OpeningHours.Single(openingHour => openingHour.Day == from.DayOfWeek.ToString().ToUpper());
+            DateTime fromTemp;
+            DateTime toTemp;
+            if (from.Hour < 13)
+            {
+                fromTemp = new DateTime(from.Year, from.Month, from.Day, openingHoursData.HourFrom, openingHoursData.MinuteFrom, 0);
+                toTemp = new DateTime(from.Year, from.Month, from.Day, halfDayHour, 0, 0);
+            } else
+            {
+                fromTemp = new DateTime(from.Year, from.Month, from.Day, halfDayHour, 0, 0);
+                toTemp = new DateTime(from.Year, from.Month, from.Day, openingHoursData.HourTo, openingHoursData.MinuteTo, 0);
+            }
+            List<AppointmentData> appointmentPreceding = _unitOfWork.Appointment.GetAppointmentsByNotHospitalAndDoctorUsername(doctorUsername, hospitalData.Id, fromTemp, toTemp);
+            return appointmentPreceding.Count == 0;
         }
         public bool AppointmentTaken(long roomId, DateTime from, DateTime to)
         {

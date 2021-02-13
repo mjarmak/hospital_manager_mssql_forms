@@ -73,10 +73,19 @@ namespace hospital_manager_api.Controllers
         [HttpGet("{username}")]
         public ActionResult<DoctorResponse> GetDoctor(string username)
         {
-            return Ok(new
+            try
             {
-                data = _doctorService.GetDoctor(username)
-            });
+                return Ok(new
+                {
+                    data = _doctorService.GetDoctor(username)
+                });
+            } catch (NotFoundDoctor e)
+            {
+                return NotFound(new
+                {
+                    data = e.Message
+                });
+            }
         }
 
         [HttpGet("all")]
