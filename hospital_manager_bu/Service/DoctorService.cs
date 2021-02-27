@@ -50,14 +50,68 @@ namespace hospital_manager_bl.Service
             var doctorResponse = modelConverter.ResponseOf(_unitOfWork.Doctor.GetDoctor(doctorData.Username));
             return doctorResponse;
         }
+
+        public DoctorResponse UpdateDoctorConsultations(string doctorUsername, List<ConsultationRequest> consultations)
+        {
+            var doctorData = _unitOfWork.Doctor.GetDoctor(doctorUsername);
+
+            List<ConsultationData> consultationsData = modelConverter.EnvelopeOf(consultations);
+            List<ConsultationData> consultationsDataFiltered = new List<ConsultationData>();
+
+            for(int i = 0; i < consultationsData.Count; i++) {
+                if (!HospitalExists(consultationsData[i].HospitalId) || !SpecialityExists(consultationsData[i].SpecialityId))
+                {
+                    consultationsData.Remove(consultationsData[i]);
+                    i--;
+                }
+            }
+
+            consultationsData.ForEach(consultation =>
+            {
+                if (doctorData.Consultations.SingleOrDefault(consultationDoctor =>
+                consultationDoctor.HospitalId == consultation.HospitalId
+                && consultationDoctor.Duration == consultation.Duration
+                && consultationDoctor.SpecialityId == consultation.SpecialityId
+                ) == null)
+                {
+                    consultationsDataFiltered.Add(consultation);
+                }
+            });
+
+            doctorData.Consultations.AddRange(consultationsDataFiltered);
+
+            _unitOfWork.Doctor.Update(doctorData);
+            _unitOfWork.Save();
+
+            var doctorResponse = modelConverter.ResponseOf(_unitOfWork.Doctor.GetDoctor(doctorData.Username));
+            return doctorResponse;
+        }
+
         public DoctorResponse RegisterDoctor(UserAccountRequest userAccountRequest, string token)
         {
+            for (int i = 0; i < userAccountRequest.DoctorRequest.Consultations.Count; i++)
+            {
+                if (!HospitalExists(userAccountRequest.DoctorRequest.Consultations[i].HospitalId) || !SpecialityExists(userAccountRequest.DoctorRequest.Consultations[i].SpecialityId))
+                {
+                    userAccountRequest.DoctorRequest.Consultations.Remove(userAccountRequest.DoctorRequest.Consultations[i]);
+                    i--;
+                }
+            }
+            for (int i = 0; i < userAccountRequest.DoctorRequest.SpecialityIds.Count; i++)
+            {
+                if (!SpecialityExists(userAccountRequest.DoctorRequest.SpecialityIds[i]))
+                {
+                    userAccountRequest.DoctorRequest.SpecialityIds.Remove(userAccountRequest.DoctorRequest.SpecialityIds[i]);
+                    i--;
+                }
+            }
             try
             {
                 string username = oAuthService.RegisterUser(userAccountRequest, token);
                 userAccountRequest.DoctorRequest.Username = username;
                 userAccountRequest.DoctorRequest.Name = userAccountRequest.Name + " " + userAccountRequest.Surname;
-            } catch (InvalidUserRequest e)
+            }
+            catch (InvalidUserRequest e)
             {
                 throw new InvalidUserRequest(e.Message);
             }
@@ -68,6 +122,14 @@ namespace hospital_manager_bl.Service
 
             var doctorResponse = modelConverter.ResponseOf(_unitOfWork.Doctor.GetDoctor(doctorData.Username));
             return doctorResponse;
+        }
+        private bool HospitalExists(long id)
+        {
+            return _unitOfWork.Hospital.Get(id) != null;
+        }
+        private bool SpecialityExists(long id)
+        {
+            return _unitOfWork.Speciality.Get(id) != null;
         }
     }
 }

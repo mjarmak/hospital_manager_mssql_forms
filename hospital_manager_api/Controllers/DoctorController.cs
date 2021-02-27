@@ -61,6 +61,51 @@ namespace hospital_manager_api.Controllers
             }
         }
 
+        [HttpPut("{doctorUsername}/consultations")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN,DOCTOR")]
+        public ActionResult<DoctorResponse> UpdateDoctorConsultations(string doctorUsername, List<ConsultationRequest> consultations)
+        {
+            string role = GetClaim("role");
+            string username = GetClaim("preferred_username");
+            if (!role.Contains("ADMIN"))
+            {
+                try
+                {
+                    var doctor = _doctorService.GetDoctor(username);
+
+                    if (role.Contains("DOCTOR") && !username.Equals(doctor.Username))
+                    {
+                        return BadRequest(new
+                        {
+                            data = "A doctor can only update his own consultations."
+                        });
+                    }
+                }
+                catch (NotFoundDoctor e)
+                {
+                    return BadRequest(new
+                    {
+                        data = e.Message
+                    });
+                }
+            }
+            try
+            {
+                var result = _doctorService.UpdateDoctorConsultations(doctorUsername, consultations);
+                return Ok(new
+                {
+                    data = result
+                });
+            }
+            catch (InvalidUserRequest e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
+        }
+
         [HttpGet("hospital/{hospitalId}")]
         public ActionResult<DoctorResponse> GetDoctorsByHospitalId(long hospitalId)
         {
