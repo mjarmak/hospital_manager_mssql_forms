@@ -11,6 +11,7 @@ using System.Linq;
 using hospital_manager_ui.Configuration;
 using System.Net.Http.Headers;
 using System.Drawing;
+using hospital_manager_ui.Util;
 
 namespace hospital_manager_ui.Forms
 {
@@ -328,6 +329,12 @@ namespace hospital_manager_ui.Forms
                 }
                 RefreshAppointments();
             }
+        }
+
+        private void logoutMenuStrip_Clicked(object sender, EventArgs e)
+        {
+            AuthUtil.LogOut();
+            this.Close();
         }
     }
 }

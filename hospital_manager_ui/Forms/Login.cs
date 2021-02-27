@@ -62,11 +62,25 @@ namespace hospital_manager_ui.Forms
                     {
                         AdminHomePage f = new AdminHomePage();
                         f.Show();
+                        f.FormClosed += new FormClosedEventHandler(Form_Closed);
+                        void Form_Closed(object sender, FormClosedEventArgs e)
+                        {
+                            AuthUtil.LogOut();
+                            this.Show();
+                        }
+                        f.Show();
                         this.Hide();
                     }
                     else if (AuthConfiguration.Role.Contains("PATIENT") || AuthConfiguration.Role.Contains("DOCTOR"))
                     {
                         UserHomePage f = new UserHomePage();
+                        f.Show();
+                        f.FormClosed += new FormClosedEventHandler(Form_Closed);
+                        void Form_Closed(object sender, FormClosedEventArgs e)
+                        {
+                            AuthUtil.LogOut();
+                            this.Show();
+                        }
                         f.Show();
                         this.Hide();
                     }

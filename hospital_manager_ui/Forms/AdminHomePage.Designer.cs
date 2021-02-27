@@ -65,11 +65,17 @@
             this.Doctor = new System.Windows.Forms.ColumnHeader();
             this.Patient = new System.Windows.Forms.ColumnHeader();
             this.Description = new System.Windows.Forms.ColumnHeader();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.accountMenuItemAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutMenuItemAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.SpecialitiesTab.SuspendLayout();
             this.HospitalsTab.SuspendLayout();
             this.DoctorsTab.SuspendLayout();
             this.AppointmentsTab.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -81,11 +87,11 @@
             this.tabControl1.Controls.Add(this.HospitalsTab);
             this.tabControl1.Controls.Add(this.DoctorsTab);
             this.tabControl1.Controls.Add(this.AppointmentsTab);
-            this.tabControl1.Location = new System.Drawing.Point(12, 11);
+            this.tabControl1.Location = new System.Drawing.Point(12, 26);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(890, 494);
+            this.tabControl1.Size = new System.Drawing.Size(893, 491);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -97,7 +103,7 @@
             this.SpecialitiesTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SpecialitiesTab.Name = "SpecialitiesTab";
             this.SpecialitiesTab.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.SpecialitiesTab.Size = new System.Drawing.Size(882, 466);
+            this.SpecialitiesTab.Size = new System.Drawing.Size(885, 463);
             this.SpecialitiesTab.TabIndex = 0;
             this.SpecialitiesTab.Text = "Specialities";
             this.SpecialitiesTab.UseVisualStyleBackColor = true;
@@ -115,7 +121,7 @@
             this.listViewSpeciality.Location = new System.Drawing.Point(3, 2);
             this.listViewSpeciality.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewSpeciality.Name = "listViewSpeciality";
-            this.listViewSpeciality.Size = new System.Drawing.Size(876, 433);
+            this.listViewSpeciality.Size = new System.Drawing.Size(876, 418);
             this.listViewSpeciality.TabIndex = 1;
             this.listViewSpeciality.UseCompatibleStateImageBehavior = false;
             this.listViewSpeciality.View = System.Windows.Forms.View.Details;
@@ -133,7 +139,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(804, 440);
+            this.button1.Location = new System.Drawing.Point(804, 425);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -151,7 +157,7 @@
             this.HospitalsTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.HospitalsTab.Name = "HospitalsTab";
             this.HospitalsTab.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.HospitalsTab.Size = new System.Drawing.Size(882, 466);
+            this.HospitalsTab.Size = new System.Drawing.Size(885, 463);
             this.HospitalsTab.TabIndex = 1;
             this.HospitalsTab.Text = "Hospitals";
             this.HospitalsTab.UseVisualStyleBackColor = true;
@@ -243,7 +249,7 @@
             this.DoctorsTab.Location = new System.Drawing.Point(4, 24);
             this.DoctorsTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DoctorsTab.Name = "DoctorsTab";
-            this.DoctorsTab.Size = new System.Drawing.Size(882, 466);
+            this.DoctorsTab.Size = new System.Drawing.Size(885, 463);
             this.DoctorsTab.TabIndex = 2;
             this.DoctorsTab.Text = "Doctors";
             this.DoctorsTab.UseVisualStyleBackColor = true;
@@ -310,14 +316,15 @@
             this.AppointmentsTab.Location = new System.Drawing.Point(4, 24);
             this.AppointmentsTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AppointmentsTab.Name = "AppointmentsTab";
-            this.AppointmentsTab.Size = new System.Drawing.Size(882, 466);
+            this.AppointmentsTab.Size = new System.Drawing.Size(885, 463);
             this.AppointmentsTab.TabIndex = 3;
             this.AppointmentsTab.Text = "Appointments";
             this.AppointmentsTab.UseVisualStyleBackColor = true;
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(642, 440);
+            this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConfirm.Location = new System.Drawing.Point(645, 452);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(75, 23);
             this.btnConfirm.TabIndex = 4;
@@ -328,7 +335,7 @@
             // buttonDeleteAppointment
             // 
             this.buttonDeleteAppointment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDeleteAppointment.Location = new System.Drawing.Point(723, 440);
+            this.buttonDeleteAppointment.Location = new System.Drawing.Point(726, 452);
             this.buttonDeleteAppointment.Name = "buttonDeleteAppointment";
             this.buttonDeleteAppointment.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteAppointment.TabIndex = 3;
@@ -364,7 +371,7 @@
             // button5
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(804, 440);
+            this.button5.Location = new System.Drawing.Point(807, 452);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 1;
@@ -388,7 +395,7 @@
             this.listViewAppointment.Location = new System.Drawing.Point(239, 0);
             this.listViewAppointment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewAppointment.Name = "listViewAppointment";
-            this.listViewAppointment.Size = new System.Drawing.Size(640, 435);
+            this.listViewAppointment.Size = new System.Drawing.Size(643, 447);
             this.listViewAppointment.TabIndex = 0;
             this.listViewAppointment.UseCompatibleStateImageBehavior = false;
             this.listViewAppointment.View = System.Windows.Forms.View.Details;
@@ -422,11 +429,54 @@
             this.Description.Text = "Description";
             this.Description.Width = 150;
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.AccessibleName = "accountMenuStrip";
+            this.toolStripMenuItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(64, 20);
+            this.toolStripMenuItem1.Text = "Account";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.AccessibleName = "logoutMenuStrip";
+            this.toolStripMenuItem2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(117, 22);
+            this.toolStripMenuItem2.Text = "Log Out";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.accountMenuItemAdmin});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(917, 24);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // accountMenuItemAdmin
+            // 
+            this.accountMenuItemAdmin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.logoutMenuItemAdmin});
+            this.accountMenuItemAdmin.Name = "accountMenuItemAdmin";
+            this.accountMenuItemAdmin.Size = new System.Drawing.Size(64, 20);
+            this.accountMenuItemAdmin.Text = "Account";
+            // 
+            // logoutMenuItemAdmin
+            // 
+            this.logoutMenuItemAdmin.AccessibleName = "logoutMenuItemAdmin";
+            this.logoutMenuItemAdmin.Name = "logoutMenuItemAdmin";
+            this.logoutMenuItemAdmin.Size = new System.Drawing.Size(117, 22);
+            this.logoutMenuItemAdmin.Text = "Log Out";
+            this.logoutMenuItemAdmin.Click += new System.EventHandler(this.logoutMenuStrip_Clicked);
+            // 
             // AdminHomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 516);
+            this.ClientSize = new System.Drawing.Size(917, 528);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AdminHomePage";
@@ -437,7 +487,10 @@
             this.DoctorsTab.ResumeLayout(false);
             this.AppointmentsTab.ResumeLayout(false);
             this.AppointmentsTab.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -482,5 +535,10 @@
         private System.Windows.Forms.Button buttonDoctorDetails;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem accountMenuItemAdmin;
+        private System.Windows.Forms.ToolStripMenuItem logoutMenuItemAdmin;
     }
 }

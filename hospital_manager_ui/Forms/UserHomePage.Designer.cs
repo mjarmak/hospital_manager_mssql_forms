@@ -45,6 +45,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Appointments = new System.Windows.Forms.TabPage();
+            this.btnConfirm = new System.Windows.Forms.Button();
             this.buttonDeleteAppointment = new System.Windows.Forms.Button();
             this.listViewAppointmentUser = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
@@ -54,10 +55,14 @@
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.button1 = new System.Windows.Forms.Button();
-            this.btnConfirm = new System.Windows.Forms.Button();
+            this.Account = new System.Windows.Forms.ToolStripComboBox();
+            this.accountMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tabControl1.SuspendLayout();
             this.Home.SuspendLayout();
             this.Appointments.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -67,10 +72,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.Home);
             this.tabControl1.Controls.Add(this.Appointments);
-            this.tabControl1.Location = new System.Drawing.Point(12, 11);
+            this.tabControl1.Location = new System.Drawing.Point(12, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(890, 494);
+            this.tabControl1.Size = new System.Drawing.Size(899, 489);
             this.tabControl1.TabIndex = 2;
             // 
             // Home
@@ -92,7 +97,7 @@
             this.Home.Location = new System.Drawing.Point(4, 24);
             this.Home.Name = "Home";
             this.Home.Padding = new System.Windows.Forms.Padding(3);
-            this.Home.Size = new System.Drawing.Size(882, 466);
+            this.Home.Size = new System.Drawing.Size(891, 461);
             this.Home.TabIndex = 0;
             this.Home.Text = "Home";
             this.Home.UseVisualStyleBackColor = true;
@@ -240,15 +245,26 @@
             this.Appointments.Location = new System.Drawing.Point(4, 24);
             this.Appointments.Name = "Appointments";
             this.Appointments.Padding = new System.Windows.Forms.Padding(3);
-            this.Appointments.Size = new System.Drawing.Size(882, 466);
+            this.Appointments.Size = new System.Drawing.Size(891, 461);
             this.Appointments.TabIndex = 1;
             this.Appointments.Text = "Appointments";
             this.Appointments.UseVisualStyleBackColor = true;
             // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConfirm.Location = new System.Drawing.Point(644, 420);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
+            this.btnConfirm.TabIndex = 3;
+            this.btnConfirm.Text = "Confirm";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click_1);
+            // 
             // buttonDeleteAppointment
             // 
             this.buttonDeleteAppointment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDeleteAppointment.Location = new System.Drawing.Point(716, 440);
+            this.buttonDeleteAppointment.Location = new System.Drawing.Point(725, 420);
             this.buttonDeleteAppointment.Name = "buttonDeleteAppointment";
             this.buttonDeleteAppointment.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteAppointment.TabIndex = 2;
@@ -272,7 +288,7 @@
             this.listViewAppointmentUser.Location = new System.Drawing.Point(3, 0);
             this.listViewAppointmentUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewAppointmentUser.Name = "listViewAppointmentUser";
-            this.listViewAppointmentUser.Size = new System.Drawing.Size(876, 435);
+            this.listViewAppointmentUser.Size = new System.Drawing.Size(885, 415);
             this.listViewAppointmentUser.TabIndex = 1;
             this.listViewAppointmentUser.UseCompatibleStateImageBehavior = false;
             this.listViewAppointmentUser.View = System.Windows.Forms.View.Details;
@@ -308,7 +324,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(797, 441);
+            this.button1.Location = new System.Drawing.Point(806, 421);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 22);
             this.button1.TabIndex = 0;
@@ -316,29 +332,60 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btnConfirm
+            // Account
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(635, 440);
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
-            this.btnConfirm.TabIndex = 3;
-            this.btnConfirm.Text = "Confirm";
-            this.btnConfirm.UseVisualStyleBackColor = true;
-            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click_1);
+            this.Account.Items.AddRange(new object[] {
+            "Account"});
+            this.Account.Name = "Account";
+            this.Account.Size = new System.Drawing.Size(121, 23);
+            // 
+            // accountMenuStrip
+            // 
+            this.accountMenuStrip.AccessibleName = "accountMenuStrip";
+            this.accountMenuStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.accountMenuStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.logoutMenuStrip});
+            this.accountMenuStrip.Name = "accountMenuStrip";
+            this.accountMenuStrip.Size = new System.Drawing.Size(64, 20);
+            this.accountMenuStrip.Text = "Account";
+            // 
+            // logoutMenuStrip
+            // 
+            this.logoutMenuStrip.AccessibleName = "logoutMenuStrip";
+            this.logoutMenuStrip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.logoutMenuStrip.Name = "logoutMenuStrip";
+            this.logoutMenuStrip.Size = new System.Drawing.Size(117, 22);
+            this.logoutMenuStrip.Text = "Log Out";
+            this.logoutMenuStrip.Click += new System.EventHandler(this.logoutMenuStrip_Clicked);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.accountMenuStrip});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(923, 24);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked_1);
             // 
             // UserHomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 516);
+            this.ClientSize = new System.Drawing.Size(923, 527);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "UserHomePage";
             this.Text = "UserHomePage";
             this.tabControl1.ResumeLayout(false);
             this.Home.ResumeLayout(false);
             this.Home.PerformLayout();
             this.Appointments.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -370,5 +417,10 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.Button buttonDeleteAppointment;
         private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.ToolStripComboBox Account;
+        private System.Windows.Forms.ToolStripMenuItem logout;
+        private System.Windows.Forms.ToolStripMenuItem accountMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem logoutMenuStrip;
+        private System.Windows.Forms.MenuStrip menuStrip1;
     }
 }

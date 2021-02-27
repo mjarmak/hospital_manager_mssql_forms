@@ -1,5 +1,6 @@
 ﻿using hospital_manager_models.Models;
 using hospital_manager_ui.Configuration;
+using hospital_manager_ui.Util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -176,6 +177,16 @@ namespace hospital_manager_ui.Forms
                 }
                 RefreshAppointments();
             }
+        }
+
+        private void menuStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
+        {
+        }
+
+        private void logoutMenuStrip_Clicked(object sender, EventArgs e)
+        {
+            AuthUtil.LogOut();
+            this.Close();
         }
     }
 }

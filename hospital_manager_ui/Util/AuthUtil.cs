@@ -39,5 +39,17 @@ namespace hospital_manager_ui.Util
                 return;
             }
         }
+
+        public static void LogOut()
+        {
+            AuthConfiguration.AccessToken = null;
+            AuthConfiguration.Email = null;
+            AuthConfiguration.Name = null;
+            AuthConfiguration.LastName = null;
+            AuthConfiguration.Gender = null;
+            AuthConfiguration.Phone = null;
+            AuthConfiguration.Birthdate = null;
+            AuthConfiguration.Role = null;
+        }
     }
 }
