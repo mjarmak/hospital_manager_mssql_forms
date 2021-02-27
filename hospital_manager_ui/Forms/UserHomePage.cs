@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -32,6 +33,11 @@ namespace hospital_manager_ui.Forms
             labelPhone.Text = String.IsNullOrEmpty(AuthConfiguration.Phone) ? "" : AuthConfiguration.Phone;
             labelBirthday.Text = String.IsNullOrEmpty(AuthConfiguration.Birthdate) ? "" : AuthConfiguration.Birthdate;
             labelGender.Text = String.IsNullOrEmpty(AuthConfiguration.Gender) ? "" : AuthConfiguration.Gender;
+
+            if (AuthConfiguration.Role.Contains("PATIENT"))
+            {
+                btnConfirm.Visible = false;
+            }
 
             RefreshHospitals();
             RefreshAppointments();
@@ -85,13 +91,18 @@ namespace hospital_manager_ui.Forms
                     {
                         withWho = appointment.PatientUsername;
                     }
-                    return new ListViewItem(new[] {
+                    var listItem = new ListViewItem(new[] {
                         hospitals.SingleOrDefault(hospital => hospital.Id == appointment.Room.HospitalId).Name,
                         appointment.Room.Name,
                         appointment.From.ToString(),
                         (appointment.To - appointment.From).TotalMinutes.ToString(),
                         withWho,
                         appointment.Description });
+                    if (appointment.Status == "PENDING")
+                    {
+                        listItem.BackColor = Color.Yellow;
+                    }
+                    return listItem;
                 }).ToArray());
             }
         }
@@ -144,6 +155,27 @@ namespace hospital_manager_ui.Forms
                 RefreshAppointments();
             }
             f.Show();
+        }
+
+        private void btnConfirm_Click_1(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection indices = listViewAppointmentUser.SelectedIndices;
+            if (indices.Count > 0)
+            {
+                long appointmentId = appointments[indices[0]].Id;
+                var client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthConfiguration.AccessToken);
+                Task<HttpResponseMessage> response = client.GetAsync(url + "/appointment/" + appointmentId + "/confirm");
+                response.Wait();
+                if (response.Result.StatusCode != HttpStatusCode.OK)
+                {
+                    MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to confirm appointment with ID " + appointmentId,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+                RefreshAppointments();
+            }
         }
     }
 }

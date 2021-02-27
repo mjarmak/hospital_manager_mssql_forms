@@ -10,6 +10,7 @@ using hospital_manager_models.Models;
 using System.Linq;
 using hospital_manager_ui.Configuration;
 using System.Net.Http.Headers;
+using System.Drawing;
 
 namespace hospital_manager_ui.Forms
 {
@@ -183,9 +184,14 @@ namespace hospital_manager_ui.Forms
                 listViewAppointment.Items.Clear();
                 listViewAppointment.Items.AddRange(appointments.Select(appointment =>
                 {
-                    return new ListViewItem(new[] { appointment.Room.Name, appointment.From.ToString(),
+                    var listItem = new ListViewItem(new[] { appointment.Room.Name, appointment.From.ToString(),
                             (appointment.To - appointment.From).TotalMinutes.ToString(),
                             appointment.Doctor.Name, appointment.PatientUsername, appointment.Description });
+                    if (appointment.Status == "PENDING")
+                    {
+                        listItem.BackColor = Color.Yellow;
+                    }
+                    return listItem;
                 }).ToArray());
             }
         }
@@ -300,6 +306,27 @@ namespace hospital_manager_ui.Forms
                 string doctorUsername = doctors[indices[0]].Username;
                 DoctorDetails f = new DoctorDetails(doctorUsername);
                 f.Show();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection indices = listViewAppointment.SelectedIndices;
+            if (indices.Count > 0)
+            {
+                long appointmentId = appointments[indices[0]].Id;
+                var client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthConfiguration.AccessToken);
+                Task<HttpResponseMessage> response = client.GetAsync(url + "/appointment/" + appointmentId + "/confirm");
+                response.Wait();
+                if (response.Result.StatusCode != HttpStatusCode.OK)
+                {
+                    MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to confirm appointment with ID " + appointmentId,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+                RefreshAppointments();
             }
         }
     }

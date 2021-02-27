@@ -43,6 +43,12 @@ namespace hospital_manager_bl.Service
             AppointmentData appointmentData = _unitOfWork.Appointment.Get(id);
             _unitOfWork.Appointment.Remove(appointmentData);
             _unitOfWork.Save();
+
+            emailService.SendEmail(
+                oAuthService.GetUserEmail(appointmentData.PatientUsername),
+                "Appoitment Deleted with Doctor " + appointmentData.DoctorUsername,
+                "At " + appointmentData.From + " to " + appointmentData.To + " in room " + _unitOfWork.Room.Get(appointmentData.RoomId).Name + " for " + appointmentData.Description);
+
         }
 
         public List<AppointmentResponse> GetAppointments()
@@ -230,7 +236,7 @@ namespace hospital_manager_bl.Service
             {
                 emailService.SendEmail(
                     oAuthService.GetUserEmail(appointment.DoctorUsername),
-                   "Appoitment for " + appointment.PatientUsername,
+                   "Appoitment Request for " + appointment.PatientUsername,
                     "At " + appointment.From + " to " + appointment.To + " in room " + _unitOfWork.Room.Get(appointment.RoomId).Name + " for " + appointment.Description);
             }
             if (!oAuthService.UserExists(appointment.PatientUsername))
@@ -241,9 +247,10 @@ namespace hospital_manager_bl.Service
             {
                 emailService.SendEmail(
                     oAuthService.GetUserEmail(appointment.PatientUsername),
-                    "Appoitment with Doctor " + appointment.DoctorUsername,
+                    "Appoitment Request with Doctor " + appointment.DoctorUsername,
                     "At " + appointment.From + " to " + appointment.To + " in room " + _unitOfWork.Room.Get(appointment.RoomId).Name + " for " + appointment.Description);
             }
+            appointment.Status = "PENDING";
             var appointmentData = modelConverter.EnvelopeOf(appointment);
             _unitOfWork.Appointment.Add(appointmentData);
             _unitOfWork.Save();
@@ -261,7 +268,15 @@ namespace hospital_manager_bl.Service
             {
                 throw new InvalidAppointment("Appointment Id should not be 0 on creation.");
             }
-            if (AppointmentTaken(appointment.RoomId, appointment.From, appointment.To))
+            if (!AppointmentExists(appointment.Id))
+            {
+                throw new NotFoundAppointment("Appointment with ID " + appointment.Id + " doesn't exist.");
+            }
+            if (appointment.Status != "PENDING")
+            {
+                throw new InvalidAppointment("Appointment status can only be PENDING.");
+            }
+            if (_unitOfWork.Appointment.GetAppointmentByRoomIdAndTimeExclusive(appointment.RoomId, appointment.From, appointment.To).Id != appointment.Id)
             {
                 throw new InvalidAppointment("An appointment is already taken in room " + appointment.RoomId + " is already taken.");
             }
@@ -273,17 +288,55 @@ namespace hospital_manager_bl.Service
             {
                 throw new NotFoundUser("Doctor with username " + appointment.DoctorUsername + " does not exist.");
             }
+            else
+            {
+                emailService.SendEmail(
+                    oAuthService.GetUserEmail(appointment.DoctorUsername),
+                   "Appoitment Request for " + appointment.PatientUsername,
+                    "At " + appointment.From + " to " + appointment.To + " in room " + _unitOfWork.Room.Get(appointment.RoomId).Name + " for " + appointment.Description);
+            }
             if (!oAuthService.UserExists(appointment.PatientUsername))
             {
                 throw new NotFoundUser("Patient with username " + appointment.PatientUsername + " does not exist.");
+            }
+            else
+            {
+                emailService.SendEmail(
+                    oAuthService.GetUserEmail(appointment.PatientUsername),
+                    "Appoitment Request with Doctor " + appointment.DoctorUsername,
+                    "At " + appointment.From + " to " + appointment.To + " in room " + _unitOfWork.Room.Get(appointment.RoomId).Name + " for " + appointment.Description);
             }
             if (!AppointmentHalfDayValid(appointment.DoctorUsername, appointment.RoomId, appointment.From, appointment.To))
             {
                 throw new InvalidAppointment("2 appointment of different hospitals cannot be taken in the same half day.");
             }
             var appointmentData = modelConverter.EnvelopeOf(appointment);
-            _unitOfWork.Appointment.Add(appointmentData);
+            _unitOfWork.Appointment.Update(appointmentData);
             _unitOfWork.Save();
+
+            return modelConverter.ResponseOf(_unitOfWork.Appointment.Get(appointmentData.Id));
+        }
+
+        public AppointmentResponse ConfirmAppointment(long id)
+        {
+            if (id == 0)
+            {
+                throw new InvalidAppointment("Appointment Id should not be 0.");
+            }
+            var appointmentData = _unitOfWork.Appointment.Get(id);
+            if (appointmentData.Status != "PENDING")
+            {
+                throw new InvalidAppointment("Appointment status must be PENDING.");
+            }
+            appointmentData.Status = "CONFIRMED";
+            _unitOfWork.Appointment.Update(appointmentData);
+            _unitOfWork.Save();
+
+            emailService.SendEmail(
+                oAuthService.GetUserEmail(appointmentData.PatientUsername),
+                "Appoitment Confirmed with Doctor " + appointmentData.DoctorUsername,
+                "At " + appointmentData.From + " to " + appointmentData.To + " in room " + _unitOfWork.Room.Get(appointmentData.RoomId).Name + " for " + appointmentData.Description);
+
 
             return modelConverter.ResponseOf(_unitOfWork.Appointment.Get(appointmentData.Id));
         }

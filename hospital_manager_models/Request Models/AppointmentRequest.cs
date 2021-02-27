@@ -14,6 +14,8 @@ namespace hospital_manager_models.Models
 
         public string Description { get; set; }
 
+        public string Status { get; set; }
+
         public DateTime From { get; set; }
 
         public DateTime To { get; set; }

@@ -1,6 +1,7 @@
 ﻿using hospital_manager_data_access.Data;
 using hospital_manager_data_access.Entities;
 using hospital_manager_data_access.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,11 +33,16 @@ namespace hospital_manager_data_access.Repositories.Implementation
 
         public AppointmentData GetAppointmentByRoomIdAndTimeExclusive(long roomId, DateTime dateFrom, DateTime dateTo)
         {
-            return Db.AppointmentData
+            var appointment = Db.AppointmentData
                 .SingleOrDefault(appointment =>
                 appointment.RoomId == roomId
                 && ((appointment.From >= dateFrom && appointment.From < dateTo) || (appointment.To >= dateFrom && appointment.To < dateTo))
                 );
+            if (appointment != null)
+            {
+                Db.Entry(appointment).State = EntityState.Detached;
+            }
+            return appointment;
         }
 
         public AppointmentData GetAppointmentByRoomIdAndTime(long roomId, DateTime dateFrom, DateTime dateTo)

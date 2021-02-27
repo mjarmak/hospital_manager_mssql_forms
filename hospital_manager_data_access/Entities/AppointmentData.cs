@@ -18,6 +18,8 @@ namespace hospital_manager_data_access.Entities
 
         public string Description { get; set; }
 
+        public string Status { get; set; }
+
         public DateTime From { get; set; }
 
         public DateTime To { get; set; }

@@ -52,6 +52,7 @@
             this.DoctorUsername = new System.Windows.Forms.ColumnHeader();
             this.DoctorName = new System.Windows.Forms.ColumnHeader();
             this.AppointmentsTab = new System.Windows.Forms.TabPage();
+            this.btnConfirm = new System.Windows.Forms.Button();
             this.buttonDeleteAppointment = new System.Windows.Forms.Button();
             this.hospitalComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -299,6 +300,7 @@
             // 
             // AppointmentsTab
             // 
+            this.AppointmentsTab.Controls.Add(this.btnConfirm);
             this.AppointmentsTab.Controls.Add(this.buttonDeleteAppointment);
             this.AppointmentsTab.Controls.Add(this.hospitalComboBox);
             this.AppointmentsTab.Controls.Add(this.label1);
@@ -312,6 +314,16 @@
             this.AppointmentsTab.TabIndex = 3;
             this.AppointmentsTab.Text = "Appointments";
             this.AppointmentsTab.UseVisualStyleBackColor = true;
+            // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Location = new System.Drawing.Point(642, 440);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
+            this.btnConfirm.TabIndex = 4;
+            this.btnConfirm.Text = "Confirm";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.button4_Click);
             // 
             // buttonDeleteAppointment
             // 
@@ -468,5 +480,7 @@
         private System.Windows.Forms.Button buttonEditHospital;
         private System.Windows.Forms.Button buttonAddRooms;
         private System.Windows.Forms.Button buttonDoctorDetails;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnConfirm;
     }
 }

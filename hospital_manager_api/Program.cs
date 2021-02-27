@@ -146,6 +146,7 @@ namespace hospital_manager_api
 
         private static void AddAppointment(IHost host)
         {
+            DateTime now = DateTime.Now;
             var scope = host.Services.CreateScope();
             var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
             AppointmentService _appointmentService = new AppointmentService(unitOfWork);
@@ -156,8 +157,8 @@ namespace hospital_manager_api
                     DoctorUsername = "DrakeRamoray10071995",
                     Description = "appointment for Pediatrics.",
                     RoomId = 1,
-                    From = new DateTime(2021, 1, 18, 7, 0,0),
-                    To = new DateTime(2021, 1, 18, 7, 14, 0),
+                    From = new DateTime(now.Year, now.Month, 18, 7, 0,0),
+                    To = new DateTime(now.Year, now.Month, 18, 7, 14, 0),
                 });
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
@@ -166,8 +167,8 @@ namespace hospital_manager_api
                     DoctorUsername = "DrakeRamoray10071995",
                     Description = "appointment for Pediatrics.",
                     RoomId = 1,
-                    From = new DateTime(2021, 1, 30, 7, 0, 0),
-                    To = new DateTime(2021, 1, 30, 7, 14, 0),
+                    From = new DateTime(now.Year, now.Month, 20, 7, 0, 0),
+                    To = new DateTime(now.Year, now.Month, 20, 7, 14, 0),
                 });
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
@@ -176,8 +177,8 @@ namespace hospital_manager_api
                     DoctorUsername = "DrakeRamoray10071995",
                     Description = "appointment for Pediatrics.",
                     RoomId = 1,
-                    From = new DateTime(2021, 2, 1, 7, 0, 0),
-                    To = new DateTime(2021, 2, 1, 7, 14, 0),
+                    From = new DateTime(now.Year, now.Month, 1, 7, 0, 0),
+                    To = new DateTime(now.Year, now.Month, 1, 7, 14, 0),
                 });
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
@@ -186,8 +187,8 @@ namespace hospital_manager_api
                     DoctorUsername = "DrakeRamoray10071995",
                     Description = "appointment for Pediatrics.",
                     RoomId = 1,
-                    From = new DateTime(2021, 2, 2, 7, 0, 0),
-                    To = new DateTime(2021, 2, 2, 7, 14, 0),
+                    From = new DateTime(now.Year, now.Month, 2, 7, 0, 0),
+                    To = new DateTime(now.Year, now.Month, 2, 7, 14, 0),
                 });
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
@@ -196,8 +197,8 @@ namespace hospital_manager_api
                     DoctorUsername = "DrakeRamoray10071995",
                     Description = "appointment for Generalist.",
                     RoomId = 1,
-                    From = new DateTime(2021, 1, 18, 15, 45, 00),
-                    To = new DateTime(2021, 1, 18, 15, 59, 00),
+                    From = new DateTime(now.Year, now.Month, 18, 15, 45, 00),
+                    To = new DateTime(now.Year, now.Month, 18, 15, 59, 00),
                 });
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
@@ -206,8 +207,8 @@ namespace hospital_manager_api
                     DoctorUsername = "DrakeRamoray10071995",
                     Description = "appointment for Generalist.",
                     RoomId = 1,
-                    From = new DateTime(2021, 1, 18, 16, 45, 00),
-                    To = new DateTime(2021, 1, 18, 16, 59, 00),
+                    From = new DateTime(now.Year, now.Month, 18, 16, 45, 00),
+                    To = new DateTime(now.Year, now.Month, 18, 16, 59, 00),
                 });
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
@@ -216,8 +217,8 @@ namespace hospital_manager_api
                     DoctorUsername = "DrakeRamoray10071995",
                     Description = "appointment for Orthopedics.",
                     RoomId = 2,
-                    From = new DateTime(2021, 1, 19, 16, 45, 00),
-                    To = new DateTime(2021, 1, 19, 16, 59, 00),
+                    From = new DateTime(now.Year, now.Month, 19, 16, 45, 00),
+                    To = new DateTime(now.Year, now.Month, 19, 16, 59, 00),
                     
                 });
 
@@ -229,8 +230,8 @@ namespace hospital_manager_api
                     DoctorUsername = "DoctorWho10071995",
                     Description = "appointment for Surgery.",
                     RoomId = 5,
-                    From = new DateTime(2021, 1, 16, 12, 0, 0),
-                    To = new DateTime(2021, 1, 18, 12, 14, 0),
+                    From = new DateTime(now.Year, now.Month, 16, 12, 0, 0),
+                    To = new DateTime(now.Year, now.Month, 16, 12, 14, 0),
                 });
             _appointmentService.SaveAppointment(
                 new AppointmentRequest
@@ -239,8 +240,8 @@ namespace hospital_manager_api
                     DoctorUsername = "DoctorWho10071995",
                     Description = "appointment for Surgery.",
                     RoomId = 3,
-                    From = new DateTime(2021, 1, 16, 17, 0, 0),
-                    To = new DateTime(2021, 1, 18, 17, 14, 0),
+                    From = new DateTime(now.Year, now.Month, 16, 17, 0, 0),
+                    To = new DateTime(now.Year, now.Month, 16, 17, 14, 0),
                 });
         }
 

@@ -24,7 +24,8 @@ namespace hospital_manager_bl.Util
                 RoomId = appointment.RoomId,
                 Description = appointment.Description,
                 From = appointment.From,
-                To = appointment.To
+                To = appointment.To,
+                Status = appointment.Status
             };
         }
         public DoctorData EnvelopeOf(DoctorRequest doctorRequest)
@@ -61,6 +62,7 @@ namespace hospital_manager_bl.Util
                 RoomId = appointment.RoomId,
                 Room = ResponseOf(_unitOfWork.Room.Get(appointment.RoomId)),
                 Description = appointment.Description,
+                Status = appointment.Status,
                 From = appointment.From,
                 To = appointment.To
             };

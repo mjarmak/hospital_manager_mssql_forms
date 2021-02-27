@@ -121,6 +121,13 @@ namespace hospital_manager_api.Controllers
                     data = appointmentData
                 });
             }
+            catch (NotFoundAppointment e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
             catch (InvalidAppointment e)
             {
                 return BadRequest(new
@@ -234,6 +241,57 @@ namespace hospital_manager_api.Controllers
             {
                 data = appointment
             });
+        }
+
+        [HttpGet("{id}/confirm")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN,DOCTOR")]
+        public ActionResult<AppointmentData> ConfirmAppointment(long id)
+        {
+            string role = GetClaim("role");
+            string username = GetClaim("preferred_username");
+            AppointmentResponse appointment;
+            try
+            {
+                appointment = _appointmentService.GetAppointment(id);
+            }
+            catch (NotFoundAppointment e)
+            {
+                return NotFound(new
+                {
+                    data = e.Message
+                });
+            }
+            if (!role.Contains("ADMIN"))
+            {
+                if (role.Contains("DOCTOR") && !username.Equals(appointment.DoctorUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A doctor can only confirm his own appointments."
+                    });
+                }
+                else if (role.Contains("PATIENT") && !username.Equals(appointment.PatientUsername))
+                {
+                    return BadRequest(new
+                    {
+                        data = "A patient can only confirm his own appointments."
+                    });
+                }
+            }
+            try
+            {
+                return Ok(new
+                {
+                    data = _appointmentService.ConfirmAppointment(id)
+                });
+            }
+            catch (InvalidAppointment e)
+            {
+                return BadRequest(new
+                {
+                    data = e.Message
+                });
+            }
         }
 
         [HttpGet("all")]
