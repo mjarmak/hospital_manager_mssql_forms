@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using hospital_manager_models.Models;
 using static hospital_manager_models.Models.UserAccountRequest;
+using authentication_api.Service;
 
 namespace authentication_api.Controllers
 {
@@ -24,6 +25,7 @@ namespace authentication_api.Controllers
         private readonly JwtSecurityTokenHandler _tokenHandler;
         public RoleManager<IdentityRole> RoleManager { get; }
         public IIdentityServerInteractionService InteractionService { get; }
+        private readonly EmailService emailService;
 
         public AuthController(
             UserManager<IdentityUser> userManager,
@@ -36,6 +38,7 @@ namespace authentication_api.Controllers
             RoleManager = roleManager;
             InteractionService = interactionService;
             _tokenHandler = new JwtSecurityTokenHandler();
+            emailService = new EmailService();
         }
 
         [Route("register")]
@@ -93,6 +96,10 @@ namespace authentication_api.Controllers
             {
                 await _userManager.AddClaimAsync(user, new Claim(JwtClaimTypes.BirthDate, userAccountDataModel.BirthDate));
             }
+            emailService.SendEmail(
+                    userAccountDataModel.Email,
+                    "Account Creation Comfirmation",
+                    "Username: " + username + "\nPassword: " + userAccountDataModel.Password);
 
             return Ok(new
             {
@@ -159,6 +166,11 @@ namespace authentication_api.Controllers
                 await _userManager.AddClaimAsync(user, new Claim(JwtClaimTypes.BirthDate, userAccountDataModel.BirthDate));
             }
 
+            emailService.SendEmail(
+                    userAccountDataModel.Email,
+                    "Account Creation Comfirmation",
+                    "Username: " + username + "\nPassword: " + userAccountDataModel.Password);
+
             return Ok(new
             {
                 data = result.ToString(),
@@ -200,7 +212,7 @@ namespace authentication_api.Controllers
         [Route("user/username")]
         [HttpGet]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public async Task<ActionResult<UserDetailsResponse>> GetUsersByUserName(string username)
+        public async Task<ActionResult<UserDetailsResponse>> GetUserByUserName(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
@@ -217,6 +229,24 @@ namespace authentication_api.Controllers
             return Ok(new
             {
                 data = userDetailsResponse
+            });
+        }
+
+        [Route("user/email")]
+        [HttpGet]
+        public async Task<ActionResult<UserDetailsResponse>> GetUserEmailByUserName(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null)
+            {
+                return BadRequest(new
+                {
+                    data = new List<string> { "User " + username + " doesn't exist" }
+                });
+            }
+            return Ok(new
+            {
+                email = user.Email
             });
         }
 

@@ -15,6 +15,7 @@ namespace hospital_manager_bl.Service
         private readonly IUnitOfWork _unitOfWork;
         private readonly ModelConverter modelConverter;
         private readonly OAuthService oAuthService;
+        private readonly EmailService emailService;
         public int halfDayHour = 13;
 
         public AppointmentService(IUnitOfWork unitOfWork)
@@ -22,6 +23,7 @@ namespace hospital_manager_bl.Service
             _unitOfWork = unitOfWork;
             modelConverter = new ModelConverter(_unitOfWork);
             oAuthService = new OAuthService();
+            emailService = new EmailService();
         }
 
         public AppointmentResponse GetAppointment(long id)
@@ -216,17 +218,31 @@ namespace hospital_manager_bl.Service
             {
                 throw new NotFoundRoom("Room with ID " + appointment.RoomId + " does not exist.");
             }
+            if (!AppointmentHalfDayValid(appointment.DoctorUsername, appointment.RoomId, appointment.From, appointment.To))
+            {
+                throw new InvalidAppointment("2 appointment of different hospitals cannot be taken in the same half day.");
+            }
             if (!oAuthService.UserExists(appointment.DoctorUsername))
             {
                 throw new NotFoundUser("Doctor with username " + appointment.DoctorUsername + " does not exist.");
+            }
+            else
+            {
+                emailService.SendEmail(
+                    oAuthService.GetUserEmail(appointment.DoctorUsername),
+                   "Appoitment for " + appointment.PatientUsername,
+                    "At " + appointment.From + " to " + appointment.To + " in room " + _unitOfWork.Room.Get(appointment.RoomId).Name + " for " + appointment.Description);
             }
             if (!oAuthService.UserExists(appointment.PatientUsername))
             {
                 throw new NotFoundUser("Patient with username " + appointment.PatientUsername + " does not exist.");
             }
-            if (!AppointmentHalfDayValid(appointment.DoctorUsername, appointment.RoomId, appointment.From, appointment.To))
+            else
             {
-                throw new InvalidAppointment("2 appointment of different hospitals cannot be taken in the same half day.");
+                emailService.SendEmail(
+                    oAuthService.GetUserEmail(appointment.PatientUsername),
+                    "Appoitment with Doctor " + appointment.DoctorUsername,
+                    "At " + appointment.From + " to " + appointment.To + " in room " + _unitOfWork.Room.Get(appointment.RoomId).Name + " for " + appointment.Description);
             }
             var appointmentData = modelConverter.EnvelopeOf(appointment);
             _unitOfWork.Appointment.Add(appointmentData);

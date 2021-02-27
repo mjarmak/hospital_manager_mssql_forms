@@ -27,7 +27,7 @@ namespace authentication_api
             AddUser(host, "mohamadjarmak@gmail.com", "PATIENT", "Mohamad", "Jarmak", "MALE", "+32466550935",
                 "07/06/1995");
 
-            AddUser(host, "bigi_admin@businessmanager.com", "PATIENT", "Francesco", "Bigi", "MALE", "+32466550935",
+            AddUser(host, "newbreaker@gmail.com", "PATIENT", "Francesco", "Bigi", "MALE", "+32466550935",
                 "10/07/1995");
 
             AddUser(host, "newbreaker@gmail.com", "PATIENT", "Francesco2", "Bigi2", "MALE", "+32466550935",

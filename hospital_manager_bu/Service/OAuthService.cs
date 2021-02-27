@@ -31,6 +31,23 @@ namespace hospital_manager_bl.Service
             }
         }
 
+        public string GetUserEmail(string username)
+        {
+            var client = new HttpClient();
+            Task<HttpResponseMessage> response = client.GetAsync(url + "/user/email?username=" + username);
+            response.Wait();
+            if (response.Result.StatusCode != HttpStatusCode.OK)
+            {
+                return null;
+            }
+            else
+            {
+                string result = response.Result.Content.ReadAsStringAsync().Result;
+                JObject jObject = JObject.Parse(result);
+                return jObject.GetValue("email").ToString();
+            }
+        }
+
         public string RegisterUser(UserAccountRequest userAccountRequest, string token)
         {
             var client = new HttpClient();
