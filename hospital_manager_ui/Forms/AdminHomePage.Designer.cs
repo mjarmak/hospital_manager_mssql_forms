@@ -33,11 +33,11 @@
             this.listViewSpeciality = new System.Windows.Forms.ListView();
             this.SpecialityId = new System.Windows.Forms.ColumnHeader();
             this.SpecialityName = new System.Windows.Forms.ColumnHeader();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonAddSpeciality = new System.Windows.Forms.Button();
             this.HospitalsTab = new System.Windows.Forms.TabPage();
             this.buttonAddRooms = new System.Windows.Forms.Button();
             this.buttonEditHospital = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonAddHospital = new System.Windows.Forms.Button();
             this.listViewHospital = new System.Windows.Forms.ListView();
             this.HospitalId = new System.Windows.Forms.ColumnHeader();
             this.HospitalName = new System.Windows.Forms.ColumnHeader();
@@ -46,8 +46,9 @@
             this.HospitalPostCode = new System.Windows.Forms.ColumnHeader();
             this.HospitalCountry = new System.Windows.Forms.ColumnHeader();
             this.DoctorsTab = new System.Windows.Forms.TabPage();
+            this.buttonEditConsultations = new System.Windows.Forms.Button();
             this.buttonDoctorDetails = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.AddDoctor = new System.Windows.Forms.Button();
             this.listViewDoctor = new System.Windows.Forms.ListView();
             this.DoctorUsername = new System.Windows.Forms.ColumnHeader();
             this.DoctorName = new System.Windows.Forms.ColumnHeader();
@@ -57,7 +58,7 @@
             this.hospitalComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.button5 = new System.Windows.Forms.Button();
+            this.buttonAddAppointment = new System.Windows.Forms.Button();
             this.listViewAppointment = new System.Windows.Forms.ListView();
             this.Room = new System.Windows.Forms.ColumnHeader();
             this.At = new System.Windows.Forms.ColumnHeader();
@@ -98,7 +99,7 @@
             // SpecialitiesTab
             // 
             this.SpecialitiesTab.Controls.Add(this.listViewSpeciality);
-            this.SpecialitiesTab.Controls.Add(this.button1);
+            this.SpecialitiesTab.Controls.Add(this.buttonAddSpeciality);
             this.SpecialitiesTab.Location = new System.Drawing.Point(4, 24);
             this.SpecialitiesTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SpecialitiesTab.Name = "SpecialitiesTab";
@@ -121,7 +122,7 @@
             this.listViewSpeciality.Location = new System.Drawing.Point(3, 2);
             this.listViewSpeciality.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewSpeciality.Name = "listViewSpeciality";
-            this.listViewSpeciality.Size = new System.Drawing.Size(876, 418);
+            this.listViewSpeciality.Size = new System.Drawing.Size(876, 430);
             this.listViewSpeciality.TabIndex = 1;
             this.listViewSpeciality.UseCompatibleStateImageBehavior = false;
             this.listViewSpeciality.View = System.Windows.Forms.View.Details;
@@ -136,22 +137,22 @@
             this.SpecialityName.Text = "Name";
             this.SpecialityName.Width = 200;
             // 
-            // button1
+            // buttonAddSpeciality
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(804, 425);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAddSpeciality.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAddSpeciality.Location = new System.Drawing.Point(807, 437);
+            this.buttonAddSpeciality.Name = "buttonAddSpeciality";
+            this.buttonAddSpeciality.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddSpeciality.TabIndex = 0;
+            this.buttonAddSpeciality.Text = "Add";
+            this.buttonAddSpeciality.UseVisualStyleBackColor = true;
+            this.buttonAddSpeciality.Click += new System.EventHandler(this.button1_Click);
             // 
             // HospitalsTab
             // 
             this.HospitalsTab.Controls.Add(this.buttonAddRooms);
             this.HospitalsTab.Controls.Add(this.buttonEditHospital);
-            this.HospitalsTab.Controls.Add(this.button2);
+            this.HospitalsTab.Controls.Add(this.buttonAddHospital);
             this.HospitalsTab.Controls.Add(this.listViewHospital);
             this.HospitalsTab.Location = new System.Drawing.Point(4, 24);
             this.HospitalsTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -165,7 +166,7 @@
             // buttonAddRooms
             // 
             this.buttonAddRooms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAddRooms.Location = new System.Drawing.Point(623, 440);
+            this.buttonAddRooms.Location = new System.Drawing.Point(626, 437);
             this.buttonAddRooms.Name = "buttonAddRooms";
             this.buttonAddRooms.Size = new System.Drawing.Size(94, 23);
             this.buttonAddRooms.TabIndex = 3;
@@ -176,7 +177,7 @@
             // buttonEditHospital
             // 
             this.buttonEditHospital.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEditHospital.Location = new System.Drawing.Point(723, 440);
+            this.buttonEditHospital.Location = new System.Drawing.Point(726, 437);
             this.buttonEditHospital.Name = "buttonEditHospital";
             this.buttonEditHospital.Size = new System.Drawing.Size(75, 23);
             this.buttonEditHospital.TabIndex = 2;
@@ -184,16 +185,16 @@
             this.buttonEditHospital.UseVisualStyleBackColor = true;
             this.buttonEditHospital.Click += new System.EventHandler(this.buttonEditHospital_Click);
             // 
-            // button2
+            // buttonAddHospital
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(804, 440);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Add";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonAddHospital.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAddHospital.Location = new System.Drawing.Point(807, 437);
+            this.buttonAddHospital.Name = "buttonAddHospital";
+            this.buttonAddHospital.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddHospital.TabIndex = 1;
+            this.buttonAddHospital.Text = "Add";
+            this.buttonAddHospital.UseVisualStyleBackColor = true;
+            this.buttonAddHospital.Click += new System.EventHandler(this.button2_Click);
             // 
             // listViewHospital
             // 
@@ -211,7 +212,7 @@
             this.listViewHospital.Location = new System.Drawing.Point(3, 2);
             this.listViewHospital.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewHospital.Name = "listViewHospital";
-            this.listViewHospital.Size = new System.Drawing.Size(876, 433);
+            this.listViewHospital.Size = new System.Drawing.Size(876, 430);
             this.listViewHospital.TabIndex = 0;
             this.listViewHospital.UseCompatibleStateImageBehavior = false;
             this.listViewHospital.View = System.Windows.Forms.View.Details;
@@ -243,8 +244,9 @@
             // 
             // DoctorsTab
             // 
+            this.DoctorsTab.Controls.Add(this.buttonEditConsultations);
             this.DoctorsTab.Controls.Add(this.buttonDoctorDetails);
-            this.DoctorsTab.Controls.Add(this.button3);
+            this.DoctorsTab.Controls.Add(this.AddDoctor);
             this.DoctorsTab.Controls.Add(this.listViewDoctor);
             this.DoctorsTab.Location = new System.Drawing.Point(4, 24);
             this.DoctorsTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -254,10 +256,21 @@
             this.DoctorsTab.Text = "Doctors";
             this.DoctorsTab.UseVisualStyleBackColor = true;
             // 
+            // buttonEditConsultations
+            // 
+            this.buttonEditConsultations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEditConsultations.Location = new System.Drawing.Point(597, 437);
+            this.buttonEditConsultations.Name = "buttonEditConsultations";
+            this.buttonEditConsultations.Size = new System.Drawing.Size(123, 23);
+            this.buttonEditConsultations.TabIndex = 3;
+            this.buttonEditConsultations.Text = "Edit Consultations";
+            this.buttonEditConsultations.UseVisualStyleBackColor = true;
+            this.buttonEditConsultations.Click += new System.EventHandler(this.buttonEditConsultations_Click);
+            // 
             // buttonDoctorDetails
             // 
             this.buttonDoctorDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDoctorDetails.Location = new System.Drawing.Point(723, 440);
+            this.buttonDoctorDetails.Location = new System.Drawing.Point(726, 437);
             this.buttonDoctorDetails.Name = "buttonDoctorDetails";
             this.buttonDoctorDetails.Size = new System.Drawing.Size(75, 23);
             this.buttonDoctorDetails.TabIndex = 2;
@@ -265,16 +278,16 @@
             this.buttonDoctorDetails.UseVisualStyleBackColor = true;
             this.buttonDoctorDetails.Click += new System.EventHandler(this.buttonDoctorDetails_Click);
             // 
-            // button3
+            // AddDoctor
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(804, 440);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Add";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.AddDoctor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddDoctor.Location = new System.Drawing.Point(807, 437);
+            this.AddDoctor.Name = "AddDoctor";
+            this.AddDoctor.Size = new System.Drawing.Size(75, 23);
+            this.AddDoctor.TabIndex = 1;
+            this.AddDoctor.Text = "Add";
+            this.AddDoctor.UseVisualStyleBackColor = true;
+            this.AddDoctor.Click += new System.EventHandler(this.button3_Click);
             // 
             // listViewDoctor
             // 
@@ -288,7 +301,7 @@
             this.listViewDoctor.Location = new System.Drawing.Point(3, 2);
             this.listViewDoctor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewDoctor.Name = "listViewDoctor";
-            this.listViewDoctor.Size = new System.Drawing.Size(876, 433);
+            this.listViewDoctor.Size = new System.Drawing.Size(876, 430);
             this.listViewDoctor.TabIndex = 0;
             this.listViewDoctor.UseCompatibleStateImageBehavior = false;
             this.listViewDoctor.View = System.Windows.Forms.View.Details;
@@ -311,7 +324,7 @@
             this.AppointmentsTab.Controls.Add(this.hospitalComboBox);
             this.AppointmentsTab.Controls.Add(this.label1);
             this.AppointmentsTab.Controls.Add(this.monthCalendar1);
-            this.AppointmentsTab.Controls.Add(this.button5);
+            this.AppointmentsTab.Controls.Add(this.buttonAddAppointment);
             this.AppointmentsTab.Controls.Add(this.listViewAppointment);
             this.AppointmentsTab.Location = new System.Drawing.Point(4, 24);
             this.AppointmentsTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -324,7 +337,7 @@
             // btnConfirm
             // 
             this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfirm.Location = new System.Drawing.Point(645, 452);
+            this.btnConfirm.Location = new System.Drawing.Point(645, 437);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(75, 23);
             this.btnConfirm.TabIndex = 4;
@@ -335,7 +348,7 @@
             // buttonDeleteAppointment
             // 
             this.buttonDeleteAppointment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDeleteAppointment.Location = new System.Drawing.Point(726, 452);
+            this.buttonDeleteAppointment.Location = new System.Drawing.Point(726, 437);
             this.buttonDeleteAppointment.Name = "buttonDeleteAppointment";
             this.buttonDeleteAppointment.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteAppointment.TabIndex = 3;
@@ -368,16 +381,16 @@
             this.monthCalendar1.TabIndex = 2;
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
-            // button5
+            // buttonAddAppointment
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(807, 452);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 1;
-            this.button5.Text = "Add";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.buttonAddAppointment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAddAppointment.Location = new System.Drawing.Point(807, 437);
+            this.buttonAddAppointment.Name = "buttonAddAppointment";
+            this.buttonAddAppointment.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddAppointment.TabIndex = 1;
+            this.buttonAddAppointment.Text = "Add";
+            this.buttonAddAppointment.UseVisualStyleBackColor = true;
+            this.buttonAddAppointment.Click += new System.EventHandler(this.button5_Click);
             // 
             // listViewAppointment
             // 
@@ -395,7 +408,7 @@
             this.listViewAppointment.Location = new System.Drawing.Point(239, 0);
             this.listViewAppointment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewAppointment.Name = "listViewAppointment";
-            this.listViewAppointment.Size = new System.Drawing.Size(643, 447);
+            this.listViewAppointment.Size = new System.Drawing.Size(643, 432);
             this.listViewAppointment.TabIndex = 0;
             this.listViewAppointment.UseCompatibleStateImageBehavior = false;
             this.listViewAppointment.View = System.Windows.Forms.View.Details;
@@ -501,11 +514,11 @@
         private System.Windows.Forms.TabPage HospitalsTab;
         private System.Windows.Forms.TabPage DoctorsTab;
         private System.Windows.Forms.ListView listViewSpeciality;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonAddSpeciality;
         private System.Windows.Forms.TabPage Appointments;
         private System.Windows.Forms.ColumnHeader SpecialityId;
         private System.Windows.Forms.ColumnHeader SpecialityName;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonAddHospital;
         private System.Windows.Forms.ListView listViewHospital;
         private System.Windows.Forms.ColumnHeader HospitalId;
         private System.Windows.Forms.ColumnHeader HospitalName;
@@ -513,13 +526,13 @@
         private System.Windows.Forms.ColumnHeader HospitalCountry;
         private System.Windows.Forms.ColumnHeader HospitalPostCode;
         private System.Windows.Forms.ColumnHeader HospitalStreet;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button AddDoctor;
         private System.Windows.Forms.ListView listViewDoctor;
         private System.Windows.Forms.ColumnHeader DoctorUsername;
         private System.Windows.Forms.ColumnHeader DoctorName;
         private System.Windows.Forms.ListView listViewAppointment;
         private System.Windows.Forms.TabPage AppointmentsTab;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button buttonAddAppointment;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.ComboBox hospitalComboBox;
         private System.Windows.Forms.Label label1;
@@ -540,5 +553,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem accountMenuItemAdmin;
         private System.Windows.Forms.ToolStripMenuItem logoutMenuItemAdmin;
+        private System.Windows.Forms.Button buttonEditConsultations;
     }
 }

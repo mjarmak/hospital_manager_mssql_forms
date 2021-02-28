@@ -336,5 +336,16 @@ namespace hospital_manager_ui.Forms
             AuthUtil.LogOut();
             this.Close();
         }
+
+        private void buttonEditConsultations_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection indices = listViewDoctor.SelectedIndices;
+            if (indices.Count > 0)
+            {
+                string doctorUsername = doctors[indices[0]].Username;
+                EditDoctorConsultations f = new EditDoctorConsultations(doctorUsername);
+                f.Show();
+            }
+        }
     }
 }

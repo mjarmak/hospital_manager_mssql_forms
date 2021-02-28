@@ -83,7 +83,7 @@ namespace hospital_manager_api.Controllers
                 }
                 catch (NotFoundDoctor e)
                 {
-                    return BadRequest(new
+                    return NotFound(new
                     {
                         data = e.Message
                     });
@@ -97,9 +97,62 @@ namespace hospital_manager_api.Controllers
                     data = result
                 });
             }
-            catch (InvalidUserRequest e)
+            catch (NotFoundDoctor e)
             {
-                return BadRequest(new
+                return NotFound(new
+                {
+                    data = e.Message
+                });
+            }
+        }
+
+
+        [HttpDelete("{doctorUsername}/consultations/{consultationId}")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN,DOCTOR")]
+        public ActionResult<DoctorResponse> DeleteDoctorConsultations(string doctorUsername, long consultationId)
+        {
+            string role = GetClaim("role");
+            string username = GetClaim("preferred_username");
+            if (!role.Contains("ADMIN"))
+            {
+                try
+                {
+                    var doctor = _doctorService.GetDoctor(username);
+
+                    if (role.Contains("DOCTOR") && !username.Equals(doctor.Username))
+                    {
+                        return BadRequest(new
+                        {
+                            data = "A doctor can only delete his own consultations."
+                        });
+                    }
+                }
+                catch (NotFoundDoctor e)
+                {
+                    return NotFound(new
+                    {
+                        data = e.Message
+                    });
+                }
+            }
+            try
+            {
+                var result = _doctorService.DeleteDoctorConsultation(doctorUsername, consultationId);
+                return Ok(new
+                {
+                    data = result
+                });
+            }
+            catch (NotFoundDoctor e)
+            {
+                return NotFound(new
+                {
+                    data = e.Message
+                });
+            }
+            catch (NotFoundConsultation e)
+            {
+                return NotFound(new
                 {
                     data = e.Message
                 });

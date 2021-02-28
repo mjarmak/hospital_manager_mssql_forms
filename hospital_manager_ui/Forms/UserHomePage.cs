@@ -38,8 +38,8 @@ namespace hospital_manager_ui.Forms
             if (AuthConfiguration.Role.Contains("PATIENT"))
             {
                 btnConfirm.Visible = false;
+                buttonEditConsultations.Visible = false;
             }
-
             RefreshHospitals();
             RefreshAppointments();
 
@@ -187,6 +187,13 @@ namespace hospital_manager_ui.Forms
         {
             AuthUtil.LogOut();
             this.Close();
+        }
+
+        private void buttonEditConsultations_Click(object sender, EventArgs e)
+        {
+            string doctorUsername = AuthConfiguration.Username;
+            EditDoctorConsultations f = new EditDoctorConsultations(doctorUsername);
+            f.Show();
         }
     }
 }

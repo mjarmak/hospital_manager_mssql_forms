@@ -59,6 +59,7 @@
             this.accountMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.buttonEditConsultations = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.Home.SuspendLayout();
             this.Appointments.SuspendLayout();
@@ -75,7 +76,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(899, 489);
+            this.tabControl1.Size = new System.Drawing.Size(899, 419);
             this.tabControl1.TabIndex = 2;
             // 
             // Home
@@ -97,7 +98,7 @@
             this.Home.Location = new System.Drawing.Point(4, 24);
             this.Home.Name = "Home";
             this.Home.Padding = new System.Windows.Forms.Padding(3);
-            this.Home.Size = new System.Drawing.Size(891, 461);
+            this.Home.Size = new System.Drawing.Size(891, 391);
             this.Home.TabIndex = 0;
             this.Home.Text = "Home";
             this.Home.UseVisualStyleBackColor = true;
@@ -245,7 +246,7 @@
             this.Appointments.Location = new System.Drawing.Point(4, 24);
             this.Appointments.Name = "Appointments";
             this.Appointments.Padding = new System.Windows.Forms.Padding(3);
-            this.Appointments.Size = new System.Drawing.Size(891, 461);
+            this.Appointments.Size = new System.Drawing.Size(891, 391);
             this.Appointments.TabIndex = 1;
             this.Appointments.Text = "Appointments";
             this.Appointments.UseVisualStyleBackColor = true;
@@ -253,7 +254,7 @@
             // btnConfirm
             // 
             this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfirm.Location = new System.Drawing.Point(644, 420);
+            this.btnConfirm.Location = new System.Drawing.Point(644, 395);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(75, 23);
             this.btnConfirm.TabIndex = 3;
@@ -264,7 +265,7 @@
             // buttonDeleteAppointment
             // 
             this.buttonDeleteAppointment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDeleteAppointment.Location = new System.Drawing.Point(725, 420);
+            this.buttonDeleteAppointment.Location = new System.Drawing.Point(725, 395);
             this.buttonDeleteAppointment.Name = "buttonDeleteAppointment";
             this.buttonDeleteAppointment.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteAppointment.TabIndex = 2;
@@ -288,7 +289,7 @@
             this.listViewAppointmentUser.Location = new System.Drawing.Point(3, 0);
             this.listViewAppointmentUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewAppointmentUser.Name = "listViewAppointmentUser";
-            this.listViewAppointmentUser.Size = new System.Drawing.Size(885, 415);
+            this.listViewAppointmentUser.Size = new System.Drawing.Size(885, 390);
             this.listViewAppointmentUser.TabIndex = 1;
             this.listViewAppointmentUser.UseCompatibleStateImageBehavior = false;
             this.listViewAppointmentUser.View = System.Windows.Forms.View.Details;
@@ -324,7 +325,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(806, 421);
+            this.button1.Location = new System.Drawing.Point(806, 396);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 22);
             this.button1.TabIndex = 0;
@@ -369,11 +370,23 @@
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked_1);
             // 
+            // buttonEditConsultations
+            // 
+            this.buttonEditConsultations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEditConsultations.Location = new System.Drawing.Point(788, 452);
+            this.buttonEditConsultations.Name = "buttonEditConsultations";
+            this.buttonEditConsultations.Size = new System.Drawing.Size(123, 23);
+            this.buttonEditConsultations.TabIndex = 3;
+            this.buttonEditConsultations.Text = "Edit Consultations";
+            this.buttonEditConsultations.UseVisualStyleBackColor = true;
+            this.buttonEditConsultations.Click += new System.EventHandler(this.buttonEditConsultations_Click);
+            // 
             // UserHomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(923, 527);
+            this.ClientSize = new System.Drawing.Size(923, 487);
+            this.Controls.Add(this.buttonEditConsultations);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "UserHomePage";
@@ -422,5 +435,6 @@
         private System.Windows.Forms.ToolStripMenuItem accountMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem logoutMenuStrip;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.Button buttonEditConsultations;
     }
 }

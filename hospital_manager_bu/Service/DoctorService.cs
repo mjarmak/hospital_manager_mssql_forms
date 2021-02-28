@@ -55,6 +55,11 @@ namespace hospital_manager_bl.Service
         {
             var doctorData = _unitOfWork.Doctor.GetDoctor(doctorUsername);
 
+            if (doctorData == null)
+            {
+                throw new NotFoundDoctor("Doctor with username " + doctorUsername + " does not exist.");
+            }
+
             List<ConsultationData> consultationsData = modelConverter.EnvelopeOf(consultations);
             List<ConsultationData> consultationsDataFiltered = new List<ConsultationData>();
 
@@ -79,6 +84,31 @@ namespace hospital_manager_bl.Service
             });
 
             doctorData.Consultations.AddRange(consultationsDataFiltered);
+
+            _unitOfWork.Doctor.Update(doctorData);
+            _unitOfWork.Save();
+
+            var doctorResponse = modelConverter.ResponseOf(_unitOfWork.Doctor.GetDoctor(doctorData.Username));
+            return doctorResponse;
+        }
+
+        public DoctorResponse DeleteDoctorConsultation(string doctorUsername, long consultationId)
+        {
+            var doctorData = _unitOfWork.Doctor.GetDoctor(doctorUsername);
+
+            if (doctorData == null)
+            {
+                throw new NotFoundDoctor("Doctor with username " + doctorUsername + " does not exist.");
+            }
+
+            ConsultationData consultationData = doctorData.Consultations.SingleOrDefault(consultation => consultation.Id == consultationId);
+
+            if (consultationData == null)
+            {
+                throw new NotFoundConsultation("Consultation with ID " + consultationId + " does not exist.");
+            }
+
+            doctorData.Consultations.Remove(consultationData);
 
             _unitOfWork.Doctor.Update(doctorData);
             _unitOfWork.Save();
