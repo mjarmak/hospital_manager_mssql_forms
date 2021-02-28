@@ -17,12 +17,14 @@ namespace hospital_manager_ui.Forms
     public partial class AddAppointment : Form
     {
         private protected string url = ApplicationConfiguration.hospitalManagerApiUrl;
+        private protected string oauthUrl = ApplicationConfiguration.oauthUrl;
         private List<SpecialityResponse> specialities;
         private List<HospitalResponse> hospitals;
         private List<RoomResponse> rooms;
         private List<DoctorResponse> doctors;
         private List<AppointmentRequest> appointmentSuggestions;
         private AppointmentRequest appointmentSuggestion;
+        private List<UserDetailsResponse> patients;
 
         private long specialityId;
         private long hospitalId;
@@ -34,10 +36,15 @@ namespace hospital_manager_ui.Forms
             RefreshSpecialities();
             RefreshDoctors();
 
+            if (AuthConfiguration.Role != null && !AuthConfiguration.Role.Contains("PATIENT"))
+            {
+                RefreshPatients();
+            }
+
             if (AuthConfiguration.Role != null && AuthConfiguration.Role.Contains("PATIENT"))
             {
-                textBoxPatient.Text = AuthConfiguration.Username;
-                textBoxPatient.Enabled = false;
+                comboBoxPatient.Text = AuthConfiguration.Username;
+                comboBoxPatient.Enabled = false;
             } else if (AuthConfiguration.Role != null && AuthConfiguration.Role.Contains("DOCTOR"))
             {
                 textBoxDoctor.Text = AuthConfiguration.Username;
@@ -46,6 +53,29 @@ namespace hospital_manager_ui.Forms
             appointmentSuggestion = new AppointmentRequest();
         }
 
+        private void RefreshPatients()
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthConfiguration.AccessToken);
+            Task<HttpResponseMessage> response = client.GetAsync(oauthUrl + "/user?role=PATIENT");
+            response.Wait();
+            if (response.Result.StatusCode != HttpStatusCode.OK)
+            {
+                MessageBox.Show(response.Result.Content.ReadAsStringAsync().Result, "Failed to fetch patients",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            else
+            {
+                string result = response.Result.Content.ReadAsStringAsync().Result;
+                this.patients = JsonConvert.DeserializeObject<ResponseEnvelope<List<UserDetailsResponse>>>(result).data;
+                comboBoxPatient.Items.Clear();
+                comboBoxPatient.Items.AddRange(this.patients.Select(patient =>
+                {
+                    return patient.Username;
+                }).ToArray());
+            }
+        }
         private void RefreshSpecialities()
         {
             var client = new HttpClient();
@@ -250,7 +280,7 @@ namespace hospital_manager_ui.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            appointmentSuggestion.PatientUsername = textBoxPatient.Text;
+            appointmentSuggestion.PatientUsername = comboBoxPatient.Text;
             appointmentSuggestion.Description = textBoxDescription.Text;
 
             if (String.IsNullOrWhiteSpace(appointmentSuggestion.PatientUsername))

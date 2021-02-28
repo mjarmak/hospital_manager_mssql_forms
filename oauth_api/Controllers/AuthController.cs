@@ -192,21 +192,33 @@ namespace authentication_api.Controllers
 
         [Route("user")]
         [HttpGet]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN")]
-        public ActionResult<IEnumerable<IdentityUser>> GetAllUsers(string role)
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "ADMIN,DOCTOR")]
+        public ActionResult<List<UserDetailsResponse>> GetAllUsers(string role)
         {
+            List<UserDetailsResponse> users;
+
             if (role == null)
             {
-                return Ok(new
+                users = _userManager.Users.Select(user => new UserDetailsResponse()
                 {
-                    data = _userManager.Users
-                });
+                    Username = user.UserName,
+                    Email = user.Email,
+                    Phone = user.PhoneNumber
+                }).ToList();
             }
-
-            return Ok(new
+            else
             {
-                data = _userManager.GetUsersInRoleAsync(role).Result
-            });
+                users = _userManager.GetUsersInRoleAsync(role).Result.Select(user => new UserDetailsResponse()
+                {
+                    Username = user.UserName,
+                    Email = user.Email,
+                    Phone = user.PhoneNumber
+                }).ToList(); ;
+            }
+                return Ok(new
+            {
+                data = users
+                });
         }
 
         [Route("user/username")]

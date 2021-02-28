@@ -38,7 +38,6 @@
             this.Room = new System.Windows.Forms.ColumnHeader();
             this.Duration = new System.Windows.Forms.ColumnHeader();
             this.Doctor = new System.Windows.Forms.ColumnHeader();
-            this.textBoxPatient = new System.Windows.Forms.TextBox();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,6 +52,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.dateTimePickerAppointmenFrom = new System.Windows.Forms.DateTimePicker();
             this.labelTimeSlotBooked = new System.Windows.Forms.Label();
+            this.comboBoxPatient = new System.Windows.Forms.ComboBox();
             At = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
@@ -64,6 +64,7 @@
             // 
             // hospitalComboBox
             // 
+            this.hospitalComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.hospitalComboBox.Enabled = false;
             this.hospitalComboBox.FormattingEnabled = true;
             this.hospitalComboBox.Location = new System.Drawing.Point(471, 12);
@@ -83,6 +84,7 @@
             // 
             // specialityComboBox
             // 
+            this.specialityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.specialityComboBox.FormattingEnabled = true;
             this.specialityComboBox.Location = new System.Drawing.Point(78, 12);
             this.specialityComboBox.Name = "specialityComboBox";
@@ -136,13 +138,6 @@
             // 
             this.Doctor.Text = "Doctor";
             this.Doctor.Width = 180;
-            // 
-            // textBoxPatient
-            // 
-            this.textBoxPatient.Location = new System.Drawing.Point(127, 221);
-            this.textBoxPatient.Name = "textBoxPatient";
-            this.textBoxPatient.Size = new System.Drawing.Size(212, 23);
-            this.textBoxPatient.TabIndex = 8;
             // 
             // textBoxDescription
             // 
@@ -269,11 +264,22 @@
             this.labelTimeSlotBooked.Text = "*Time slot already booked or not in the same half day for the hospital.";
             this.labelTimeSlotBooked.Visible = false;
             // 
+            // comboBoxPatient
+            // 
+            this.comboBoxPatient.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.comboBoxPatient.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxPatient.FormattingEnabled = true;
+            this.comboBoxPatient.Location = new System.Drawing.Point(127, 221);
+            this.comboBoxPatient.Name = "comboBoxPatient";
+            this.comboBoxPatient.Size = new System.Drawing.Size(212, 23);
+            this.comboBoxPatient.TabIndex = 16;
+            // 
             // AddAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.comboBoxPatient);
             this.Controls.Add(this.labelTimeSlotBooked);
             this.Controls.Add(this.dateTimePickerAppointmenFrom);
             this.Controls.Add(this.button2);
@@ -288,7 +294,6 @@
             this.Controls.Add(this.textBoxDoctor);
             this.Controls.Add(this.textBoxDescription);
             this.Controls.Add(this.textBoxRoom);
-            this.Controls.Add(this.textBoxPatient);
             this.Controls.Add(this.listViewSuggestions);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.label2);
@@ -313,7 +318,6 @@
         private System.Windows.Forms.ColumnHeader Room;
         private System.Windows.Forms.ColumnHeader Duration;
         private System.Windows.Forms.ColumnHeader Doctor;
-        private System.Windows.Forms.TextBox textBoxPatient;
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -328,5 +332,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker dateTimePickerAppointmenFrom;
         private System.Windows.Forms.Label labelTimeSlotBooked;
+        private System.Windows.Forms.ComboBox comboBoxPatient;
     }
 }

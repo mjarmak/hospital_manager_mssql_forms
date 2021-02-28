@@ -254,7 +254,7 @@
             // btnConfirm
             // 
             this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfirm.Location = new System.Drawing.Point(644, 395);
+            this.btnConfirm.Location = new System.Drawing.Point(644, 365);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(75, 23);
             this.btnConfirm.TabIndex = 3;
@@ -265,7 +265,7 @@
             // buttonDeleteAppointment
             // 
             this.buttonDeleteAppointment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDeleteAppointment.Location = new System.Drawing.Point(725, 395);
+            this.buttonDeleteAppointment.Location = new System.Drawing.Point(725, 365);
             this.buttonDeleteAppointment.Name = "buttonDeleteAppointment";
             this.buttonDeleteAppointment.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteAppointment.TabIndex = 2;
@@ -286,10 +286,10 @@
             this.columnHeader5,
             this.columnHeader6});
             this.listViewAppointmentUser.HideSelection = false;
-            this.listViewAppointmentUser.Location = new System.Drawing.Point(3, 0);
+            this.listViewAppointmentUser.Location = new System.Drawing.Point(3, 2);
             this.listViewAppointmentUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewAppointmentUser.Name = "listViewAppointmentUser";
-            this.listViewAppointmentUser.Size = new System.Drawing.Size(885, 390);
+            this.listViewAppointmentUser.Size = new System.Drawing.Size(885, 358);
             this.listViewAppointmentUser.TabIndex = 1;
             this.listViewAppointmentUser.UseCompatibleStateImageBehavior = false;
             this.listViewAppointmentUser.View = System.Windows.Forms.View.Details;
@@ -325,10 +325,10 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(806, 396);
+            this.button1.Location = new System.Drawing.Point(806, 366);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 22);
-            this.button1.TabIndex = 0;
+            this.button1.TabIndex = 4;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
