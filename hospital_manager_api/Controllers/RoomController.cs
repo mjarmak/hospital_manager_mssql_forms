@@ -45,10 +45,7 @@ namespace hospital_manager_api.Controllers
             }
             catch (InvalidRoom e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
         }
         [HttpPost("all")]
@@ -65,10 +62,7 @@ namespace hospital_manager_api.Controllers
             }
             catch (InvalidRoom e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
         }
         [HttpGet("{id}")]
@@ -83,10 +77,7 @@ namespace hospital_manager_api.Controllers
             }
             catch (NotFoundRoom e)
             {
-                return NotFound(new
-                {
-                    data = e.Message
-                });
+                return NotFound(e.Message);
             }
         }
         [HttpGet("hospital/{hospitalId}")]

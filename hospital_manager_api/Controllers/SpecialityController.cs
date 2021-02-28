@@ -47,10 +47,7 @@ namespace hospital_manager_api.Controllers
             }
             catch (InvalidSpeciality e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
         }
 
@@ -66,10 +63,7 @@ namespace hospital_manager_api.Controllers
             }
             catch (NotFoundSpeciality e)
             {
-                return NotFound(new
-                {
-                    data = e.Message
-                });
+                return NotFound(e.Message);
             }
         }
 

@@ -45,10 +45,7 @@ namespace hospital_manager_api.Controllers
             }
             catch (InvalidHospital e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
         }
 
@@ -65,17 +62,11 @@ namespace hospital_manager_api.Controllers
             }
             catch (InvalidHospital e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
             catch (NotFoundHospital e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
         }
 
@@ -92,18 +83,12 @@ namespace hospital_manager_api.Controllers
             }
             catch (InvalidHospital e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
             catch (NotFoundHospital e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
-            }
+                return BadRequest(e.Message);
+    }
         }
 
         [HttpDelete("room/{id}")]
@@ -139,10 +124,7 @@ namespace hospital_manager_api.Controllers
             }
             catch (NotFoundHospital e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
         }
 

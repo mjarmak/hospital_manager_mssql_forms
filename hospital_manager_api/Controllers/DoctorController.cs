@@ -38,10 +38,7 @@ namespace hospital_manager_api.Controllers
         {
             if (userAccountRequest.DoctorRequest == null)
             {
-                return BadRequest(new
-                {
-                    data = "Doctor object is missing."
-                });
+                return BadRequest("Doctor object is missing.");
             }
 
             try
@@ -54,10 +51,7 @@ namespace hospital_manager_api.Controllers
             }
             catch (InvalidUserRequest e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
         }
 
@@ -75,18 +69,12 @@ namespace hospital_manager_api.Controllers
 
                     if (role.Contains("DOCTOR") && !username.Equals(doctor.Username))
                     {
-                        return BadRequest(new
-                        {
-                            data = "A doctor can only update his own consultations."
-                        });
+                        return BadRequest("A doctor can only update his own consultations.");
                     }
                 }
                 catch (NotFoundDoctor e)
                 {
-                    return NotFound(new
-                    {
-                        data = e.Message
-                    });
+                    return NotFound(e.Message);
                 }
             }
             try
@@ -99,10 +87,7 @@ namespace hospital_manager_api.Controllers
             }
             catch (NotFoundDoctor e)
             {
-                return NotFound(new
-                {
-                    data = e.Message
-                });
+                return NotFound(e.Message);
             }
         }
 
@@ -121,18 +106,12 @@ namespace hospital_manager_api.Controllers
 
                     if (role.Contains("DOCTOR") && !username.Equals(doctor.Username))
                     {
-                        return BadRequest(new
-                        {
-                            data = "A doctor can only delete his own consultations."
-                        });
+                        return BadRequest("A doctor can only delete his own consultations.");
                     }
                 }
                 catch (NotFoundDoctor e)
                 {
-                    return NotFound(new
-                    {
-                        data = e.Message
-                    });
+                    return NotFound(e.Message);
                 }
             }
             try
@@ -145,17 +124,11 @@ namespace hospital_manager_api.Controllers
             }
             catch (NotFoundDoctor e)
             {
-                return NotFound(new
-                {
-                    data = e.Message
-                });
+                return NotFound(e.Message);
             }
             catch (NotFoundConsultation e)
             {
-                return NotFound(new
-                {
-                    data = e.Message
-                });
+                return NotFound(e.Message);
             }
         }
 
@@ -179,10 +152,7 @@ namespace hospital_manager_api.Controllers
                 });
             } catch (NotFoundDoctor e)
             {
-                return NotFound(new
-                {
-                    data = e.Message
-                });
+                return NotFound(e.Message);
             }
         }
 

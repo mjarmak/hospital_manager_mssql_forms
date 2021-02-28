@@ -45,17 +45,11 @@ namespace hospital_manager_api.Controllers
             {
                 if (role.Contains("DOCTOR") && !username.Equals(appointment.DoctorUsername))
                 {
-                    return BadRequest(new
-                    {
-                        data = "A doctor can only create his own appointments."
-                    });
+                    return BadRequest("A doctor can only create his own appointments.");
                 }
                 else if (role.Contains("PATIENT") && !username.Equals(appointment.PatientUsername))
                 {
-                    return BadRequest(new
-                    {
-                        data = "A patient can only create his own appointments."
-                    });
+                    return BadRequest("A patient can only create his own appointments.");
                 }
             }
             try
@@ -68,24 +62,15 @@ namespace hospital_manager_api.Controllers
             }
             catch (InvalidAppointment e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
             catch (NotFoundRoom e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
             catch (NotFoundUser e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
         }
 
@@ -100,17 +85,11 @@ namespace hospital_manager_api.Controllers
             {
                 if (role.Contains("DOCTOR") && !username.Equals(appointment.DoctorUsername))
                 {
-                    return BadRequest(new
-                    {
-                        data = "A doctor can only update his own appointments."
-                    });
+                    return BadRequest("A doctor can only update his own appointments.");
                 }
                 else if (role.Contains("PATIENT") && !username.Equals(appointment.PatientUsername))
                 {
-                    return BadRequest(new
-                    {
-                        data = "A patient can only update his own appointments."
-                    });
+                    return BadRequest("A patient can only update his own appointments.");
                 }
             }
             try
@@ -123,31 +102,19 @@ namespace hospital_manager_api.Controllers
             }
             catch (NotFoundAppointment e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
             catch (InvalidAppointment e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
             catch (NotFoundRoom e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
             catch (NotFoundUser e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
         }
 
@@ -173,33 +140,21 @@ namespace hospital_manager_api.Controllers
             {
                 if (role.Contains("DOCTOR") && !username.Equals(appointment.DoctorUsername))
                 {
-                    return BadRequest(new
-                    {
-                        data = "A doctor can only delete his own appointments."
-                    });
+                    return BadRequest("A doctor can only delete his own appointments.");
                 }
                 else if (role.Contains("PATIENT") && !username.Equals(appointment.PatientUsername))
                 {
-                    return BadRequest(new
-                    {
-                        data = "A patient can only delete his own appointments."
-                    });
+                    return BadRequest("A patient can only delete his own appointments.");
                 }
             }
             try
             {
                 _appointmentService.DeleteAppointment(id);
-                return Ok(new
-                {
-                    data = "OK"
-                });
+                return Ok("OK");
             }
             catch (NotFoundAppointment e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
         }
 
@@ -215,26 +170,17 @@ namespace hospital_manager_api.Controllers
                 appointment = _appointmentService.GetAppointment(id);
             } catch (NotFoundAppointment e)
             {
-                return NotFound(new
-                {
-                    data = e.Message
-                });
+                return NotFound(e.Message);
             }
             if (!role.Contains("ADMIN"))
             {
                 if (role.Contains("DOCTOR") && !username.Equals(appointment.DoctorUsername))
                 {
-                    return BadRequest(new
-                    {
-                        data = "A doctor can only get his own appointments."
-                    });
+                    return BadRequest("A doctor can only get his own appointments.");
                 }
                 else if (role.Contains("PATIENT") && !username.Equals(appointment.PatientUsername))
                 {
-                    return BadRequest(new
-                    {
-                        data = "A patient can only get his own appointments."
-                    });
+                    return BadRequest("A patient can only get his own appointments.");
                 }
             }
             return Ok(new
@@ -256,26 +202,17 @@ namespace hospital_manager_api.Controllers
             }
             catch (NotFoundAppointment e)
             {
-                return NotFound(new
-                {
-                    data = e.Message
-                });
+                return NotFound(e.Message);
             }
             if (!role.Contains("ADMIN"))
             {
                 if (role.Contains("DOCTOR") && !username.Equals(appointment.DoctorUsername))
                 {
-                    return BadRequest(new
-                    {
-                        data = "A doctor can only confirm his own appointments."
-                    });
+                    return BadRequest("A doctor can only confirm his own appointments.");
                 }
                 else if (role.Contains("PATIENT") && !username.Equals(appointment.PatientUsername))
                 {
-                    return BadRequest(new
-                    {
-                        data = "A patient can only confirm his own appointments."
-                    });
+                    return BadRequest("A patient can only confirm his own appointments.");
                 }
             }
             try
@@ -287,10 +224,7 @@ namespace hospital_manager_api.Controllers
             }
             catch (InvalidAppointment e)
             {
-                return BadRequest(new
-                {
-                    data = e.Message
-                });
+                return BadRequest(e.Message);
             }
         }
 

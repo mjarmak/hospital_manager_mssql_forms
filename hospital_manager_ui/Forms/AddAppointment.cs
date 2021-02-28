@@ -43,6 +43,7 @@ namespace hospital_manager_ui.Forms
                 textBoxDoctor.Text = AuthConfiguration.Username;
                 textBoxDoctor.Enabled = false;
             }
+            appointmentSuggestion = new AppointmentRequest();
         }
 
         private void RefreshSpecialities()
