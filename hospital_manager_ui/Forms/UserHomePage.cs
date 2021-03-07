@@ -53,7 +53,7 @@ namespace hospital_manager_ui.Forms
         private void RefreshAppointments()
         {
             DateTime current = DateTime.Now;
-            DateTime From = new DateTime(current.Year, current.Month, current.Day - 7, 0, 0, 0);
+            DateTime From = new DateTime(current.AddDays(-7).Year, current.AddDays(-7).Month, current.AddDays(-7).Day, 0, 0, 0);
             DateTime To = new DateTime(current.AddYears(10).Year, current.Month, current.Day, 0, 0, 0);
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthConfiguration.AccessToken);

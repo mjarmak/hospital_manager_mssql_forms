@@ -34,20 +34,20 @@ namespace authentication_api
                     config.Audience = "hm";
                 });
 
-            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
             // Do first:
             // dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/IdentityServer/PersistedGrantDb
             // dotnet ef migrations add InitialIdentityServerConfigurationDbMigration -c ConfigurationDbContext -o Data/Migrations/IdentityServer/ConfigurationDb
-            // dotnet ef migrations add InitialIdentityServerDefaultDbMigration -c DefaultDbContext -o Data/Migrations/IdentityServer/DefaultDbContext
-            //services.AddDbContext<DefaultContext>(
-            //    options => options.UseSqlServer(connectionString,
-            //    b => b.MigrationsAssembly(typeof(DefaultContext).Assembly.FullName))
-            //);
+            // dotnet ef migrations add InitialIdentityServerDefaultDbMigration -c DefaultContext -o Data/Migrations/IdentityServer/DefaultDbContext
+            services.AddDbContext<DefaultContext>(
+                options => options.UseSqlServer(connectionString,
+                b => b.MigrationsAssembly(typeof(DefaultContext).Assembly.FullName))
+            );
 
-            services.AddDbContext<DefaultContext>(config =>
-            {
-                config.UseInMemoryDatabase("Memory");
-            });
+            //services.AddDbContext<DefaultContext>(config =>
+            //{
+            //    config.UseInMemoryDatabase("Memory");
+            //});
             services.AddIdentity<IdentityUser, IdentityRole>(config =>
             {
                 config.Password.RequiredLength = 1;
@@ -58,31 +58,31 @@ namespace authentication_api
                 .AddEntityFrameworkStores<DefaultContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddIdentityServer()
-                .AddAspNetIdentity<IdentityUser>()
-                .AddInMemoryApiResources(AuthConfiguration.GetApis())
-                .AddInMemoryIdentityResources(AuthConfiguration.GetIdentityResources())
-                .AddInMemoryClients(AuthConfiguration.GetClients())
-                .AddDeveloperSigningCredential();
-
-            //var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             //services.AddIdentityServer()
             //    .AddAspNetIdentity<IdentityUser>()
-            //    .AddDeveloperSigningCredential()
-            //    .AddConfigurationStore(options =>
-            //    {
-            //        options.ConfigureDbContext = builder =>
-            //            builder.UseSqlServer(connectionString,
-            //                sql => sql.MigrationsAssembly(migrationsAssembly));
-            //    })
-            //    .AddOperationalStore(options =>
-            //    {
-            //        options.ConfigureDbContext = builder =>
-            //            builder.UseSqlServer(connectionString,
-            //                sql => sql.MigrationsAssembly(migrationsAssembly));
-            //        options.EnableTokenCleanup = true;
-            //        options.TokenCleanupInterval = 30;
-            //    });
+            //    .AddInMemoryApiResources(AuthConfiguration.GetApis())
+            //    .AddInMemoryIdentityResources(AuthConfiguration.GetIdentityResources())
+            //    .AddInMemoryClients(AuthConfiguration.GetClients())
+            //    .AddDeveloperSigningCredential();
+
+            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+            services.AddIdentityServer()
+                .AddAspNetIdentity<IdentityUser>()
+                .AddDeveloperSigningCredential()
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlServer(connectionString,
+                            sql => sql.MigrationsAssembly(migrationsAssembly));
+                })
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlServer(connectionString,
+                            sql => sql.MigrationsAssembly(migrationsAssembly));
+                    options.EnableTokenCleanup = true;
+                    options.TokenCleanupInterval = 30;
+                });
 
             services.AddCors(config =>
                 config.AddPolicy("AllowAll",
@@ -96,7 +96,7 @@ namespace authentication_api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //InitializeDatabase(app);
+            InitializeDatabase(app);
 
             if (env.IsDevelopment())
             {
@@ -119,41 +119,42 @@ namespace authentication_api
             });
         }
 
-        //private void InitializeDatabase(IApplicationBuilder app)
-        //{
-        //    using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-        //    {
-        //        serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+                serviceScope.ServiceProvider.GetRequiredService<DefaultContext>().Database.Migrate();
 
-        //        var contextConfig = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
-        //        contextConfig.Database.Migrate();
-        //        if (!contextConfig.Clients.Any())
-        //        {
-        //            foreach (var client in AuthConfiguration.GetClients())
-        //            {
-        //                contextConfig.Clients.Add(client.ToEntity());
-        //            }
-        //            contextConfig.SaveChanges();
-        //        }
+                var contextConfig = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+                contextConfig.Database.Migrate();
+                if (!contextConfig.Clients.Any())
+                {
+                    foreach (var client in AuthConfiguration.GetClients())
+                    {
+                        contextConfig.Clients.Add(client.ToEntity());
+                    }
+                    contextConfig.SaveChanges();
+                }
 
-        //        if (!contextConfig.IdentityResources.Any())
-        //        {
-        //            foreach (var resource in AuthConfiguration.GetIdentityResources())
-        //            {
-        //                contextConfig.IdentityResources.Add(resource.ToEntity());
-        //            }
-        //            contextConfig.SaveChanges();
-        //        }
+                if (!contextConfig.IdentityResources.Any())
+                {
+                    foreach (var resource in AuthConfiguration.GetIdentityResources())
+                    {
+                        contextConfig.IdentityResources.Add(resource.ToEntity());
+                    }
+                    contextConfig.SaveChanges();
+                }
 
-        //        if (!contextConfig.ApiResources.Any())
-        //        {
-        //            foreach (var resource in AuthConfiguration.GetApis())
-        //            {
-        //                contextConfig.ApiResources.Add(resource.ToEntity());
-        //            }
-        //            contextConfig.SaveChanges();
-        //        }
-        //    }
-        //}
+                if (!contextConfig.ApiResources.Any())
+                {
+                    foreach (var resource in AuthConfiguration.GetApis())
+                    {
+                        contextConfig.ApiResources.Add(resource.ToEntity());
+                    }
+                    contextConfig.SaveChanges();
+                }
+            }
+        }
     }
 }

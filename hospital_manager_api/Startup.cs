@@ -32,22 +32,21 @@ namespace hospital_manager_api
                     config.Audience = "hm";
                 });
 
-            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
             //// Do first:
-            //// dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/IdentityServer/PersistedGrantDb
-            //// dotnet ef migrations add InitialIdentityServerConfigurationDbMigration - c ConfigurationDbContext - o Data/Migrations/IdentityServer/ConfigurationDb
-            //// dotnet ef migrations add InitialIdentityServerDefaultDbMigration -c DefaultDbContext -o Data/Migrations/IdentityServer/DefaultDbContext
-            //services.AddDbContext<HospitalDbContext>(
-            //    options => options.UseSqlServer(connectionString,
-            //    b => b.MigrationsAssembly(typeof(HospitalDbContext).Assembly.FullName))
-            //);
-
+            //// dotnet ef migrations add InitialHospitalManagerDefaultDbMigration -c HospitalDbContext -o Data/Migrations/DefaultHospitalDbContext
+            //
             services.AddDbContext<HospitalDbContext>(
-                config =>
-                {
-                    config.UseInMemoryDatabase("Memory");
-                }
+                options => options.UseSqlServer(connectionString,
+                    b => b.MigrationsAssembly("hospital_manager_api"))
             );
+
+            //services.AddDbContext<HospitalDbContext>(
+            //    config =>
+            //    {
+            //        config.UseInMemoryDatabase("Memory");
+            //    }
+            //);
 
             services.AddControllers();
             //services.AddMvc();
@@ -83,8 +82,11 @@ namespace hospital_manager_api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, HospitalDbContext dbContext)
         {
+
+            dbContext.Database.Migrate();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

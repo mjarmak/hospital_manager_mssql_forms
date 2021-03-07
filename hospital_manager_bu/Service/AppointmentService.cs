@@ -236,7 +236,7 @@ namespace hospital_manager_bl.Service
             {
                 emailService.SendEmail(
                     oAuthService.GetUserEmail(appointment.DoctorUsername),
-                   "Appoitment Request for " + appointment.PatientUsername,
+                   "Appointment Request for " + appointment.PatientUsername,
                     "At " + appointment.From + " to " + appointment.To + " in room " + _unitOfWork.Room.Get(appointment.RoomId).Name + " for " + appointment.Description);
             }
             if (!oAuthService.UserExists(appointment.PatientUsername))

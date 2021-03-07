@@ -15,10 +15,10 @@ namespace hospital_manager_api
         {
             var host = CreateHostBuilder(args).Build();
 
-            AddSpeciality(host);
-            AddHospital(host);
-            AddDoctor(host);
-            AddAppointment(host);
+            //AddSpeciality(host);
+            //AddHospital(host);
+            //AddDoctor(host);
+            //AddAppointment(host);
 
             host.Run();
         }

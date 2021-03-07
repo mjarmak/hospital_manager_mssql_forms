@@ -12,34 +12,36 @@ namespace authentication_api
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+
+            //AddRole(host, "ADMIN");
+            //AddRole(host, "DOCTOR");
+            //AddRole(host, "PATIENT");
+
+            //AddUser(host, "admin", "ADMIN", "admin", "admin", "OTHER", "+32466550935",
+            //        "10/07/1995");
+            //AddUser(host, "mohamadjarmak@gmail.com", "PATIENT", "Mohamad", "Jarmak", "MALE", "+32466550935",
+            //    "07/06/1995");
+            //AddUser(host, "newbreaker@gmail.com", "PATIENT", "Francesco", "Bigi", "MALE", "+32466550935",
+            //    "10/07/1995");
+            //AddUser(host, "newbreaker@gmail.com", "PATIENT", "Francesco2", "Bigi2", "MALE", "+32466550935",
+            //    "10/07/1995");
+            //AddUser(host, "mohamadjarmak@gmail.com", "DOCTOR", "Doctor", "Who", "MALE", "+32466550935",
+            //    "10/07/1995");
+            //AddUser(host, "mohamadjarmak@gmail.com", "DOCTOR", "Drake", "Ramoray", "MALE", "+32466550935",
+            //    "10/07/1995");
+
+            host.Run();
+        }
+
+        public static void AddRole(IHost host, string name)
+        {
             var scope = host.Services.CreateScope();
 
             var roleManager = scope.ServiceProvider
                 .GetRequiredService<RoleManager<IdentityRole>>();
 
-            roleManager.CreateAsync(new IdentityRole { Name = "ADMIN" }).GetAwaiter().GetResult();
-            roleManager.CreateAsync(new IdentityRole { Name = "DOCTOR" }).GetAwaiter().GetResult();
-            roleManager.CreateAsync(new IdentityRole { Name = "PATIENT" }).GetAwaiter().GetResult();
+            roleManager.CreateAsync(new IdentityRole { Name = name }).GetAwaiter().GetResult();
 
-            AddUser(host, "admin", "ADMIN", "admin", "admin", "OTHER", "+32466550935",
-                    "10/07/1995");
-
-            AddUser(host, "mohamadjarmak@gmail.com", "PATIENT", "Mohamad", "Jarmak", "MALE", "+32466550935",
-                "07/06/1995");
-
-            AddUser(host, "newbreaker@gmail.com", "PATIENT", "Francesco", "Bigi", "MALE", "+32466550935",
-                "10/07/1995");
-
-            AddUser(host, "newbreaker@gmail.com", "PATIENT", "Francesco2", "Bigi2", "MALE", "+32466550935",
-                "10/07/1995");
-
-            AddUser(host, "mohamadjarmak@gmail.com", "DOCTOR", "Doctor", "Who", "MALE", "+32466550935",
-                "10/07/1995");
-
-            AddUser(host, "mohamadjarmak@gmail.com", "DOCTOR", "Drake", "Ramoray", "MALE", "+32466550935",
-                "10/07/1995");
-
-            host.Run();
         }
 
         public static void AddUser(IHost host, string email, string role, string name, string familyName, string gender, string phoneNumber, string birthdate)
